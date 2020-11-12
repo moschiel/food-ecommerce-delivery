@@ -1,13 +1,26 @@
+<% const homeRout = '/'; %> 
+
+<%# inclui .icone-sacola se estiver na home %>
+<% if (rout == homeRout) { %>
 <div class="icone-sacola" onclick="toggleSacola()">
   <i class="fas fa-shopping-bag fa-3x"></i>
   <div class="icone-sacola-num">0</div>
 </div>
-
+<% } %>
+ 
+<%# determina visualizacao inicial da sacola dependendo da rota %> 
+<% if (rout == homeRout) { %>
 <div class="sacola" style="display: none;">
+<% } else { %>
+<div class="sacola" style="display: flex;">
+<% } %> 
   <span class="sacola-texto">Sua sacola</span> 
   <ul id="sacola-lista">
     <div class="divisoria"></div>
   </ul>
   <span class="sacola-total-text">Total: R$ <span class="sacola-total-valor">0,00</span></span>
+  <%# inclui botão na sacola se estiver na home %> 
+  <% if (rout == homeRout) { %>
   <button class="pagamento">Prosseguir para pagamento</button>
+  <% } %>
 </div>
