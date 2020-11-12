@@ -1,0 +1,242 @@
+/* header{
+  background-color: fuchsia;
+  border: 1px solid red;
+  height: 150px;
+}
+
+section{
+  background-color: tomato;
+  border: 1px solid red;
+  height: 150px;
+}
+
+article{
+  background-color: greenyellow;
+  border: 1px solid red;
+  height: 150px;
+} */
+body {
+  background-color: #f3f3f3;
+  font-family: 'Bebas Neue', cursive;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+header{
+  background-color: rgb(253, 190, 71);
+  box-sizing: border-box;
+}
+
+.my-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav li a {
+  font-size: 30px;
+  color: #3d2514;
+  
+}
+nav a img{
+  height: 8vh;
+}
+
+.nav-block{
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-toggler{
+  outline: none !important;
+  border: none !important;
+}
+
+
+.delivery a {
+  color:  #3d2514;
+  font-size: 20px;
+}
+
+section.carousel {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+section.carousel>div{
+  height: 92vh;
+  width: 100vw;
+}
+
+.carousel-inner img{
+  height: 92vh;
+  width: 100vw;
+}
+
+section.categorias>div{
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+}
+
+.categoria{
+  overflow-x: auto;
+}
+
+
+
+/* card */
+.my-card{
+  position: relative;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 5px;
+  /* background-color: rgb(226, 226, 226);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19); */
+}
+
+/* .my-card-body{
+  height: 90%;
+} */
+.my-card-img-top{
+  margin: 10px;
+  margin-bottom: 0px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 2px dashed tomato;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+.my-card-body{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-group{
+  margin-top: 5px;
+  width: 80%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.my-card-title, .my-card-text, .my-card-btn-add{
+  margin: 0px;
+  display: inline-block;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.my-card-title{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 25px;
+  align-self: center;
+  justify-self: center;
+  background-color: tomato;
+  color: whitesmoke;
+  border-radius: 10px;
+}
+
+.my-card-text{
+  font-size: 35px;
+  order: -1;
+  align-content: center;
+  text-align: center;
+  position: absolute;
+  line-height: 75px;
+  right: 10px;
+  top: 10px;
+  height: 80px;
+  width: 80px;
+  box-sizing: border-box;
+  background-color: rgb(245, 134, 115);
+  border-radius: 50%;
+}
+
+.my-btn-group{
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.my-card-btn-add{
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  align-content: center;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  line-height: 33px;
+  background-color: tomato;
+  color: #3d2514;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.my-card-btn-add:hover{
+  color: white;
+  background-color: rgb(235, 91, 66);
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.map-container{
+  padding: 5px;
+}
+
+.info-container{
+  color: #dddddd;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dddddd; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3; 
+}
+
+@media (max-width:540px) {
+  .my-logo, .av-block, .delivery{
+    display: flex;
+    /* width: 100vw; */
+    /* justify-content: center; */
+    margin-bottom: 15px;
+  }
+
+  section.carousel>div{
+    width: 100%;
+  }
+
+
+}
