@@ -1,0 +1,172 @@
+html,body{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes shake-animation {
+  00% { transform: rotate(0deg); }
+  05% { transform: rotate(-15deg); }
+  10% { transform: rotate(15deg); }
+  15% { transform: rotate(-15deg); }
+  20% { transform: rotate(15deg); }
+  25% { transform: rotate(0deg); }
+}
+
+div.icone-sacola{
+  position: fixed;
+  right: 40px;
+  top: 50px;
+  z-index: 3;
+  cursor: pointer;
+
+  /* animation */
+  animation: shake-animation 2s;
+  animation-iteration-count: infinite;
+  animation-delay: 2s;
+}
+
+i.fa-shopping-bag{
+  color: red;
+}
+
+i.fa-shopping-bag:hover{
+  color: rgb(255, 55,55);
+}
+
+div.icone-sacola-num{
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid black;
+  position: relative;
+  top: -18px;
+  left: -2px;
+  text-align: center;
+  line-height: 20px;
+  color: red;
+}
+
+div.sacola {
+  width: 500px; 
+  height: 80%;
+  /* width: fit-content;
+  height: fit-content; */
+  border-radius: 5px;
+  background-color: white;
+  position: fixed;
+  right: 40px;
+  top: 60px;
+  z-index: 2;
+  -webkit-box-shadow: -1px 2px 2px 1px rgba(0,0,0,0.12);
+  -moz-box-shadow: -1px 2px 2px 1px rgba(0,0,0,0.12);
+  box-shadow: -1px 2px 2px 1px rgba(0,0,0,0.12);
+  font-family: Arial, Helvetica, sans-serif;
+  /* display setado via javascript */
+  /* display: none; */
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 15px;
+}
+
+span.sacola-texto {
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+ul#sacola-lista {
+  width: 100%;
+  /* scroll */
+  overflow: scroll;
+  /* Remove bullets, margin and padding da li */
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li.sacola-item {
+  /* border: 1px solid red; */
+  /* height: 70px; */
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  padding: 5px 0;
+  border-bottom: 1px solid gray;
+}
+
+div.item-seletor {
+  width: 80px;
+  padding: 5px;
+  margin-right: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid green;
+  color: green;
+}
+
+div.item-seletor i.fas{
+  cursor: pointer;
+}
+
+div.item-seletor .fa-minus:active,
+div.item-seletor .fa-plus:active{
+  color: rgb(0,200,0);
+}
+
+span.item-quantidade{
+  font-weight: bold;
+}
+
+li.sacola-item img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 8px;
+  /* margin-right: 50px; */
+}
+
+span.item-nome{
+  margin-right: 8px;
+}
+
+span.item-preco{
+  margin-left: auto;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+i.fa-trash-alt{
+  /* color: orangered; */
+  color: gray;
+  cursor: pointer;
+}
+
+div.divisoria{
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+span.sacola-total-text{
+  margin-left: auto;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+button.pagamento{
+  background-color: orangered;
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-top: 20px;
+}
+
+button.pagamento:hover{
+  background-color: rgb(255,89,00);
+}

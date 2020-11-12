@@ -1,6 +1,7 @@
 let categorias = [
   {
     nome: "Lanches",
+    codigo: 1,
     items: [
       {
         id: 1,
@@ -42,33 +43,34 @@ let categorias = [
   },
   {
     nome: "Pizzas",
+    codigo: 2,
     items: [
       {
-        id: 1,
-        nome: "Moda do Javascript",
+        id: 21,
+        nome: "Moda do Java",
         valor: "45,99",
         imagem: "./images/food1.jpg"
       },
       {
-        id: 2,
+        id: 22,
         nome: "Pyzza",
         valor: "44,99",
         imagem: "./images/food2.jpg"
       },
       {
-        id: 3,
+        id: 23,
         nome: "C# à italiana",
         valor: "44,89",
         imagem: "./images/food3.jpg"
       },
       {
-        id: 4,
+        id: 24,
         nome: "Dartguesa",
         valor: "43,89",
         imagem: "./images/food3.jpg"
       },
       {
-        id: 5,
+        id: 25,
         nome: "Go Lang ",
         valor: "40,59",
         imagem: "./images/food1.jpg"
@@ -77,39 +79,40 @@ let categorias = [
   },
   {
     nome: "Bebidas",
+    codigo: 3,
     items: [
       {
-        id: 1,
+        id: 31,
         nome: "Coca-Cola",
         valor: "108,99",
         imagem: "./images/food1.jpg"
       },
       {
-        id: 2,
+        id: 32,
         nome: "Fanta",
         valor: "8,99",
         imagem: "./images/food2.jpg"
       },
       {
-        id: 3,
+        id: 33,
         nome: "Sprite",
         valor: "8,89",
         imagem: "./images/food3.jpg"
       },
       {
-        id: 4,
+        id: 34,
         nome: "Sukita",
         valor: "8,89",
         imagem: "./images/food3.jpg"
       },
       {
-        id: 5,
+        id: 35,
         nome: "Guaraná Antártica",
         valor: "7,59",
         imagem: "./images/food1.jpg"
       },
       {
-        id: 6,
+        id: 36,
         nome: "Funada",
         valor: "5,59",
         imagem: "./images/food2.jpg"
@@ -133,8 +136,11 @@ let destaques = [
   },
 ]
 
+
+
 module.exports = {
   index: (req,res)=>{
     res.render('index', { title: 'Ecommerce', categorias, destaques });
-  }
+  },
+  categorias
 } 

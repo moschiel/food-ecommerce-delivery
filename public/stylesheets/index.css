@@ -184,6 +184,7 @@ section.categorias>div{
   color: #3d2514;
   border-radius: 50%;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .my-card-btn-add:hover{
