@@ -1,29 +1,31 @@
 let itemsSacola = [];
-let sacolaSessionKey = "sacolaSessionStorage";
+let sacolaLocalStorageKey = "sacolaLocalStorage";
 
-// inicializa sacola com items armazenados na sessionStorage
+// inicializa sacola com items armazenados na localStorage
 function inicializaSacola() {
-  let sessionItemsSacola = sessionStorage.getItem(sacolaSessionKey);
-  if(sessionItemsSacola != null) {
-    itemsSacola = JSON.parse(sessionItemsSacola);
+  let storageItemsSacola = localStorage.getItem(sacolaLocalStorageKey);
+  if(storageItemsSacola != null) {
+    itemsSacola = JSON.parse(storageItemsSacola);
 
-    let itemsHtml = "";
+    let itemsHtml = `<div class="divisoria"></div>`;
     itemsSacola.forEach(item => {
       itemsHtml += criarHtmlDoItemParaSacola(item);
     });
 
     let elSacolaLista = document.getElementById('sacola-lista');
-    elSacolaLista.insertAdjacentHTML("beforeend", itemsHtml); //adiciona items no HTML
+    elSacolaLista.innerHTML = itemsHtml; //adiciona items no HTML
     
     atualizarTotalSacola();
   }
 }
 
-//numero para moeda real
+// window.addEventListener("hashchange", inicializaSacola);
+
+//converte formato numero para moeda real
 function numberToReal(num) {
   return num.toFixed(2).replace('.', ',');
 }
-//moeda real para numero
+//converte formato moeda real para numero
 function realToNumber (real) {
   return Number(real.toString().replace(',', '.'));
 }
@@ -64,7 +66,7 @@ function criarHtmlDoItemParaSacola(item) {
     </div>
     <img src="${item.img}" alt="">
     <span class="item-nome">${item.nome}</span>
-    <span class="item-preco">R$ <span class="item-valor">${numberToReal(item.valor)}</span></span>
+    <span class="item-preco">R$ <span class="item-valor">${numberToReal(item.valor * item.quantidade)}</span></span>
     <i class="fas fa-trash-alt" onclick="removerItemDaSacola('${item.id}')"></i>
   </li>`;
 
@@ -80,25 +82,28 @@ function atualizarTotalSacola() {
   let elSacola = document.body.querySelector('.sacola');
   let elValores = elSacola.querySelectorAll('.item-valor');
   let elPreco = elSacola.querySelector('.sacola-total-valor');
-  let elQuant = elSacola.querySelectorAll('.item-quantidade');
+  let elQuantidades = elSacola.querySelectorAll('.item-quantidade');
   
+  //soma preço
   let totalPreco = 0.0;
-  let totalQuant = 0;
-  for(let i=0; i < elValores.length; i++){
-    //soma preço
-    totalPreco += realToNumber(elValores[i].innerHTML);
-    //soma quantidade
-    totalQuant += Number(elQuant[i].innerHTML);
-  }
+  elValores.forEach(elValor => {
+    totalPreco += realToNumber(elValor.innerHTML);
+  });
   //atualiza preço total
   elPreco.innerHTML = numberToReal(totalPreco); 
-  //aqualiza quantidade total
+  
   if(elIconeSacola != null) {
+    //soma quantidade
+    let totalQuant = 0;
+    elQuantidades.forEach(elQuant => {
+      totalQuant += Number(elQuant.innerHTML);
+    });
+    //atualiza quantidade total
     elIconeSacola.innerHTML = totalQuant;
   }
-  //atualiza sessionStorage da sacola
-  // console.log(itemsSacola);
-  sessionStorage.setItem(sacolaSessionKey, JSON.stringify(itemsSacola));
+
+  //atualiza localStorage da sacola
+  localStorage.setItem(sacolaLocalStorageKey, JSON.stringify(itemsSacola));
 }
 
 function adicionarNaSacola(card_id) {
