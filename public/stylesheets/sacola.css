@@ -79,7 +79,7 @@ span.sacola-texto {
 ul#sacola-lista {
   width: 100%;
   /* scroll */
-  overflow: scroll;
+  overflow: auto;
   /* Remove bullets, margin and padding da li */
   list-style-type: none;
   margin: 0;

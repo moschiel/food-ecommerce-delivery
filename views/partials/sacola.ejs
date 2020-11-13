@@ -21,6 +21,8 @@
   <span class="sacola-total-text">Total: R$ <span class="sacola-total-valor">0,00</span></span>
   <%# inclui botão na sacola se estiver na home %> 
   <% if (rout == homeRout) { %>
-  <button class="pagamento">Prosseguir para pagamento</button>
+  <a href="/pedido/finalizar">
+    <button class="pagamento">Prosseguir para pagamento</button>
+  </a>
   <% } %>
 </div>
