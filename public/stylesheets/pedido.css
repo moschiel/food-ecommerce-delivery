@@ -9,38 +9,54 @@ html, body{
   padding: 0px;
 }
 
+.w100{
+  width: 100%;
+}
+.w50{
+  width: 50%;
+}
+.w30{
+  width: 30%;
+}
+
 main{
-  border: 1px solid red;
+  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
 }
 
-section.pagamento{
-  border: 1px solid blue;
+.containerForms{
+  /* border: 2px solid red; */
+  width: 100%;
+}
+
+.containerLocalAutocompletar,
+.containerPagamento{
+  /* border: 1px solid blue; */
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-section.pagamento form{
-  border: 1px solid green;
+.containerLocalAutocompletar form,
+.containerPagamento form{
+  /* border: 2px solid green; */
   width: 500px;
 }
 
 .blocoInput {
-  border: 1px solid orange;
-  width: 100%;
+  /* border: 1px solid orange; */
   margin-bottom: 20px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
 .blocoInput label{
-  position: relative;
-  left: 15px;
-  top: 10px;
+  /* position: relative;
+  left: 10px;
+  top: 8px;
   background-color: white;
-  padding: 5px;
+  padding: 0px 5px; */
 }
 
 .blocoInput input{
@@ -48,9 +64,8 @@ section.pagamento form{
   width: 100%;
 }
 
+
 .containerSacola {
   border-left: 1px solid gray;
   min-width: 450px;
 }
-
-

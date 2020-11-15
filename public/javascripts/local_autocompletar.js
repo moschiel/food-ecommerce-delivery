@@ -8,11 +8,11 @@
 let placeSearch;
 let autocomplete;
 const componentForm = {
-  route: "long_name",                         //rua
-  street_number: "short_name",                //numero
-  administrative_area_level_2: "long_name",   //cidade
-  administrative_area_level_1: "short_name",  //estado
-  postal_code: "short_name",                  //cep
+  route: "long_name",
+  street_number: "short_name",
+  administrative_area_level_2: "long_name",
+  administrative_area_level_1: "short_name",
+  postal_code: "short_name",
 };
 
 function initAutocomplete() {
@@ -48,17 +48,12 @@ function fillInAddress() {
       const val = component[componentForm[addressType]];
       document.getElementById(addressType).value = val;
     }
-    console.log(component);
-    console.log(addressType);
   }
 }
 
 // Bias the autocomplete object to the user's geographical location,
 // as supplied by the browser's 'navigator.geolocation' object.
-let geolocated = false;
 function geolocate() {
-  if(geolocated) 
-    return;
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       const geolocation = {
@@ -70,7 +65,6 @@ function geolocate() {
         radius: position.coords.accuracy,
       });
       autocomplete.setBounds(circle.getBounds());
-      geolocated = true;
     });
   }
 }

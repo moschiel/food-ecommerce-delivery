@@ -5,48 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seu pedido</title>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-  <script defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&libraries=places&callback=initMap">
-  </script>
+  
   <link rel="stylesheet" href="../stylesheets/pedido.css">
+  <!-- sacola scritps/styles -->
   <link rel="stylesheet" href="../stylesheets/sacola.css">
   <script defer src="../javascripts/sacola.js"></script>
+  <!-- local_autocompletar scritps/styles -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" href="../stylesheets/local_autocompletar.css">
+  <script src="../javascripts/local_autocompletar.js"></script>
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&callback=initAutocomplete&libraries=places&v=weekly"></script>
 </head>
 <body>
 
   <main>
-    <section class="endereco">
-      
-    </section>
-    <section class="pagamento">
-      <form action="" method="post">
-        <div class="blocoInput">
-          <label for="numCartao">Número do Cartão</label>
-          <input type="text" id="numCartao" name="numCartao" maxlength="16" required>
-        </div>
-        <div style="display: flex;">
-          <div class="blocoInput">
-            <label for="validade">Validade</label>
-            <input type="text" id="validade" name="validade" maxlength="16" required>
-          </div>
-          <div class="blocoInput">
-            <label for="cvv">CVV</label>
-            <input type="text" id="cvv" name="cvv" maxlength="16" required>
-          </div>
-        </div>
-        <div class="blocoInput">
-          <label for="nomeTitular">Nome do Titular</label>
-          <input type="text" id="nomeTitular" name="nomeTitular" maxlength="16" required>
-        </div>
-        <div class="blocoInput">
-          <label for="cpfTitular">CPF</label>
-          <input type="text" id="cpfTitular" name="cpfTitular" maxlength="16" required>
-        </div>
-        <div class="blocoInput">
-          <input type="submit" value="Fazer pedido">
-        </div>
-      </form>
-    </section>
+    <div class="containerForms">
+      <section class="containerLocalAutocompletar">
+        <%- include('./partials/local_autocompletar'); %>
+      </section>
+  
+      <section class="containerPagamento">
+        <%- include('./partials/pagamento_form'); %>
+      </section>
+    </div>
 
     <section class="containerSacola">
       <%- include('./partials/sacola', {rout: '/pedido/finalizar'}); %>
