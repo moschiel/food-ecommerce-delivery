@@ -7,16 +7,17 @@
   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-  <link rel="stylesheet" href="./stylesheets/index.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="stylesheets/sacola.css">
+  <link defer rel="stylesheet" href="stylesheets/sacola.css">
   <script defer src="javascripts/sacola.js"></script>
+  <link defer rel="stylesheet" href="stylesheets/index.css">
 </head>
 <body>
 
-  <%- include('./partials/sacola', {rout: '/'}); %>
+  <section class="containerSacola">
+    <%- include('./partials/sacola', {rout: '/'}); %>
+  </section>
 
   <header class="row">
     <div class="container">

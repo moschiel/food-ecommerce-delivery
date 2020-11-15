@@ -1,11 +1,12 @@
 *{
-  margin: 0px;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 html, body{
   height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 main{
@@ -47,5 +48,9 @@ section.pagamento form{
   width: 100%;
 }
 
+.containerSacola {
+  border-left: 1px solid gray;
+  min-width: 450px;
+}
 
 

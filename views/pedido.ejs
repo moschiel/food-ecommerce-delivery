@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seu pedido</title>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+  <script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&libraries=places&callback=initMap">
+  </script>
   <link rel="stylesheet" href="../stylesheets/pedido.css">
   <link rel="stylesheet" href="../stylesheets/sacola.css">
   <script defer src="../javascripts/sacola.js"></script>
@@ -12,6 +15,9 @@
 <body>
 
   <main>
+    <section class="endereco">
+      
+    </section>
     <section class="pagamento">
       <form action="" method="post">
         <div class="blocoInput">
@@ -41,7 +47,10 @@
         </div>
       </form>
     </section>
-    <%- include('./partials/sacola', {rout: '/pedido/finalizar'}); %>
+
+    <section class="containerSacola">
+      <%- include('./partials/sacola', {rout: '/pedido/finalizar'}); %>
+    </section>
   </main>
 
 </body>
