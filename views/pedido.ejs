@@ -6,15 +6,21 @@
   <title>Seu pedido</title>
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
   
-  <link rel="stylesheet" href="../stylesheets/pedido.css">
-  <!-- sacola scritps/styles -->
+  <!-- scritps/styles p/ sacola.ejs-->
   <link rel="stylesheet" href="../stylesheets/sacola.css">
   <script defer src="../javascripts/sacola.js"></script>
-  <!-- local_autocompletar scritps/styles -->
+
+  <!-- scritps/styles p/ auto_completar.ejs-->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <link rel="stylesheet" href="../stylesheets/local_autocompletar.css">
   <script src="../javascripts/local_autocompletar.js"></script>
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&callback=initAutocomplete&libraries=places&v=weekly"></script>
+
+  <!-- scritps/styles p/ form_pagamento.ejs-->
+  <link rel="stylesheet" href="../stylesheets/form_pagamento.css">
+
+  <!-- scripts/styles dessa pagina -->
+  <link rel="stylesheet" href="../stylesheets/pedido.css">
 </head>
 <body>
 
@@ -25,7 +31,7 @@
       </section>
   
       <section class="containerPagamento">
-        <%- include('./partials/pagamento_form'); %>
+        <%- include('./partials/form_pagamento'); %>
       </section>
     </div>
 
