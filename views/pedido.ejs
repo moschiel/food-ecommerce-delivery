@@ -11,9 +11,10 @@
   <script defer src="../javascripts/sacola.js"></script>
 
   <!-- scritps/styles p/ auto_completar.ejs-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <link rel="stylesheet" href="../stylesheets/local_autocompletar.css">
-  <script src="../javascripts/local_autocompletar.js"></script>
+  <script defer src="../javascripts/local_autocompletar.js"></script>
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&callback=initAutocomplete&libraries=places&v=weekly"></script>
 
   <!-- scritps/styles p/ form_pagamento.ejs-->
@@ -26,11 +27,11 @@
 
   <main>
     <div class="containerForms">
-      <section class="containerLocalAutocompletar">
+      <section class="containerLocalAutocompletar ">
         <%- include('./partials/local_autocompletar'); %>
       </section>
   
-      <section class="containerPagamento">
+      <section class="containerPagamento ">
         <%- include('./partials/form_pagamento'); %>
       </section>
     </div>

@@ -49,6 +49,7 @@ function fillInAddress() {
       document.getElementById(addressType).value = val;
     }
   }
+  showAddressForm();
 }
 
 // Bias the autocomplete object to the user's geographical location,
@@ -67,4 +68,22 @@ function geolocate() {
       autocomplete.setBounds(circle.getBounds());
     });
   }
+}
+
+
+//minhas funcoes
+
+let locationField = $('#locationField');
+let formAddress = $('form#address');
+
+//somente barra de pesquiva visivel
+function showAddressSearch(){
+  $('#locationField > input').val(""); //limpa pesquisa
+  locationField.slideDown();
+  formAddress.slideUp();
+}
+//somente form visivel
+function showAddressForm(){
+  locationField.slideUp();
+  formAddress.slideDown(); 
 }

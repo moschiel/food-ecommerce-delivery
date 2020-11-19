@@ -16,13 +16,20 @@ input#autocomplete{
   border: 1px solid rgb(200,200,200);
   height: 40px;
   width: 100%;
+  border-radius: 5px;
 }
 
 form#address{
-  /* display: none; */
+  /* display alterado via javascript */
+  display: none; 
   border: 1px solid rgb(200,200,200);
   width: 100%;
   border-radius: 5px;
+}
+
+form#address .blocoInput label {
+  color: rgb(140,140,140);
+  margin-left: 3px;
 }
 
 form#address .blocoInput {
@@ -36,9 +43,34 @@ form#address .blocoInput input{
   border: 1px solid rgb(200,200,200);
   height: 40px;
   width: 100%;
+  font-size: 15px;
 }
 
 form#address .blocoButton{
   display: flex;
   justify-content: space-between;
+}
+
+form#address .button{
+  height: 40px;
+  width: 200px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form#address .confirmarBtn{
+  background-color: rgb(20, 173, 15);
+}
+form#address .confirmarBtn:hover{
+  background-color: rgb(30, 190, 30);
+}
+form#address .cancelarBtn{
+  background-color: rgb(240, 90, 60);;
+}
+form#address .cancelarBtn:hover{
+  background-color: rgb(255, 99, 71);
 }

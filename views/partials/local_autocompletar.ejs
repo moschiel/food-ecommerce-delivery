@@ -2,7 +2,7 @@
   <div id="locationField">
     <input
       id="autocomplete"
-      placeholder="Enter your address"
+      placeholder="Inserir um novo endereço"
       onFocus="geolocate()"
       type="text"
     />
@@ -12,7 +12,7 @@
              the locations relevant to your app. For more information, see
        https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
   -->
-  <form id="address" action="" method="post">
+  <form id="address" action=>
     <div class="blocoInput w100">
       <label for="route">Rua</label>
       <input class="field" id="route" name="route" disabled="true" />
@@ -42,8 +42,8 @@
       <input class="field" id="postal_code" name="postal_code" disabled="true" />
     </div>
     <div class="blocoInput blocoButton w100">
-      <button>Confirmar Endereço</button>
-      <button>Cancelar</button>
+      <div class="button confirmarBtn" onclick="showAddressSearch()"><p>Adicionar Endereço</p></div>
+      <div class="button cancelarBtn" onclick="showAddressSearch()"><p>Cancelar</p></div>
     </div>
   </form>
 </div>
