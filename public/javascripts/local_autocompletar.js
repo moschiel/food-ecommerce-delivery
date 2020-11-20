@@ -10,6 +10,7 @@ let autocomplete;
 const componentForm = {
   route: "long_name",
   street_number: "short_name",
+  sublocality_level_1: "short_name",
   administrative_area_level_2: "long_name",
   administrative_area_level_1: "short_name",
   postal_code: "short_name",
@@ -33,6 +34,7 @@ function initAutocomplete() {
 function fillInAddress() {
   // Get the place details from the autocomplete object.
   const place = autocomplete.getPlace();
+  //console.log(place);
 
   for (const component in componentForm) {
     document.getElementById(component).value = "";
@@ -72,18 +74,93 @@ function geolocate() {
 
 
 //minhas funcoes
+let addressList = [];
+let addressLocalStorageKey = 'addressLocalStorage';
+let elLocationField = $('#locationField');
+let elAddressList = $('#address-list');
+let elFormAddress = $('form#address');
 
-let locationField = $('#locationField');
-let formAddress = $('form#address');
-
-//somente barra de pesquiva visivel
-function showAddressSearch(){
+//componentes para seleção de endereço visivel
+function showAddressSelection(){
   $('#locationField > input').val(""); //limpa pesquisa
-  locationField.slideDown();
-  formAddress.slideUp();
+  elAddressList.slideDown();
+  elLocationField.slideDown();
+  elFormAddress.slideUp();
 }
-//somente form visivel
+//form para prenchimente endereço visivel
 function showAddressForm(){
-  locationField.slideUp();
-  formAddress.slideDown(); 
+  elAddressList.slideUp();
+  elLocationField.slideUp();
+  elFormAddress.slideDown(); 
 }
+
+function getAddressInputsValues() {
+  lastAddressId++;
+  localStorage.setItem('lastAddressId', lastAddressId);
+
+  let address = {
+    id:lastAddressId,
+    select: true,
+    route: $('#route').val(),
+    street_number: $('#street_number').val(),
+    complement: $('#complement').val(),
+    sublocality_level_1: $('#sublocality_level_1').val(),
+    administrative_area_level_2: $('#administrative_area_level_2').val(),
+    administrative_area_level_1: $('#administrative_area_level_1').val(),
+    postal_code: $('#postal_code').val(),
+  }
+  return address;
+}
+
+function createAddressBoxHtml(addr){
+
+  let addressLine1 = `${addr.route}, ${addr.street_number}`;
+  if(addr.complement)
+    addressLine1 += `, ${addr.complement}`;
+
+  let addressLine2 = `${addr.sublocality_level_1}, ${addr.administrative_area_level_2}/${addr.administrative_area_level_1}, ${addr.postal_code}`;
+
+  let addressBoxHTML = `
+    <div class="address-box" id="address-box-${addr.id}">
+      <div class="address-line-1">${addressLine1}</div>
+      <div class="address-line-2">${addressLine2}</div>
+    </div>`;
+
+  return addressBoxHTML;
+}
+
+function addAddress(){
+  let address = getAddressInputsValues();
+  let addressBoxHTML = createAddressBoxHtml(address);
+
+  addressList.push(address);
+  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
+  document.body.querySelector('#address-list').insertAdjacentHTML("beforeend", addressBoxHTML);
+
+  showAddressSelection();
+}
+
+let lastAddressId = 0;
+function initAddressList() {
+    //address list
+    let storageAddressList = localStorage.getItem(addressLocalStorageKey);
+
+    if(storageAddressList != null){
+      addressList = JSON.parse(storageAddressList);
+    }
+
+    let addressBoxesHTML = "";
+    addressList.forEach(address => {
+      addressBoxesHTML += createAddressBoxHtml(address);
+    });
+
+    document.body.querySelector('#address-list').innerHTML = addressBoxesHTML;
+
+    //last address id created
+    lastAddressId = Number(localStorage.getItem('lastAddressId'));
+    
+    if(lastAddressId == null)
+      lastAddressId = 0;
+}
+
+initAddressList();

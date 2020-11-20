@@ -1,11 +1,15 @@
 <div id="localAutoComplete">
+  
   <div id="locationField">
     <input
-      id="autocomplete"
-      placeholder="Inserir um novo endereço"
-      onFocus="geolocate()"
-      type="text"
+    id="autocomplete"
+    placeholder="Pesquisar endereço"
+    onFocus="geolocate()"
+    type="text"
     />
+  </div>
+  
+  <div id="address-list">
   </div>
   
   <!-- Note: The address components in this sample are typical. You might need to adjust them for
@@ -28,22 +32,28 @@
       </div>
     </div>
     <div style="display: flex;">
-      <div class="blocoInput w100">
+      <div class="blocoInput w50">
+        <label for="sublocality_level_1">Bairro</label>
+        <input class="field" id="sublocality_level_1" name="sublocality_level_1" disabled="true" />
+      </div>
+      <div class="blocoInput w50">
         <label for="administrative_area_level_2">Cidade</label>
         <input class="field" id="administrative_area_level_2" name="administrative_area_level_2" disabled="true" />
       </div>
-      <div class="blocoInput w30">
+    </div>
+    <div style="display: flex;">
+      <div class="blocoInput w20">
         <label for="administrative_area_level_1">UF</label>
         <input class="field" id="administrative_area_level_1" name="administrative_area_level_1" disabled="true" />
       </div>
-    </div>
-    <div class="blocoInput w50">
-      <label for="postal_code">CEP</label>
-      <input class="field" id="postal_code" name="postal_code" disabled="true" />
+      <div class="blocoInput w50">
+        <label for="postal_code">CEP</label>
+        <input class="field" id="postal_code" name="postal_code" disabled="true" />
+      </div>
     </div>
     <div class="blocoInput blocoButton w100">
-      <div class="button confirmarBtn" onclick="showAddressSearch()"><p>Adicionar Endereço</p></div>
-      <div class="button cancelarBtn" onclick="showAddressSearch()"><p>Cancelar</p></div>
+      <div class="button confirmarBtn" onclick="addAddress()"><p>Adicionar Endereço</p></div>
+      <div class="button cancelarBtn" onclick="showAddressSelection()"><p>Cancelar</p></div>
     </div>
   </form>
 </div>

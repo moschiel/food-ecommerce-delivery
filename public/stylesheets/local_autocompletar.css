@@ -7,6 +7,9 @@
 .w30{
   width: 30%;
 }
+.w20{
+  width: 20%;
+}
 
 div#localAutoComplete {
   width: 100%;
