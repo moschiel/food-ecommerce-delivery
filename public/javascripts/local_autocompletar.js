@@ -122,8 +122,14 @@ function createAddressBoxHtml(addr){
 
   let addressBoxHTML = `
     <div class="address-box" id="address-box-${addr.id}">
-      <div class="address-line-1">${addressLine1}</div>
-      <div class="address-line-2">${addressLine2}</div>
+      <div>
+        <div class="address-line address-line-1">${addressLine1}</div>
+        <div class="address-line address-line-2">${addressLine2}</div>
+      </div>
+      <div>
+        <button class="address-editar">Editar</button>
+        <button class="address-trocar">Trocar</button>
+      </div>
     </div>`;
 
   return addressBoxHTML;

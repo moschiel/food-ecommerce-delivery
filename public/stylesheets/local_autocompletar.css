@@ -15,7 +15,31 @@ div#localAutoComplete {
   width: 100%;
 }
 
+/* #address-list{
+  border: 1px solid rgb(200,200,200);
+} */
+.address-box{
+  border: 1px solid rgb(200,200,200);
+  border-radius: 5px;
+  height: 80px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.address-line-1{
+  font-size: 20px;
+  color: rgb(50,50,50);
+}
+.address-line-2{
+  font-style: italic;
+  color: rgb(150,150,150);
+}
+
 input#autocomplete{
+  display: none;
   border: 1px solid rgb(200,200,200);
   height: 40px;
   width: 100%;
