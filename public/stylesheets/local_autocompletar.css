@@ -25,8 +25,12 @@ div#localAutoComplete {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   padding: 10px;
+}
+
+.address-box-controls{
+  margin-left: auto;
 }
 
 .address-line-1{
@@ -39,7 +43,7 @@ div#localAutoComplete {
 }
 
 input#autocomplete{
-  display: none;
+  /* display: none; */
   border: 1px solid rgb(200,200,200);
   height: 40px;
   width: 100%;

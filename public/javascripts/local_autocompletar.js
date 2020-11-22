@@ -76,6 +76,7 @@ function geolocate() {
 //minhas funcoes
 let addressList = [];
 let addressLocalStorageKey = 'addressLocalStorage';
+let elAddressSelected = $('#address-selected');
 let elLocationField = $('#locationField');
 let elAddressList = $('#address-list');
 let elFormAddress = $('form#address');
@@ -122,13 +123,13 @@ function createAddressBoxHtml(addr){
 
   let addressBoxHTML = `
     <div class="address-box" id="address-box-${addr.id}">
+      <input type="radio" name="addr-select">
       <div>
         <div class="address-line address-line-1">${addressLine1}</div>
         <div class="address-line address-line-2">${addressLine2}</div>
       </div>
-      <div>
+      <div class="address-box-controls">
         <button class="address-editar">Editar</button>
-        <button class="address-trocar">Trocar</button>
       </div>
     </div>`;
 
@@ -148,23 +149,28 @@ function addAddress(){
 
 let lastAddressId = 0;
 function initAddressList() {
-    //address list
+    //carrega address list
     let storageAddressList = localStorage.getItem(addressLocalStorageKey);
-
     if(storageAddressList != null){
       addressList = JSON.parse(storageAddressList);
     }
 
     let addressBoxesHTML = "";
+    //let addressBoxSelectedHTML = "";
     addressList.forEach(address => {
+      //cria html da lista de andereços
       addressBoxesHTML += createAddressBoxHtml(address);
+      if(address.select){
+        //cria html do endereço selecionado para entrega
+        //addressBoxSelectedHTML = createAddressBoxHtml(address);
+      }
     });
 
     document.body.querySelector('#address-list').innerHTML = addressBoxesHTML;
+    //document.body.querySelector('#address-selected').innerHTML = addressBoxSelectedHTML;
 
-    //last address id created
+    //load last address id created
     lastAddressId = Number(localStorage.getItem('lastAddressId'));
-    
     if(lastAddressId == null)
       lastAddressId = 0;
 }
