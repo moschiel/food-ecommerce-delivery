@@ -19,6 +19,8 @@
 #address-title {
   font-weight: bold;
   margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 #locationField {
@@ -58,6 +60,10 @@
   transition: 0.25s ease-in-out;
   height: 70px; /*80*/
 }
+.address-box:hover{
+  background-color: rgb(255,255,230);
+  border: 3px solid rgb(255, 69, 0);
+}
 /* .address-box > input[type=radio] {
   margin-right: 10px;
 } */
@@ -81,12 +87,24 @@
   font-size: 14px;
 }
 .address-box .address-box-controls{
+  /* border: 1px solid black; */
   margin-left: auto;
+  min-width: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+.address-box .address-box-controls i{
+  color: rgb(100,100,100);
+}
+.address-box .address-box-controls i:hover{
+  color: rgb(255, 69, 0);
 }
 
 .address-box-select {
   border: 3px solid rgb(255, 69, 0);
-  background-color: rgb(255, 240, 190);
+  background-color: rgb(255, 255, 230);
   height: 100px;
 }
 .address-box-select .icon-select{

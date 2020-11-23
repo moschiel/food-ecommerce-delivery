@@ -35,9 +35,7 @@ function initAutocomplete() {
 //preenche o formulario com os dados de endereço
 function fillInAddress(address) {
   //limpa o formulario
-  elFormAddrInputs.each((index, element) => {
-    element.value = '';
-  });
+  clearFormAddress();
 
   //se recebeu endereço como parametro, preenche com os dados recebidos
   if(address) {
@@ -104,13 +102,15 @@ function showAddressList(){
 function showAddressForm(addr_id){
   if(addr_id) {
     elConfirmButton.text('ATUALIZAR ENDEREÇO');
-    elConfirmButton.click(()=>( editAddress(addr_id)));
+    elConfirmButton.unbind('click'); //remove todos eventos click
+    elConfirmButton.click(()=>( editAddress(addr_id))); //add click event
     let address = addressList.find((item) => item.id == addr_id);
     fillInAddress(address);
   }
   else {
     elConfirmButton.text('ADICIONAR ENDEREÇO');
-    elConfirmButton.click(addAddress);
+    elConfirmButton.unbind('click'); //remove todos elementos click
+    elConfirmButton.click(addAddress); //add click event
     fillInAddress();
   }
 
@@ -133,7 +133,23 @@ function readAddressFromForm() {
     administrative_area_level_1: $('#administrative_area_level_1').val(),
     postal_code: $('#postal_code').val(),
   }
-  return address;
+
+  if(address.route && 
+    address.street_number && 
+    address.sublocality_level_1 &&
+    address.administrative_area_level_2 &&
+    address.administrative_area_level_1 &&
+    postal_code)
+    return address;
+  else
+    return null;
+}
+
+function clearFormAddress(){
+  //limpa o formulario
+  elFormAddrInputs.each((index, element) => {
+    element.value = '';
+  });
 }
 
 function createAddressBoxHtml(addr){
@@ -151,7 +167,6 @@ function createAddressBoxHtml(addr){
     addressClass = "address-box";
   }
 
-
   let addressBoxHTML = `
     <div class="${addressClass}" id="address-box-${addr.id}" onclick="selectAddress(${addr.id}, 'address-box-${addr.id}')">
       <!--<input type="radio" name="addr-select">-->
@@ -160,11 +175,11 @@ function createAddressBoxHtml(addr){
         <div class="address-text">
           <div class="address-line address-line-1">${addressLine1}</div>
           <div class="address-line address-line-2">${addressLine2}</div>
-          </div>
+        </div>
       </div>
       <div class="address-box-controls">
-        <button id="address-editar" onclick="showAddressForm(${addr.id})">Editar</button>
-        <button id="address-remover" onclick="removeAddress(${addr.id}, 'address-box-${addr.id}')">Apagar</button>
+        <i id="address-editar" class="fas fa-pen" onclick="showAddressForm(${addr.id})"></i>
+        <i id="address-remover" class="fas fa-trash-alt" onclick="deleteAddress(${addr.id}, 'address-box-${addr.id}')"></i>
       </div>
     </div>`;
 
@@ -172,10 +187,19 @@ function createAddressBoxHtml(addr){
 }
 
 function addAddress(){
+  console.log("addAddress");
+  let address = readAddressFromForm();
+  if(address == null)
+    return;
+
+  addressList.forEach(addr => { addr.select = false; });
+  $('.address-box').each((idx, element) => {
+    $(element).removeClass('address-box-select');
+  });
+
   lastCreatedAddressId++;
   localStorage.setItem('lastCreatedAddressId', lastCreatedAddressId);
 
-  let address = readAddressFromForm();
   address.id = lastCreatedAddressId;
   address.select = true;
   let addressBoxHTML = createAddressBoxHtml(address);
@@ -185,20 +209,38 @@ function addAddress(){
   elAddressList.append(addressBoxHTML);
 
   showAddressList();
+  //limpa o formulario
+  clearFormAddress();
 }
 
 function editAddress(addr_id){
-  let addrIndex = addressList.findIndex(item => item.id == addr_id);
+  console.log("editAddress")
   let address = readAddressFromForm();
+  if(address == null)
+    return;
+
+  addressList.forEach(addr => { addr.select = false; });
+  $('.address-box').each((idx, element) => {
+    $(element).removeClass('address-box-select');
+  });
+
+  let addrIndex = addressList.findIndex(item => item.id == addr_id);
   address.id = addr_id;
+  address.select = true;
   addressList[addrIndex] = address;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   
   loadAddressList();
   showAddressList();
+  //limpa o formulario
+  clearFormAddress();
 }
 
 function selectAddress(addr_id, element_id){
+  if(document.getElementById(element_id) == null)
+    return;
+  console.log('selectAddress')
+
   addressList.forEach(addr => { addr.select = false; });
   $('.address-box').each((idx, element) => {
     $(element).removeClass('address-box-select');
@@ -208,7 +250,13 @@ function selectAddress(addr_id, element_id){
   addressList[addrIndex].select = true;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   $('#'+element_id).addClass('address-box-select');
+}
 
+function deleteAddress(addr_id, element_id){
+  console.log("deleteAddress")
+  addressList = addressList.filter(addr => addr.id != addr_id);
+  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
+  $('#'+element_id).remove();
 }
 
 //inicializa lista de endereços
