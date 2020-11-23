@@ -121,17 +121,18 @@ function showAddressForm(addr_id){
 
 //leitura dos valores do form
 function readAddressFromForm() {
-
+  
   let address = {
     id:null,
     select: false,
-    route: $('#route').val(),
-    street_number: $('#street_number').val(),
-    complement: $('#complement').val(),
-    sublocality_level_1: $('#sublocality_level_1').val(),
-    administrative_area_level_2: $('#administrative_area_level_2').val(),
-    administrative_area_level_1: $('#administrative_area_level_1').val(),
-    postal_code: $('#postal_code').val(),
+    address_type: null, //$('input[name=address_type]:checked').val()
+    route: $('#address-form #route').val(),
+    street_number: $('#address-form #street_number').val(),
+    complement: $('#address-form #complement').val(),
+    sublocality_level_1: $('#address-form #sublocality_level_1').val(),
+    administrative_area_level_2: $('#address-form #administrative_area_level_2').val(),
+    administrative_area_level_1: $('#address-form #administrative_area_level_1').val(),
+    postal_code: $('#address-form #postal_code').val(),
   }
 
   if(address.route && 
