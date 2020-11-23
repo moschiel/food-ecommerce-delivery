@@ -11,8 +11,35 @@
   width: 20%;
 }
 
-div#localAutoComplete {
+#address-selection {
   width: 100%;
+  padding: 30px 0;
+}
+
+#address-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#locationField {
+  border: 1px solid rgb(200,200,200);
+  height: 40px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+#locationField i.fa-search{
+  margin: 0 5px;
+}
+
+#locationField input#autocomplete{
+  /* display: none; */
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px; /*precisa de radius pra nao cortar a borda do elemento pai*/
 }
 
 /* #address-list{
@@ -21,68 +48,104 @@ div#localAutoComplete {
 .address-box{
   border: 1px solid rgb(200,200,200);
   border-radius: 5px;
-  height: 80px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
   padding: 10px;
-}
+  cursor: pointer;
 
-.address-box-controls{
+  transition: 0.25s ease-in-out;
+  height: 70px; /*80*/
+}
+/* .address-box > input[type=radio] {
+  margin-right: 10px;
+} */
+.address-box .icon-select{
+  transition: 0.25s ease-in-out;
+  /* display: none; */
+  height: 0px;
+  border: 0px;
+  font-size: 0px;
+  color: transparent;
+}
+.address-box .address-line-1{
+  transition: 0.25s ease-in-out;
+  font-size: 17px;
+  color: rgb(50,50,50);
+}
+.address-box .address-line-2{
+  font-style: italic;
+  transition: 0.25s ease-in-out;
+  color: rgb(150,150,150);
+  font-size: 14px;
+}
+.address-box .address-box-controls{
   margin-left: auto;
 }
 
-.address-line-1{
-  font-size: 20px;
-  color: rgb(50,50,50);
+.address-box-select {
+  border: 3px solid rgb(255, 69, 0);
+  background-color: rgb(255, 240, 190);
+  height: 100px;
 }
-.address-line-2{
-  font-style: italic;
-  color: rgb(150,150,150);
-}
-
-input#autocomplete{
-  /* display: none; */
-  border: 1px solid rgb(200,200,200);
-  height: 40px;
-  width: 100%;
+.address-box-select .icon-select{
+  display: block;
+  height: fit-content;
+  /* background-color: green; */
+  background-color: rgb(255, 69, 0);;
+  color: white;
+  width: fit-content;
+  padding: 5px;
   border-radius: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  position: relative;
+  top: -26px;
+}
+.address-box-select .address-text{
+  position: relative;
+  top: -10px;
+}
+.address-box-select .address-line-1{
+  color: rgb(255, 69, 0);
+  font-size: 21px;
+}
+.address-box-select .address-line-2{
+  color: rgb(130,130,130);
+  font-size: 16px;
 }
 
-form#address{
+#address-form{
   /* display alterado via javascript */
   display: none; 
   border: 1px solid rgb(200,200,200);
   width: 100%;
   border-radius: 5px;
+  padding: 10px 0;
 }
-
-form#address .blocoInput label {
-  color: rgb(140,140,140);
-  margin-left: 3px;
-}
-
-form#address .blocoInput {
+#address-form .blocoInput {
   /* border: 1px solid orange; */
   margin-bottom: 20px;
   padding-left: 5px;
   padding-right: 5px;
 }
-
-form#address .blocoInput input{
+#address-form .blocoInput label {
+  color: rgb(140,140,140);
+  margin-left: 3px;
+}
+#address-form .blocoInput input{
   border: 1px solid rgb(200,200,200);
   height: 40px;
   width: 100%;
   font-size: 15px;
 }
-
-form#address .blocoButton{
+#address-form .blocoButton{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0px;
 }
-
-form#address .button{
+#address-form .button{
   height: 40px;
   width: 200px;
   color: white;
@@ -93,15 +156,15 @@ form#address .button{
   justify-content: center;
   align-items: center;
 }
-form#address .confirmarBtn{
+#address-form .confirmarBtn{
   background-color: rgb(20, 173, 15);
 }
-form#address .confirmarBtn:hover{
+#address-form .confirmarBtn:hover{
   background-color: rgb(30, 190, 30);
 }
-form#address .cancelarBtn{
+#address-form .cancelarBtn{
   background-color: rgb(240, 90, 60);;
 }
-form#address .cancelarBtn:hover{
+#address-form .cancelarBtn:hover{
   background-color: rgb(255, 99, 71);
 }

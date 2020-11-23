@@ -1,10 +1,8 @@
-<div id="localAutoComplete">
-  <div style="font-weight: bold;">Endereço para entrega:</div>
-
-  <div id="address-selected">
-  </div>
+<div id="address-selection">
+  <div id="address-title">Endereço para entrega:</div>
 
   <div id="locationField">
+    <i class="fas fa-search"></i>
     <input
     id="autocomplete"
     placeholder="Pesquisar endereço"
@@ -13,14 +11,13 @@
     />
   </div>
 
-  <div id="address-list">
-  </div>
+  <div id="address-list"></div>
   
   <!-- Note: The address components in this sample are typical. You might need to adjust them for
              the locations relevant to your app. For more information, see
        https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
   -->
-  <form id="address" action=>
+  <form id="address-form" action=>
     <div class="blocoInput w100">
       <label for="route">Rua</label>
       <input class="field" id="route" name="route" disabled="true" />
@@ -56,8 +53,8 @@
       </div>
     </div>
     <div class="blocoInput blocoButton w100">
-      <div class="button confirmarBtn" onclick="addAddress()"><p>Adicionar Endereço</p></div>
-      <div class="button cancelarBtn" onclick="showAddressSelection()"><p>Cancelar</p></div>
+      <div class="button confirmarBtn"><p>Adicionar Endereço</p></div>
+      <div class="button cancelarBtn" onclick="showAddressList()"><p>Cancelar</p></div>
     </div>
   </form>
 </div>
