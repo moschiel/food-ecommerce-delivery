@@ -20,8 +20,8 @@ main{
   width: 100%;
 }
 
-.containerLocalAutocompletar,
-.containerPagamento{
+.containerCrudEndereco,
+.containerCrudPagamento{
   /* border: 1px solid blue; */
   width: 500px;
   margin: 0 auto;
