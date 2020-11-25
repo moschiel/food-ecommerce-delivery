@@ -149,9 +149,9 @@ function verifyAddress(address){
     isEmpty(address.administrative_area_level_2) ||
     isEmpty(address.administrative_area_level_1) ||
     isEmpty(postal_code))
-    return address;
-  else
     return null;
+  else
+    return address;
 }
 
 function isEmpty(value){
