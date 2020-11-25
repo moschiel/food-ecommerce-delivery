@@ -40,10 +40,14 @@ function fillInAddress(address) {
   //se recebeu endereço como parametro, preenche com os dados recebidos
   if(address) {
     elFormAddrInputs.each((index, element) => {
-      if(address[element.id]){
+      if($(element).attr('type') == 'radio' && $(element).attr('value') == address.type){
+        $(element).prop('checked', true);
+      }
+      else if(address[element.id]){
         element.value = address[element.id];
       }
     });
+    
   }
   else { //se não, preenche com os dados da 'Local API'
     // Get the place details from the autocomplete object.
@@ -120,12 +124,12 @@ function showAddressForm(addr_id){
 }
 
 //leitura dos valores do form
+//retorna null se dados invalidos
 function readAddressFromForm() {
-  
   let address = {
     id:null,
     select: false,
-    address_type: null, //$('input[name=address_type]:checked').val()
+    type: $('input[name=address_type]:checked').val(), 
     route: $('#address-form #route').val(),
     street_number: $('#address-form #street_number').val(),
     complement: $('#address-form #complement').val(),
@@ -134,45 +138,74 @@ function readAddressFromForm() {
     administrative_area_level_1: $('#address-form #administrative_area_level_1').val(),
     postal_code: $('#address-form #postal_code').val(),
   }
+  
+  return verifyAddress(address);
+}
 
-  if(address.route && 
-    address.street_number && 
-    address.sublocality_level_1 &&
-    address.administrative_area_level_2 &&
-    address.administrative_area_level_1 &&
-    postal_code)
+function verifyAddress(address){
+  if(isEmpty(address.route) ||
+    isEmpty(address.street_number) ||
+    isEmpty(address.sublocality_level_1) ||
+    isEmpty(address.administrative_area_level_2) ||
+    isEmpty(address.administrative_area_level_1) ||
+    isEmpty(postal_code))
     return address;
   else
     return null;
 }
 
+function isEmpty(value){
+  return (value == null || value == undefined || value == "");
+}
+
 function clearFormAddress(){
   //limpa o formulario
   elFormAddrInputs.each((index, element) => {
-    element.value = '';
+    if($(element).attr('type') == 'radio'){
+      $(element).prop('checked', false);
+    }else {
+      element.value = '';
+    }
   });
 }
 
 function createAddressBoxHtml(addr){
+  //determina classes a serem utilizadas
+  let addressClass = "address-box";
+  if(addr.type == 'home'){
+    addressClass += " address-box-type-home";
+  }
+  if(addr.type == 'work'){
+    addressClass += " address-box-type-work";
+  }
+  if(addr.select) {
+    addressClass += " address-box-is-selected";
+  }
+
+  //monta string de endereço, no seguinte formato:
+  //RUA, NUMERO, COMPLEMENTO
+  //BAIRRO, CIDADE/UF, CEP
   let addressLine1 = `${addr.route}, ${addr.street_number}`;
   if(addr.complement) {
     addressLine1 += `, ${addr.complement}`;
   }
-
   let addressLine2 = `${addr.sublocality_level_1}, ${addr.administrative_area_level_2}/${addr.administrative_area_level_1}, ${addr.postal_code}`;
 
-  let addressClass;
-  if(addr.select == true) {
-    addressClass = "address-box address-box-select";
-  }else{
-    addressClass = "address-box";
-  }
-
+  //monta HTML final
   let addressBoxHTML = `
     <div class="${addressClass}" id="address-box-${addr.id}" onclick="selectAddress(${addr.id}, 'address-box-${addr.id}')">
-      <!--<input type="radio" name="addr-select">-->
       <div>
-        <div class="icon-select">SELECIONADO PARA ENTREGA</div>
+        <div class="select-container">
+          <div class='address-type type-home'>
+            <i class='fas fa-home'></i>
+            <div class='text-icon'>&nbspcasa</div>
+          </div>
+          <div class='address-type type-work'>
+            <i class='fas fa-building'></i>
+            <div class='text-icon'>trabalho</div>
+          </div>
+          <div class="text-select">selecionado para entrega</div>
+        </div>
         <div class="address-text">
           <div class="address-line address-line-1">${addressLine1}</div>
           <div class="address-line address-line-2">${addressLine2}</div>
@@ -195,7 +228,7 @@ function addAddress(){
 
   addressList.forEach(addr => { addr.select = false; });
   $('.address-box').each((idx, element) => {
-    $(element).removeClass('address-box-select');
+    $(element).removeClass('address-box-is-selected');
   });
 
   lastCreatedAddressId++;
@@ -220,10 +253,10 @@ function editAddress(addr_id){
   if(address == null)
     return;
 
-  addressList.forEach(addr => { addr.select = false; });
-  $('.address-box').each((idx, element) => {
-    $(element).removeClass('address-box-select');
-  });
+  // addressList.forEach(addr => { addr.select = false; });
+  // $('.address-box').each((idx, element) => {
+  //   $(element).removeClass('address-box-select');
+  // });
 
   let addrIndex = addressList.findIndex(item => item.id == addr_id);
   address.id = addr_id;
@@ -244,13 +277,13 @@ function selectAddress(addr_id, element_id){
 
   addressList.forEach(addr => { addr.select = false; });
   $('.address-box').each((idx, element) => {
-    $(element).removeClass('address-box-select');
+    $(element).removeClass('address-box-is-selected');
   });
   
   let addrIndex = addressList.findIndex(addr => addr.id == addr_id);
   addressList[addrIndex].select = true;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
-  $('#'+element_id).addClass('address-box-select');
+  $('#'+element_id).addClass('address-box-is-selected');
 }
 
 function deleteAddress(addr_id, element_id){

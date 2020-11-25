@@ -15,14 +15,14 @@
   width: 100%;
   padding: 30px 0;
 }
-
-#address-title {
+#crud-endereco-title {
   font-weight: bold;
   margin-bottom: 10px;
   text-transform: uppercase;
   font-size: 20px;
 }
 
+/****************** LOCATION FIELD ******************/
 #locationField {
   border: 1px solid rgb(200,200,200);
   height: 40px;
@@ -34,7 +34,6 @@
 #locationField i.fa-search{
   margin: 0 5px;
 }
-
 #locationField input#autocomplete{
   /* display: none; */
   height: 100%;
@@ -44,13 +43,11 @@
   border-radius: 5px; /*precisa de radius pra nao cortar a borda do elemento pai*/
 }
 
-/* #address-list{
-  border: 1px solid rgb(200,200,200);
-} */
+/****************** ADDRESS-BOX ******************/
 .address-box{
   border: 1px solid rgb(200,200,200);
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
@@ -62,18 +59,24 @@
 }
 .address-box:hover{
   background-color: rgb(255,255,230);
-  border: 3px solid rgb(255, 69, 0);
+  border: 3px solid rgb(255, 90, 50);
 }
-/* .address-box > input[type=radio] {
-  margin-right: 10px;
-} */
-.address-box .icon-select{
+.address-box:hover .address-type{
+  background-color:  rgb(255, 90, 50);
+}
+.address-box .select-container{
+  /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
+  position: fixed; 
+}
+.address-box .address-type{
+  display: none;
+}
+.address-box .text-select {
   transition: 0.25s ease-in-out;
-  /* display: none; */
+  color: transparent;
   height: 0px;
   border: 0px;
   font-size: 0px;
-  color: transparent;
 }
 .address-box .address-line-1{
   transition: 0.25s ease-in-out;
@@ -100,38 +103,89 @@
   color: rgb(255, 69, 0);
 }
 
-.address-box-select {
-  border: 3px solid rgb(255, 69, 0);
-  background-color: rgb(255, 255, 230);
-  height: 100px;
-}
-.address-box-select .icon-select{
-  display: block;
-  height: fit-content;
-  /* background-color: green; */
-  background-color: rgb(255, 69, 0);;
-  color: white;
-  width: fit-content;
-  padding: 5px;
-  border-radius: 5px;
-  font-size: 10px;
-  font-weight: bold;
+/****************** ADDRESS-BOX-HAS-TYPE ******************/
+.address-box-type-home .select-container,
+.address-box-type-work .select-container{
+  display: flex; /* deixa de 'flutar' */
+  align-items: center;
   position: relative;
-  top: -26px;
+  top: -12px;
 }
-.address-box-select .address-text{
+
+.address-box-type-home .type-home,
+.address-box-type-work .type-work {
+  display: flex;
+  align-items: center;
+  background-color: rgb(200,200,200);
+  height: 22px;
+  padding: 0px 4px;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.address-box-type-home .type-home i,
+.address-box-type-work .type-work i{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.address-box-type-home .type-home .text-icon,
+.address-box-type-work .type-work .text-icon{
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.address-box-type-home .address-text,
+.address-box-type-work .address-text{
   position: relative;
   top: -10px;
 }
-.address-box-select .address-line-1{
+
+
+/****************** ADDRESS-BOX-IS-SELECTED ******************/
+.address-box-is-selected {
+  border: 3px solid rgb(255, 90, 50);
+  background-color: rgb(255, 255, 230);
+  height: 100px;
+}
+.address-box-is-selected .select-container {
+  display: flex; /* deixa de 'flutar' */
+  align-items: center;
+  position: relative;
+  top: -23px;
+}
+.address-box-is-selected .address-type {
+  background-color: rgb(255, 90, 50);
+  color: black;
+}
+.address-box-is-selected .text-select{
+  background-color: rgb(255, 90, 50);
+  color: black;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 22px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0px 4px;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+.address-box-is-selected .address-text{
+  position: relative;
+  top: -10px;
+}
+.address-box-is-selected .address-line-1{
   color: rgb(255, 69, 0);
   font-size: 21px;
 }
-.address-box-select .address-line-2{
+.address-box-is-selected .address-line-2{
   color: rgb(130,130,130);
   font-size: 16px;
 }
 
+/****************** ADDRESS-FORM ******************/
 #address-form{
   /* display alterado via javascript */
   display: none; 
