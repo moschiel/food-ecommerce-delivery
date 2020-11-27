@@ -1,0 +1,192 @@
+:root {
+  --color-card-elements-border: rgb(200,200,200);
+  --color-cardbox-border-selected: rgb(255, 90, 50);
+  --color-cardbox-bg-selected: rgb(255,255,230);
+  --color-cardbox-info-bg-selected: rgb(255, 140, 80);
+  --color-cardLine1: rgb(50,50,50);
+  --color-cardline1-selected: rgb(255, 90, 50);
+  --color-cardLine2: rgb(150,150,150);
+  --color-cardline2-selected: rgb(130,130,130);
+  --color-cardbox-controls: rgb(100,100,100);
+  --color-cardbox-controls-hover: rgb(255, 90, 50);
+  --color-cardform-label: rgb(140,140,140)
+}
+
+.w100{
+  width: 100%;
+}
+.w50{
+  width: 50%;
+}
+.w30{
+  width: 30%;
+}
+.w20{
+  width: 20%;
+}
+
+#crud-cartao{
+  width: 100%;
+  padding: 30px 0;
+}
+#crud-cartao-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+/****************** CARD-BOX ******************/
+.card-box{
+  border: 1px solid var(--color-card-elements-border);
+  border-radius: 5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  padding: 10px;
+  cursor: pointer;
+
+  transition: 0.25s ease-in-out;
+  height: 70px; /*80*/
+}
+.card-box:hover{
+  background-color: var(--color-cardbox-bg-selected);
+  border: 3px solid var(--color-cardbox-border-selected);
+}
+.card-box:hover .card-type{
+  background-color:  var(--color-cardbox-info-bg-selected);
+}
+.card-box .select-container{
+  /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
+  position: fixed; 
+}
+.card-box .card-type{
+  display: none;
+}
+.card-box .text-select {
+  transition: 0.25s ease-in-out;
+  color: transparent;
+  height: 0px;
+  border: 0px;
+  font-size: 0px;
+}
+.card-box .card-line-1{
+  transition: 0.25s ease-in-out;
+  font-size: 17px;
+  color: var(--color-cardLine1);
+}
+.card-box .card-line-2{
+  font-style: italic;
+  transition: 0.25s ease-in-out;
+  color: var(--color-cardLine2);
+  font-size: 14px;
+}
+.card-box .card-box-controls{
+  /* border: 1px solid black; */
+  margin-left: auto;
+  min-width: 60px;
+  display: flex;
+  justify-content: space-between;
+}
+.card-box .card-box-controls i{
+  color: var(--color-cardbox-controls);
+}
+.card-box .card-box-controls i:hover{
+  color: var(--color-cardbox-controls-hover);
+}
+
+/****************** CARD-BOX-IS-SELECTED ******************/
+.card-box-is-selected {
+  border: 3px solid rgb(255, 90, 50);
+  background-color: var(--color-cardbox-bg-selected);
+  height: 100px;
+}
+.card-box-is-selected .select-container {
+  display: flex; /* deixa de 'flutar' */
+  align-items: center;
+  position: relative;
+  top: -23px;
+}
+.card-box-is-selected .card-type {
+  background-color: var(--color-cardbox-info-bg-selected);
+  color: black;
+}
+.card-box-is-selected .text-select{
+  background-color: var(--color-cardbox-info-bg-selected);
+  color: black;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: 22px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0px 4px;
+  border-radius: 5px;
+  text-transform: capitalize;
+}
+.card-box-is-selected .card-text{
+  position: relative;
+  top: -10px;
+}
+.card-box-is-selected .card-line-1{
+  color: var(--color-cardline1-selected);
+  font-size: 21px;
+}
+.card-box-is-selected .card-line-2{
+  color: var(--color-cardline2-selected);
+  font-size: 16px;
+}
+
+/****************** CARD-FORM ******************/
+#card-form{
+  /* display alterado via javascript */
+  display: none; 
+  border: 1px solid var(--color-card-elements-border);
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+#card-form .blocoInput {
+  margin-bottom: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#card-form .blocoInput label {
+  color: var(--color-cardform-label);
+  margin-left: 3px;
+}
+#card-form .blocoInput input{
+  border: 1px solid var(--color-card-elements-border);
+  height: 40px;
+  width: 100%;
+  font-size: 15px;
+}
+#card-form .blocoButton{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+#card-form .button{
+  height: 40px;
+  width: 200px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#card-form .confirmarBtn{
+  background-color: rgb(20, 173, 15);
+}
+#card-form .confirmarBtn:hover{
+  background-color: rgb(30, 190, 30);
+}
+#card-form .cancelarBtn{
+  background-color: rgb(240, 90, 60);;
+}
+#card-form .cancelarBtn:hover{
+  background-color: rgb(255, 99, 71);
+}

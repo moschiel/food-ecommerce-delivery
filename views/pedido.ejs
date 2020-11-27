@@ -20,7 +20,8 @@
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALe8l82_f0k-_VvUT0mPBO1h4VqyGz6QU&callback=initAutocomplete&libraries=places&v=weekly"></script>
 
   <!-- scritps/styles p/ crud_pagamento.ejs-->
-  <link rel="stylesheet" href="../stylesheets/crud_pagamento.css">
+  <link rel="stylesheet" href="../stylesheets/crud_cartao.css">
+  <script defer src="../javascripts/crud_cartao.js"></script>
 
   <!-- scripts/styles dessa pagina -->
   <link rel="stylesheet" href="../stylesheets/pedido.css">
@@ -33,8 +34,8 @@
         <%- include('./partials/crud_endereco'); %>
       </section>
   
-      <section class="containerCrudPagamento ">
-        <%- include('./partials/crud_pagamento'); %>
+      <section class="containerCrudCartao ">
+        <%- include('./partials/crud_cartao'); %>
       </section>
     </div>
 

@@ -1,0 +1,34 @@
+<div id="crud-cartao">
+  <div id="crud-cartao-title">meio de pagamento:</div>
+
+  <div id="cards-list"></div>
+ 
+  <form id="card-form">
+    <div class="blocoInput">
+      <label for="numCard">Número do Cartão</label>
+      <input type="text" id="numCard" name="numCard">
+    </div>
+    <div style="display: flex;">
+      <div class="blocoInput w50">
+        <label for="expirationDate">Validade</label>
+        <input type="text" id="expirationDate" name="expirationDate">
+      </div>
+      <div class="blocoInput w50">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" name="cvv">
+      </div>
+    </div>
+    <div class="blocoInput">
+      <label for="holderName">Nome do Titular</label>
+      <input type="text" id="holderName" name="holderName">
+    </div>
+    <div class="blocoInput">
+      <label for="holderCpf">CPF</label>
+      <input type="text" id="holderCpf" name="holderCpf">
+    </div>
+    <div class="blocoInput blocoButton w100">
+      <div class="button confirmarBtn">Adicionar Cartão</div>
+      <div class="button cancelarBtn" onclick="">Cancelar</div>
+    </div>
+  </form>
+</div>

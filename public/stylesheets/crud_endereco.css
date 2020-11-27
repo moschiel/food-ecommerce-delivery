@@ -1,3 +1,17 @@
+:root {
+  --color-addr-elements-border: rgb(200,200,200);
+  --color-addrbox-border-selected: rgb(255, 90, 50);
+  --color-addrbox-bg-selected: rgb(255,255,230);
+  --color-addrbox-info-bg-selected: rgb(255, 140, 80);
+  --color-addrLine1: rgb(50,50,50);
+  --color-addrline1-selected: rgb(255, 90, 50);
+  --color-addrLine2: rgb(150,150,150);
+  --color-addrline2-selected: rgb(130,130,130);
+  --color-addrbox-controls: rgb(100,100,100);
+  --color-addrbox-controls-hover: rgb(255, 90, 50);
+  --color-addrform-label: rgb(140,140,140)
+}
+
 .w100{
   width: 100%;
 }
@@ -24,7 +38,7 @@
 
 /****************** LOCATION FIELD ******************/
 #locationField {
-  border: 1px solid rgb(200,200,200);
+  border: 1px solid var(--color-addr-elements-border);
   height: 40px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -45,7 +59,7 @@
 
 /****************** ADDRESS-BOX ******************/
 .address-box{
-  border: 1px solid rgb(200,200,200);
+  border: 1px solid var(--color-addr-elements-border);
   border-radius: 5px;
   margin-bottom: 12px;
   display: flex;
@@ -58,11 +72,11 @@
   height: 70px; /*80*/
 }
 .address-box:hover{
-  background-color: rgb(255,255,230);
-  border: 3px solid rgb(255, 90, 50);
+  background-color: var(--color-addrbox-bg-selected);
+  border: 3px solid var(--color-addrbox-border-selected);
 }
 .address-box:hover .address-type{
-  background-color:  rgb(255, 90, 50);
+  background-color:  var(--color-addrbox-info-bg-selected);
 }
 .address-box .select-container{
   /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
@@ -81,12 +95,12 @@
 .address-box .address-line-1{
   transition: 0.25s ease-in-out;
   font-size: 17px;
-  color: rgb(50,50,50);
+  color: var(--color-addrLine1);
 }
 .address-box .address-line-2{
   font-style: italic;
   transition: 0.25s ease-in-out;
-  color: rgb(150,150,150);
+  color: var(--color-addrLine2);
   font-size: 14px;
 }
 .address-box .address-box-controls{
@@ -97,10 +111,10 @@
   justify-content: space-between;
 }
 .address-box .address-box-controls i{
-  color: rgb(100,100,100);
+  color: var(--color-addrbox-controls);
 }
 .address-box .address-box-controls i:hover{
-  color: rgb(255, 69, 0);
+  color: var(--color-addrbox-controls-hover);
 }
 
 /****************** ADDRESS-BOX-HAS-TYPE ******************/
@@ -116,7 +130,7 @@
 .address-box-type-work .type-work {
   display: flex;
   align-items: center;
-  background-color: rgb(200,200,200);
+  background-color: var(--color-addr-elements-border);
   height: 22px;
   padding: 0px 4px;
   border-radius: 5px;
@@ -145,8 +159,8 @@
 
 /****************** ADDRESS-BOX-IS-SELECTED ******************/
 .address-box-is-selected {
-  border: 3px solid rgb(255, 90, 50);
-  background-color: rgb(255, 255, 230);
+  border: 3px solid var(--color-addrbox-border-selected);
+  background-color: var(--color-addrbox-bg-selected);
   height: 100px;
 }
 .address-box-is-selected .select-container {
@@ -156,11 +170,11 @@
   top: -23px;
 }
 .address-box-is-selected .address-type {
-  background-color: rgb(255, 90, 50);
+  background-color: var(--color-addrbox-info-bg-selected);
   color: black;
 }
 .address-box-is-selected .text-select{
-  background-color: rgb(255, 90, 50);
+  background-color: var(--color-addrbox-info-bg-selected);
   color: black;
   display: flex;
   align-items: center;
@@ -177,11 +191,11 @@
   top: -10px;
 }
 .address-box-is-selected .address-line-1{
-  color: rgb(255, 69, 0);
+  color: var(--color-addrline1-selected);
   font-size: 21px;
 }
 .address-box-is-selected .address-line-2{
-  color: rgb(130,130,130);
+  color: var(--color-addrline2-selected);
   font-size: 16px;
 }
 
@@ -189,7 +203,7 @@
 #address-form{
   /* display alterado via javascript */
   display: none; 
-  border: 1px solid rgb(200,200,200);
+  border: 1px solid var(--color-addr-elements-border);
   width: 100%;
   border-radius: 5px;
   padding: 10px 0;
@@ -201,11 +215,11 @@
   padding-right: 5px;
 }
 #address-form .blocoInput label {
-  color: rgb(140,140,140);
+  color: var(--color-addrform-label);
   margin-left: 3px;
 }
 #address-form .blocoInput input{
-  border: 1px solid rgb(200,200,200);
+  border: 1px solid var(--color-addr-elements-border);
   height: 40px;
   width: 100%;
   font-size: 15px;
@@ -241,7 +255,7 @@
   background-color: rgb(30, 190, 30);
 }
 #address-form .cancelarBtn{
-  background-color: rgb(240, 90, 60);;
+  background-color: rgb(240, 90, 60);
 }
 #address-form .cancelarBtn:hover{
   background-color: rgb(255, 99, 71);

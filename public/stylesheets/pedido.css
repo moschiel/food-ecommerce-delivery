@@ -10,19 +10,16 @@ html, body{
 }
 
 main{
-  /* border: 1px solid red; */
   display: flex;
   justify-content: space-between;
 }
 
 .containerForms{
-  /* border: 2px solid red; */
   width: 100%;
 }
 
 .containerCrudEndereco,
-.containerCrudPagamento{
-  /* border: 1px solid blue; */
+.containerCrudCartao{
   width: 500px;
   margin: 0 auto;
 }

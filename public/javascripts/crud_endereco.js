@@ -88,7 +88,6 @@ function geolocate() {
 let lastCreatedAddressId = 0;
 let addressList = [];
 let addressLocalStorageKey = 'addressLocalStorage';
-let elAddressSelected = $('#address-selected');
 let elLocationField = $('#locationField');
 let elAddressList = $('#address-list');
 let elFormAddress = $('#address-form');
@@ -139,22 +138,25 @@ function readAddressFromForm() {
     postal_code: $('#address-form #postal_code').val(),
   }
   
-  return verifyAddress(address);
+  if(verifyAddress(address)) 
+    return address;
+  else 
+    return null;
 }
 
 function verifyAddress(address){
-  if(isEmpty(address.route) ||
-    isEmpty(address.street_number) ||
-    isEmpty(address.sublocality_level_1) ||
-    isEmpty(address.administrative_area_level_2) ||
-    isEmpty(address.administrative_area_level_1) ||
-    isEmpty(postal_code))
-    return null;
+  if(checkValue(address.route) ||
+    checkValue(address.street_number) ||
+    checkValue(address.sublocality_level_1) ||
+    checkValue(address.administrative_area_level_2) ||
+    checkValue(address.administrative_area_level_1) ||
+    checkValue(postal_code))
+    return false;
   else
-    return address;
+    return true;
 }
 
-function isEmpty(value){
+function checkValue(value){
   return (value == null || value == undefined || value == "");
 }
 
@@ -308,9 +310,6 @@ function loadAddressList() {
 
       //insere html
       elAddressList.html(addressBoxesHTML);
-
-      //marca ultimo endereco selecionado
-      addressList.map
     }
 
     //leitura do ultimo address ID criado
