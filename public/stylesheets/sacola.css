@@ -7,6 +7,11 @@
   25% { transform: rotate(0deg); }
 }
 
+#crud-sacola {
+  width: 100%;
+  height: 100%;
+}
+
 div.icone-sacola{
   position: fixed;
   right: 40px;
@@ -42,11 +47,10 @@ div.icone-sacola-num{
   color: red;
 }
 
-div.sacola {
+.sacola {
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: white;
   flex-direction: column;
   align-items: center;
   padding: 15px 15px;

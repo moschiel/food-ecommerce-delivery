@@ -1,21 +1,16 @@
-<% const homeRout = '/'; %>
-
-<% if (rout == homeRout) { %>
+<div id="crud-sacola">
   <div class="icone-sacola" onclick="toggleSacola()">
     <i class="fas fa-shopping-bag fa-3x"></i>
     <div class="icone-sacola-num">0</div>
   </div>
-<% } %>
-
-<div class="sacola">
-  <span class="sacola-texto">Sua sacola</span> 
-  <ul id="sacola-lista">
-    <div class="divisoria"></div>
-  </ul>
-  <span class="sacola-total-text">Total: R$ <span class="sacola-total-valor">0,00</span></span>
-  <% if (rout == homeRout) { %>
-  <a href="/pedido/finalizar">
-    <button class="pagamento">Prosseguir para pagamento</button>
-  </a>
-  <% } %>
+  <div class="sacola">
+    <span class="sacola-texto">Sua sacola</span> 
+    <ul id="sacola-lista">
+      <div class="divisoria"></div>
+    </ul>
+    <span class="sacola-total-text">Total: R$ <span class="sacola-total-valor">0,00</span></span>
+    <a href="/pedido/finalizar">
+      <button class="pagamento">Prosseguir para pagamento</button>
+    </a>
+  </div>
 </div>
