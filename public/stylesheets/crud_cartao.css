@@ -14,7 +14,7 @@
   --maring-bottom-card-items: 12px;
   --border-radius-card-items: 5px;
   --transition-card-selected: 0.25s ease-in-out;
-  --border-addr-selected: 1px;
+  --border-card-selected: 1px ;
 }
 
 .w100{
@@ -71,7 +71,7 @@
 }
 .btn-new-card .new-card-text{
   font-size: 15px;
-  color: rgb(150, 150, 150);
+  color: rgb(130, 130, 130);
   /* color: rgb(230, 50, 50); */
 }
 
@@ -91,7 +91,7 @@
 }
 .card-box:hover{
   background-color: var(--color-bg-cardbox-selected);
-  border: var(--border-addr-selected) solid var(--color-border-cardbox-selected);
+  border: var(--border-card-selected) solid var(--color-border-cardbox-selected);
 }
 .card-box:hover .card-type{
   background-color:  var(--color-bg-cardbox-info-selected);
@@ -138,7 +138,7 @@
 
 /****************** CARD-BOX-IS-SELECTED ******************/
 .card-box-is-selected {
-  border: var(--border-addr-selected) solid var(--color-border-cardbox-selected);
+  border: var(--border-card-selected) solid var(--color-border-cardbox-selected);
   background-color: var(--color-bg-cardbox-selected);
   height: 100px;
 }

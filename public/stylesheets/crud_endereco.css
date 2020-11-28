@@ -2,7 +2,7 @@
   --color-border-addr-elements: rgb(200,200,200);
   --color-border-addrbox-selected: rgb(255, 90, 50);
   --color-bg-addrbox-selected: rgb(255,255,230);
-  --color-bg-addrbox-info-selected: rgb(240,240,240);/*rgb(255, 140, 80);*/
+  --color-bg-addrbox-info-selected: rgb(255, 140, 80);
   --color-addrLine1: rgb(50,50,50);
   --color-addrline1-selected: rgb(255, 90, 50);
   --color-addrLine2: rgb(150,150,150);
@@ -137,7 +137,6 @@
   padding: 0px 4px;
   border-radius: var(--border-radius-addr-items);
   margin-right: 5px;
-  border: 1px solid rgb(150, 150, 150);
 }
 .address-box-has-type .address-type-icon {
   width: 18px;
@@ -148,9 +147,8 @@
 }
 .address-box-has-type .address-type-text {
   font-size: 12px;
-  /* font-weight: bold; */
-  color: rgb(150, 150, 150);
-
+  font-weight: bold;
+  color: black;
   text-transform: capitalize;
 }
 .address-box-has-type .address-text{
