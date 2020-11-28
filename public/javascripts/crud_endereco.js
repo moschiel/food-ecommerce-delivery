@@ -175,10 +175,10 @@ function createAddressBoxHtml(addr){
   //determina classes a serem utilizadas
   let addressClass = "address-box";
   if(addr.type == 'home'){
-    addressClass += " address-box-type-home";
+    addressClass += " address-box-has-type address-box-type-home";
   }
-  if(addr.type == 'work'){
-    addressClass += " address-box-type-work";
+  else if(addr.type == 'work'){
+    addressClass += " address-box-has-type address-box-type-work";
   }
   if(addr.select) {
     addressClass += " address-box-is-selected";
@@ -198,13 +198,9 @@ function createAddressBoxHtml(addr){
     <div class="${addressClass}" id="address-box-${addr.id}" onclick="selectAddress(${addr.id}, 'address-box-${addr.id}')">
       <div>
         <div class="select-container">
-          <div class='address-type type-home'>
-            <i class='fas fa-home'></i>
-            <div class='text-icon'>&nbspcasa</div>
-          </div>
-          <div class='address-type type-work'>
-            <i class='fas fa-building'></i>
-            <div class='text-icon'>trabalho</div>
+          <div class='address-type'>
+            <i class='address-type-icon'></i>
+            <div class='address-type-text'></div>
           </div>
           <div class="text-select">selecionado para entrega</div>
         </div>

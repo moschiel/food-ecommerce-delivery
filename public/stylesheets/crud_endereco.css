@@ -1,15 +1,20 @@
 :root {
-  --color-addr-elements-border: rgb(200,200,200);
-  --color-addrbox-border-selected: rgb(255, 90, 50);
-  --color-addrbox-bg-selected: rgb(255,255,230);
-  --color-addrbox-info-bg-selected: rgb(255, 140, 80);
+  --color-border-addr-elements: rgb(200,200,200);
+  --color-border-addrbox-selected: rgb(255, 90, 50);
+  --color-bg-addrbox-selected: rgb(255,255,230);
+  --color-bg-addrbox-info-selected: rgb(240,240,240);/*rgb(255, 140, 80);*/
   --color-addrLine1: rgb(50,50,50);
   --color-addrline1-selected: rgb(255, 90, 50);
   --color-addrLine2: rgb(150,150,150);
   --color-addrline2-selected: rgb(130,130,130);
   --color-addrbox-controls: rgb(100,100,100);
   --color-addrbox-controls-hover: rgb(255, 90, 50);
-  --color-addrform-label: rgb(140,140,140)
+  --color-addrform-label: rgb(140,140,140);
+
+  --maring-bottom-addr-items: 12px;
+  --border-radius-addr-items: 5px;
+  --transition-addr-selected: 0.25s ease-in-out;
+  --border-addr-selected: 1px;
 }
 
 .w100{
@@ -27,7 +32,6 @@
 
 #crud-endereco {
   width: 100%;
-  padding: 30px 0;
 }
 #crud-endereco-title {
   font-weight: bold;
@@ -38,10 +42,10 @@
 
 /****************** LOCATION FIELD ******************/
 #locationField {
-  border: 1px solid var(--color-addr-elements-border);
+  border: 1px solid var(--color-border-addr-elements);
   height: 40px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border-radius: var(--border-radius-addr-items);
+  margin-bottom: var(--maring-bottom-addr-items);
   display: flex;
   align-items: center;
 }
@@ -54,29 +58,29 @@
   width: 100%;
   border: none;
   outline: none;
-  border-radius: 5px; /*precisa de radius pra nao cortar a borda do elemento pai*/
+  border-radius: var(--border-radius-addr-items); /*precisa de radius pra nao cortar a borda do elemento pai*/
 }
 
 /****************** ADDRESS-BOX ******************/
 .address-box{
-  border: 1px solid var(--color-addr-elements-border);
-  border-radius: 5px;
-  margin-bottom: 12px;
+  border: 1px solid var(--color-border-addr-elements);
+  border-radius: var(--border-radius-addr-items);
+  margin-bottom: var(--maring-bottom-addr-items);
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
   padding: 10px;
   cursor: pointer;
 
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-addr-selected);
   height: 70px; /*80*/
 }
 .address-box:hover{
-  background-color: var(--color-addrbox-bg-selected);
-  border: 3px solid var(--color-addrbox-border-selected);
+  background-color: var(--color-bg-addrbox-selected);
+  border: var(--border-addr-selected) solid var(--color-border-addrbox-selected);
 }
 .address-box:hover .address-type{
-  background-color:  var(--color-addrbox-info-bg-selected);
+  background-color:  var(--color-bg-addrbox-info-selected);
 }
 .address-box .select-container{
   /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
@@ -86,20 +90,20 @@
   display: none;
 }
 .address-box .text-select {
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-addr-selected);
   color: transparent;
   height: 0px;
   border: 0px;
   font-size: 0px;
 }
 .address-box .address-line-1{
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-addr-selected);
   font-size: 17px;
   color: var(--color-addrLine1);
 }
 .address-box .address-line-2{
   font-style: italic;
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-addr-selected);
   color: var(--color-addrLine2);
   font-size: 14px;
 }
@@ -117,50 +121,62 @@
   color: var(--color-addrbox-controls-hover);
 }
 
+
 /****************** ADDRESS-BOX-HAS-TYPE ******************/
-.address-box-type-home .select-container,
-.address-box-type-work .select-container{
+.address-box-has-type .select-container {
   display: flex; /* deixa de 'flutar' */
   align-items: center;
   position: relative;
   top: -12px;
 }
-
-.address-box-type-home .type-home,
-.address-box-type-work .type-work {
+.address-box-has-type .address-type {
   display: flex;
   align-items: center;
-  background-color: var(--color-addr-elements-border);
+  background-color: var(--color-border-addr-elements);
   height: 22px;
   padding: 0px 4px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-addr-items);
   margin-right: 5px;
+  border: 1px solid rgb(150, 150, 150);
 }
-.address-box-type-home .type-home i,
-.address-box-type-work .type-work i{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
+.address-box-has-type .address-type-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 2px;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
-.address-box-type-home .type-home .text-icon,
-.address-box-type-work .type-work .text-icon{
+.address-box-has-type .address-type-text {
   font-size: 12px;
-  font-weight: bold;
+  /* font-weight: bold; */
+  color: rgb(150, 150, 150);
+
   text-transform: capitalize;
 }
-.address-box-type-home .address-text,
-.address-box-type-work .address-text{
+.address-box-has-type .address-text{
   position: relative;
   top: -10px;
+}
+
+/****************** ADDRESS-BOX-TYPES ******************/
+.address-box-type-home .address-type-icon{
+  background-image: url('../icons/home-solid.svg');
+}
+.address-box-type-home .address-type-text:after{
+  content: 'casa';
+}
+.address-box-type-work .address-type-icon{
+  background-image: url('../icons/building-solid.svg');
+}
+.address-box-type-work .address-type-text:after{
+  content: 'trabalho';
 }
 
 
 /****************** ADDRESS-BOX-IS-SELECTED ******************/
 .address-box-is-selected {
-  border: 3px solid var(--color-addrbox-border-selected);
-  background-color: var(--color-addrbox-bg-selected);
+  border: var(--border-addr-selected) solid var(--color-border-addrbox-selected);
+  background-color: var(--color-bg-addrbox-selected);
   height: 100px;
 }
 .address-box-is-selected .select-container {
@@ -170,11 +186,11 @@
   top: -23px;
 }
 .address-box-is-selected .address-type {
-  background-color: var(--color-addrbox-info-bg-selected);
+  background-color: var(--color-bg-addrbox-info-selected);
   color: black;
 }
 .address-box-is-selected .text-select{
-  background-color: var(--color-addrbox-info-bg-selected);
+  background-color: var(--color-bg-addrbox-info-selected);
   color: black;
   display: flex;
   align-items: center;
@@ -183,7 +199,7 @@
   font-size: 12px;
   font-weight: bold;
   padding: 0px 4px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-addr-items);
   text-transform: capitalize;
 }
 .address-box-is-selected .address-text{
@@ -203,9 +219,9 @@
 #address-form{
   /* display alterado via javascript */
   display: none; 
-  border: 1px solid var(--color-addr-elements-border);
+  border: 1px solid var(--color-border-addr-elements);
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--border-radius-addr-items);
   padding: 10px 0;
 }
 #address-form .blocoInput {
@@ -219,7 +235,7 @@
   margin-left: 3px;
 }
 #address-form .blocoInput input{
-  border: 1px solid var(--color-addr-elements-border);
+  border: 1px solid var(--color-border-addr-elements);
   height: 40px;
   width: 100%;
   font-size: 15px;

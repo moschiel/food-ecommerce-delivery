@@ -16,12 +16,27 @@ main{
 
 .containerForms{
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .containerCrudEndereco,
 .containerCrudCartao{
   width: 500px;
   margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+#btn-fazer-pedido{
+  width: 500px;
+  margin: 0 auto;
+  font-size: 20px;
+  text-transform: capitalize;
+  background-color: orangered;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 40px;
 }
 
 .containerSacola {

@@ -5,28 +5,21 @@ let elCardsList = $('#cards-list');
 let elFormCard = $('#card-form');
 let elFormCardInputs = $("#card-form input");
 let elCardConfirmBtn = $('#card-form .confirmarBtn');
+let elBtnNewCard = $('.btn-new-card');
 
 //componentes para seleção de cartão ficam visíveis
 function showCardsList(){
+  elBtnNewCard.slideDown();
   elCardsList.slideDown();
   elFormCard.slideUp();
 }
 //form para prenchimente do cartão fica visível
-function showCardForm(card_id){
-  if(card_id) {
-    elCardConfirmBtn.text('ATUALIZAR CARTÃO');
-    elCardConfirmBtn.unbind('click'); //remove todos eventos click
-    elCardConfirmBtn.click(()=>( editCard(card_id))); //add click event
-    let card = cardsList.find((item) => item.id == card_id);
-    fillInCard(card);
-  }
-  else {
-    elCardConfirmBtn.text('ADICIONAR CARTÃO');
-    elCardConfirmBtn.unbind('click'); //remove todos elementos click
-    elCardConfirmBtn.click(addCard); //add click event
-    // fillInCard();
-  }
-
+function showCardForm(){
+  elCardConfirmBtn.text('ADICIONAR CARTÃO');
+  elCardConfirmBtn.unbind('click'); //remove todos elementos click
+  elCardConfirmBtn.click(addCard); //add click event
+  
+  elBtnNewCard.slideUp();
   elCardsList.slideUp();
   elFormCard.slideDown(); 
 }
@@ -84,28 +77,20 @@ function createCardBoxHtml(card){
   }
 
   //monta string do cartao, no seguinte formato:
-  //BANDEIRA final 0000
-  let cardLine1 = `${card.brand}`;
-  let cardLine2 = `${card.number}`;
-  // if(card.complement) {
-  //   cardLine1 += `, ${card.complement}`;
-  // }
-  // let cardLine2 = `${card.sublocality_level_1}, ${card.administrative_area_level_2}/${card.administrative_area_level_1}, ${card.postal_code}`;
+  //BANDEIRA final XXXX
+  let cardLine1 = 'xxxx-xxxx-xxxx-' + card.number.substring(card.number.length - 4);
+  let cardLine2 = card.brand;
 
   //monta HTML final
   let cardBoxHTML = `
     <div class="${cardClass}" id="card-box-${card.id}" onclick="selectCard(${card.id}, 'card-box-${card.id}')">
       <div>
         <div class="select-container">
-          <div class='card-type type-home'>
-            <i class='fas fa-home'></i>
-            <div class='text-icon'>&nbspcasa</div>
+          <div class='card-type'>
+            <i class='card-type-icon'></i>
+            <div class='card-type-text'></div>
           </div>
-          <div class='card-type type-work'>
-            <i class='fas fa-building'></i>
-            <div class='text-icon'>trabalho</div>
-          </div>
-          <div class="text-select">selecionado para entrega</div>
+          <div class="text-select">selecionado para pagamento</div>
         </div>
         <div class="card-text">
           <div class="card-line card-line-1">${cardLine1}</div>
@@ -113,7 +98,6 @@ function createCardBoxHtml(card){
         </div>
       </div>
       <div class="card-box-controls">
-        <i id="card-editar" class="fas fa-pen" onclick="showCardForm(${card.id})"></i>
         <i id="card-remover" class="fas fa-trash-alt" onclick="deleteCard(${card.id}, 'card-box-${card.id}')"></i>
       </div>
     </div>`;
@@ -144,29 +128,6 @@ function addCard(){
   localStorage.setItem(cardsLocalStorageKey, JSON.stringify(cardsList));
   elCardsList.append(cardBoxHTML);
 
-  showCardsList();
-  //limpa o formulario
-  clearFormCard();
-}
-
-function editCard(card_id){
-  console.log("editCard")
-  let card = readCardFromForm();
-  if(card == null)
-    return;
-
-  // cardsList.forEach(card => { card.select = false; });
-  // $('.card-box').each((idx, element) => {
-  //   $(element).removeClass('card-box-select');
-  // });
-
-  let cardIndex = cardsList.findIndex(item => item.id == card_id);
-  card.id = card_id;
-  card.select = true;
-  cardsList[cardIndex] = card;
-  localStorage.setItem(cardsLocalStorageKey, JSON.stringify(cardsList));
-  
-  loadCardsList();
   showCardsList();
   //limpa o formulario
   clearFormCard();
@@ -230,9 +191,7 @@ function loadCardsList() {
 }
 
 function initializeCreditCardCRUD() {
-  if(loadCardsList() == false) {
-    showCardForm();
-  }
+  loadCardsList();
 }
 
 //ao carregar o script, essa função sera executada

@@ -1,15 +1,20 @@
 :root {
-  --color-card-elements-border: rgb(200,200,200);
-  --color-cardbox-border-selected: rgb(255, 90, 50);
-  --color-cardbox-bg-selected: rgb(255,255,230);
-  --color-cardbox-info-bg-selected: rgb(255, 140, 80);
+  --color-border-card-elements: rgb(200,200,200);
+  --color-border-cardbox-selected: rgb(255, 90, 50);
+  --color-bg-cardbox-selected: rgb(255,255,230);
+  --color-bg-cardbox-info-selected: rgb(255, 140, 80);
   --color-cardLine1: rgb(50,50,50);
   --color-cardline1-selected: rgb(255, 90, 50);
   --color-cardLine2: rgb(150,150,150);
   --color-cardline2-selected: rgb(130,130,130);
   --color-cardbox-controls: rgb(100,100,100);
   --color-cardbox-controls-hover: rgb(255, 90, 50);
-  --color-cardform-label: rgb(140,140,140)
+  --color-cardform-label: rgb(140,140,140);
+
+  --maring-bottom-card-items: 12px;
+  --border-radius-card-items: 5px;
+  --transition-card-selected: 0.25s ease-in-out;
+  --border-addr-selected: 1px;
 }
 
 .w100{
@@ -27,7 +32,6 @@
 
 #crud-cartao{
   width: 100%;
-  padding: 30px 0;
 }
 #crud-cartao-title {
   font-weight: bold;
@@ -36,26 +40,61 @@
   font-size: 20px;
 }
 
+/****************** BTN-CREDIT-CARD *************/
+.buttons-new-card {
+  display: flex;
+  margin-bottom: var(--maring-bottom-card-items);
+}
+.btn-new-card {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-border-card-elements);
+  border-radius: 5px;
+  background-color: rgb(240,240,240);
+  padding: 5px;
+  margin: 0 5px;
+  /* margin-bottom: var(--maring-bottom-card-items); */
+  cursor: pointer;
+  
+}
+.btn-new-card:hover{
+  background-color: rgb(230,230,230);
+}
+.btn-new-card .new-card-icon{
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  height: 20px;
+  color: rgb(230, 50, 50);
+}
+.btn-new-card .new-card-text{
+  font-size: 15px;
+  color: rgb(150, 150, 150);
+  /* color: rgb(230, 50, 50); */
+}
+
 /****************** CARD-BOX ******************/
 .card-box{
-  border: 1px solid var(--color-card-elements-border);
-  border-radius: 5px;
-  margin-bottom: 12px;
+  border: 1px solid var(--color-border-card-elements);
+  border-radius: var(--border-radius-card-items);
+  margin-bottom: var(--maring-bottom-card-items);
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
   padding: 10px;
   cursor: pointer;
 
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-card-selected);
   height: 70px; /*80*/
 }
 .card-box:hover{
-  background-color: var(--color-cardbox-bg-selected);
-  border: 3px solid var(--color-cardbox-border-selected);
+  background-color: var(--color-bg-cardbox-selected);
+  border: var(--border-addr-selected) solid var(--color-border-cardbox-selected);
 }
 .card-box:hover .card-type{
-  background-color:  var(--color-cardbox-info-bg-selected);
+  background-color:  var(--color-bg-cardbox-info-selected);
 }
 .card-box .select-container{
   /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
@@ -65,27 +104,28 @@
   display: none;
 }
 .card-box .text-select {
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-card-selected);
   color: transparent;
   height: 0px;
   border: 0px;
   font-size: 0px;
 }
 .card-box .card-line-1{
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-card-selected);
   font-size: 17px;
   color: var(--color-cardLine1);
+  text-transform: lowercase;
+  font-style: italic;
 }
 .card-box .card-line-2{
   font-style: italic;
-  transition: 0.25s ease-in-out;
+  transition: var(--transition-card-selected);
   color: var(--color-cardLine2);
   font-size: 14px;
+  text-transform: uppercase;
 }
 .card-box .card-box-controls{
-  /* border: 1px solid black; */
   margin-left: auto;
-  min-width: 60px;
   display: flex;
   justify-content: space-between;
 }
@@ -98,8 +138,8 @@
 
 /****************** CARD-BOX-IS-SELECTED ******************/
 .card-box-is-selected {
-  border: 3px solid rgb(255, 90, 50);
-  background-color: var(--color-cardbox-bg-selected);
+  border: var(--border-addr-selected) solid var(--color-border-cardbox-selected);
+  background-color: var(--color-bg-cardbox-selected);
   height: 100px;
 }
 .card-box-is-selected .select-container {
@@ -109,11 +149,11 @@
   top: -23px;
 }
 .card-box-is-selected .card-type {
-  background-color: var(--color-cardbox-info-bg-selected);
+  background-color: var(--color-bg-cardbox-info-selected);
   color: black;
 }
 .card-box-is-selected .text-select{
-  background-color: var(--color-cardbox-info-bg-selected);
+  background-color: var(--color-bg-cardbox-info-selected);
   color: black;
   display: flex;
   align-items: center;
@@ -122,7 +162,7 @@
   font-size: 12px;
   font-weight: bold;
   padding: 0px 4px;
-  border-radius: 5px;
+  border-radius: var(--border-radius-card-items);
   text-transform: capitalize;
 }
 .card-box-is-selected .card-text{
@@ -142,9 +182,9 @@
 #card-form{
   /* display alterado via javascript */
   display: none; 
-  border: 1px solid var(--color-card-elements-border);
+  border: 1px solid var(--color-border-card-elements);
   width: 100%;
-  border-radius: 5px;
+  border-radius: var(--border-radius-card-items);
   padding: 10px 0;
 }
 #card-form .blocoInput {
@@ -157,7 +197,7 @@
   margin-left: 3px;
 }
 #card-form .blocoInput input{
-  border: 1px solid var(--color-card-elements-border);
+  border: 1px solid var(--color-border-card-elements);
   height: 40px;
   width: 100%;
   font-size: 15px;
