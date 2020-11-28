@@ -1,15 +1,15 @@
 :root {
-  --color-border-addr-elements: rgb(200,200,200);
+  --color-border-addr-elements: rgb(200, 200, 200);
   --color-border-addrbox-selected: rgb(255, 90, 50);
-  --color-bg-addrbox-selected: rgb(255,255,230);
+  --color-bg-addrbox-selected: rgb(255, 255, 230);
   --color-bg-addrbox-info-selected: rgb(255, 140, 80);
-  --color-addrLine1: rgb(50,50,50);
+  --color-addrLine1: rgb(50, 50, 50);
   --color-addrline1-selected: rgb(255, 90, 50);
-  --color-addrLine2: rgb(150,150,150);
-  --color-addrline2-selected: rgb(130,130,130);
-  --color-addrbox-controls: rgb(100,100,100);
+  --color-addrLine2: rgb(150, 150, 150);
+  --color-addrline2-selected: rgb(130, 130, 130);
+  --color-addrbox-controls: rgb(100, 100, 100);
   --color-addrbox-controls-hover: rgb(255, 90, 50);
-  --color-addrform-label: rgb(140,140,140);
+  --color-addrform-label: rgb(140, 140, 140);
 
   --maring-bottom-addr-items: 12px;
   --border-radius-addr-items: 5px;
@@ -17,16 +17,16 @@
   --border-addr-selected: 1px;
 }
 
-.w100{
+.w100 {
   width: 100%;
 }
-.w50{
+.w50 {
   width: 50%;
 }
-.w30{
+.w30 {
   width: 30%;
 }
-.w20{
+.w20 {
   width: 20%;
 }
 
@@ -49,20 +49,22 @@
   display: flex;
   align-items: center;
 }
-#locationField i.fa-search{
+#locationField i.fa-search {
   margin: 0 5px;
 }
-#locationField input#autocomplete{
+#locationField input#autocomplete {
   /* display: none; */
   height: 100%;
   width: 100%;
   border: none;
   outline: none;
-  border-radius: var(--border-radius-addr-items); /*precisa de radius pra nao cortar a borda do elemento pai*/
+  border-radius: var(
+    --border-radius-addr-items
+  ); /*precisa de radius pra nao cortar a borda do elemento pai*/
 }
 
 /****************** ADDRESS-BOX ******************/
-.address-box{
+.address-box {
   border: 1px solid var(--color-border-addr-elements);
   border-radius: var(--border-radius-addr-items);
   margin-bottom: var(--maring-bottom-addr-items);
@@ -75,18 +77,18 @@
   transition: var(--transition-addr-selected);
   height: 70px; /*80*/
 }
-.address-box:hover{
+.address-box:hover {
   background-color: var(--color-bg-addrbox-selected);
   border: var(--border-addr-selected) solid var(--color-border-addrbox-selected);
 }
-.address-box:hover .address-type{
-  background-color:  var(--color-bg-addrbox-info-selected);
+.address-box:hover .address-type {
+  background-color: var(--color-bg-addrbox-info-selected);
 }
-.address-box .select-container{
+.address-box .select-container {
   /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
-  position: fixed; 
+  position: fixed;
 }
-.address-box .address-type{
+.address-box .address-type {
   display: none;
 }
 .address-box .text-select {
@@ -96,31 +98,30 @@
   border: 0px;
   font-size: 0px;
 }
-.address-box .address-line-1{
+.address-box .address-line-1 {
   transition: var(--transition-addr-selected);
   font-size: 17px;
   color: var(--color-addrLine1);
 }
-.address-box .address-line-2{
+.address-box .address-line-2 {
   font-style: italic;
   transition: var(--transition-addr-selected);
   color: var(--color-addrLine2);
   font-size: 14px;
 }
-.address-box .address-box-controls{
+.address-box .address-box-controls {
   /* border: 1px solid black; */
   margin-left: auto;
   min-width: 60px;
   display: flex;
   justify-content: space-between;
 }
-.address-box .address-box-controls i{
+.address-box .address-box-controls i {
   color: var(--color-addrbox-controls);
 }
-.address-box .address-box-controls i:hover{
+.address-box .address-box-controls i:hover {
   color: var(--color-addrbox-controls-hover);
 }
-
 
 /****************** ADDRESS-BOX-HAS-TYPE ******************/
 .address-box-has-type .select-container {
@@ -151,25 +152,24 @@
   color: black;
   text-transform: capitalize;
 }
-.address-box-has-type .address-text{
+.address-box-has-type .address-text {
   position: relative;
   top: -10px;
 }
 
 /****************** ADDRESS-BOX-TYPES ******************/
-.address-box-type-home .address-type-icon{
-  background-image: url('../icons/home-solid.svg');
+.address-box-type-home .address-type-icon {
+  background-image: url("../icons/home-solid.svg");
 }
-.address-box-type-home .address-type-text:after{
-  content: 'casa';
+.address-box-type-home .address-type-text:after {
+  content: "casa";
 }
-.address-box-type-work .address-type-icon{
-  background-image: url('../icons/building-solid.svg');
+.address-box-type-work .address-type-icon {
+  background-image: url("../icons/building-solid.svg");
 }
-.address-box-type-work .address-type-text:after{
-  content: 'trabalho';
+.address-box-type-work .address-type-text:after {
+  content: "trabalho";
 }
-
 
 /****************** ADDRESS-BOX-IS-SELECTED ******************/
 .address-box-is-selected {
@@ -187,7 +187,7 @@
   background-color: var(--color-bg-addrbox-info-selected);
   color: black;
 }
-.address-box-is-selected .text-select{
+.address-box-is-selected .text-select {
   background-color: var(--color-bg-addrbox-info-selected);
   color: black;
   display: flex;
@@ -200,23 +200,23 @@
   border-radius: var(--border-radius-addr-items);
   text-transform: capitalize;
 }
-.address-box-is-selected .address-text{
+.address-box-is-selected .address-text {
   position: relative;
   top: -10px;
 }
-.address-box-is-selected .address-line-1{
+.address-box-is-selected .address-line-1 {
   color: var(--color-addrline1-selected);
   font-size: 21px;
 }
-.address-box-is-selected .address-line-2{
+.address-box-is-selected .address-line-2 {
   color: var(--color-addrline2-selected);
   font-size: 16px;
 }
 
 /****************** ADDRESS-FORM ******************/
-#address-form{
+#address-form {
   /* display alterado via javascript */
-  display: none; 
+  display: none;
   border: 1px solid var(--color-border-addr-elements);
   width: 100%;
   border-radius: var(--border-radius-addr-items);
@@ -232,26 +232,26 @@
   color: var(--color-addrform-label);
   margin-left: 3px;
 }
-#address-form .blocoInput input{
+#address-form .blocoInput input {
   border: 1px solid var(--color-border-addr-elements);
   height: 40px;
   width: 100%;
   font-size: 15px;
 }
-#address-form #radio-control{
+#address-form #radio-control {
   margin-bottom: 20px;
   padding-left: 5px;
   padding-right: 5px;
 }
-#address-form #radio-control input{
-  margin-right:20px;
+#address-form #radio-control input {
+  margin-right: 20px;
 }
-#address-form .blocoButton{
+#address-form .blocoButton {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0px;
 }
-#address-form .button{
+#address-form .button {
   height: 40px;
   width: 200px;
   color: white;
@@ -262,15 +262,15 @@
   justify-content: center;
   align-items: center;
 }
-#address-form .confirmarBtn{
+#address-form .confirmarBtn {
   background-color: rgb(20, 173, 15);
 }
-#address-form .confirmarBtn:hover{
+#address-form .confirmarBtn:hover {
   background-color: rgb(30, 190, 30);
 }
-#address-form .cancelarBtn{
+#address-form .cancelarBtn {
   background-color: rgb(240, 90, 60);
 }
-#address-form .cancelarBtn:hover{
+#address-form .cancelarBtn:hover {
   background-color: rgb(255, 99, 71);
 }
