@@ -10,6 +10,7 @@ html, body{
 }
 
 main{
+  height: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -23,7 +24,7 @@ main{
 .containerForms .containerCrudEndereco,
 .containerForms .containerCrudCartao{
   width: 500px;
-  padding-bottom: 20px;
+  padding: 20px 0px;
 }
 .containerForms #btn-fazer-pedido{
   width: 500px;
@@ -34,18 +35,22 @@ main{
   border: none;
   border-radius: 5px;
   height: 40px;
+  cursor: pointer;
+}
+.containerForms #btn-fazer-pedido:hover{
+  background-color: tomato;
 }
 
 .containerSacola {
-  min-width: 550px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
 }
 .containerSacola #crud-sacola {
-  position: fixed;
-  width: 450px;
-  height: 80%;
-  top: 50px;
-  right: 100px;
-  z-index: 2;
+  width: 500px;
+  height: 75%;
   border-radius: 10px;
   -webkit-box-shadow: -1px 2px 2px 1px rgba(0,0,0,0.12);
   -moz-box-shadow: -1px 2px 2px 1px rgba(0,0,0,0.12);
@@ -57,3 +62,39 @@ main{
   display: none;
 }
 
+
+/* tela menor que 1100px */
+@media screen and (max-width: 1020px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+    justify-content: unset;
+  }
+
+  .containerSacola{
+    order: 1;
+    width: 100%;
+    height: fit-content;
+    /* border: 2px solid red; */
+  }
+  .containerSacola #crud-sacola{
+    width: 500px;
+    margin: 0 auto;
+    height: fit-content;
+  }
+
+  .containerForms{
+    /* border: 2px solid blue; */
+    order: 2;
+  }
+}
+
+/* tela menor que 520px */
+@media screen and (max-width: 520px) {
+  .containerForms .containerCrudEndereco,
+  .containerForms .containerCrudCartao,
+  .containerForms #btn-fazer-pedido,
+  .containerSacola {
+    width: 95%;
+  }
+}
