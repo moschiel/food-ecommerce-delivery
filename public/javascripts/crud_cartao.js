@@ -84,14 +84,14 @@ function createCardBoxHtml(card){
   //monta HTML final
   let cardBoxHTML = `
     <div class="${cardClass}" id="card-box-${card.id}" onclick="selectCard(${card.id}, 'card-box-${card.id}')">
+    <div class="select-container">
+      <div class='card-type'>
+        <i class='card-type-icon'></i>
+        <div class='card-type-text'></div>
+      </div>
+      <div class="text-select">selecionado para pagamento</div>
+    </div>
       <div>
-        <div class="select-container">
-          <div class='card-type'>
-            <i class='card-type-icon'></i>
-            <div class='card-type-text'></div>
-          </div>
-          <div class="text-select">selecionado para pagamento</div>
-        </div>
         <div class="card-text">
           <div class="card-line card-line-1">${cardLine1}</div>
           <div class="card-line card-line-2">${cardLine2}</div>

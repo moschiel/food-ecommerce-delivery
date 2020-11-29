@@ -22,12 +22,17 @@ main{
   align-items: center;
 }
 .containerForms .containerCrudEndereco,
-.containerForms .containerCrudCartao{
-  width: 500px;
-  padding: 20px 0px;
-}
+.containerForms .containerCrudCartao,
 .containerForms #btn-fazer-pedido{
   width: 500px;
+}
+.containerForms .containerCrudEndereco{
+  padding: 20px 0px;
+}
+/* .containerForms .containerCrudCartao{
+  padding: 20px 0px;
+} */
+.containerForms #btn-fazer-pedido{
   font-size: 20px;
   text-transform: capitalize;
   background-color: orangered;
@@ -49,6 +54,7 @@ main{
   align-content: center;
 }
 .containerSacola #crud-sacola {
+  position: fixed;
   width: 500px;
   height: 75%;
   border-radius: 10px;
@@ -63,7 +69,7 @@ main{
 }
 
 
-/* tela menor que 1100px */
+/* tela menor que 1020px */
 @media screen and (max-width: 1020px) {
   main {
     flex-direction: column;
@@ -78,6 +84,7 @@ main{
     /* border: 2px solid red; */
   }
   .containerSacola #crud-sacola{
+    position: unset;
     width: 500px;
     margin: 0 auto;
     height: fit-content;

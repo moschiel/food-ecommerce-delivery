@@ -96,8 +96,9 @@
   background-color: var(--color-bg-cardbox-info-selected);
 }
 .card-box .select-container {
-  /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
-  position: fixed;
+  width: 0px; /* faz os elemntos do container 'flutuar' para nao empurrar os elementos vizinhos */
+  position: relative;
+  top: -45px;
 }
 .card-box .card-type {
   display: none;
@@ -106,6 +107,8 @@
   transition: var(--transition-card-selected);
   color: transparent;
   height: 0px;
+  width: 0px;
+  min-width: 0px;
   border: 0px;
   font-size: 0px;
 }
@@ -145,7 +148,7 @@
   display: flex; /* deixa de 'flutar' */
   align-items: center;
   position: relative;
-  top: -23px;
+  top: -45px;
 }
 .card-box-is-selected .card-type {
   background-color: var(--color-bg-cardbox-info-selected);
@@ -156,7 +159,7 @@
   color: black;
   display: flex;
   align-items: center;
-  width: fit-content;
+  min-width: 180px;
   height: 22px;
   font-size: 12px;
   font-weight: bold;
@@ -164,10 +167,7 @@
   border-radius: var(--border-radius-card-items);
   text-transform: capitalize;
 }
-.card-box-is-selected .card-text {
-  position: relative;
-  top: -10px;
-}
+
 .card-box-is-selected .card-line-1 {
   color: var(--color-cardline1-selected);
   font-size: 21px;

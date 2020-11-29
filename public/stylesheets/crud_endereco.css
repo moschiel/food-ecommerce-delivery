@@ -85,8 +85,9 @@
   background-color: var(--color-bg-addrbox-info-selected);
 }
 .address-box .select-container {
-  /* faz o container 'flutuar' para nao empurrar os elementos vizinhos */
-  position: fixed;
+  width: 0px; /* faz os elemntos do container 'flutuar' para nao empurrar os elementos vizinhos */
+  position: relative;
+  top: -45px;
 }
 .address-box .address-type {
   display: none;
@@ -95,6 +96,8 @@
   transition: var(--transition-addr-selected);
   color: transparent;
   height: 0px;
+  width: 0px;
+  min-width: 0px;
   border: 0px;
   font-size: 0px;
 }
@@ -102,12 +105,18 @@
   transition: var(--transition-addr-selected);
   font-size: 17px;
   color: var(--color-addrLine1);
+
+  overflow: hidden;
+  height: 20px;
 }
 .address-box .address-line-2 {
   font-style: italic;
   transition: var(--transition-addr-selected);
   color: var(--color-addrLine2);
   font-size: 14px;
+
+  overflow: hidden;
+  height: 18px;
 }
 .address-box .address-box-controls {
   /* border: 1px solid black; */
@@ -128,7 +137,9 @@
   display: flex; /* deixa de 'flutar' */
   align-items: center;
   position: relative;
-  top: -12px;
+
+  transition: var(--transition-addr-selected);
+  top: -30px;
 }
 .address-box-has-type .address-type {
   display: flex;
@@ -151,10 +162,6 @@
   font-weight: bold;
   color: black;
   text-transform: capitalize;
-}
-.address-box-has-type .address-text {
-  position: relative;
-  top: -10px;
 }
 
 /****************** ADDRESS-BOX-TYPES ******************/
@@ -181,7 +188,7 @@
   display: flex; /* deixa de 'flutar' */
   align-items: center;
   position: relative;
-  top: -23px;
+  top: -45px;
 }
 .address-box-is-selected .address-type {
   background-color: var(--color-bg-addrbox-info-selected);
@@ -192,7 +199,7 @@
   color: black;
   display: flex;
   align-items: center;
-  width: fit-content;
+  min-width: 160px;
   height: 22px;
   font-size: 12px;
   font-weight: bold;
@@ -200,17 +207,19 @@
   border-radius: var(--border-radius-addr-items);
   text-transform: capitalize;
 }
-.address-box-is-selected .address-text {
-  position: relative;
-  top: -10px;
-}
 .address-box-is-selected .address-line-1 {
   color: var(--color-addrline1-selected);
   font-size: 21px;
+
+  overflow: hidden;
+  height: 23px;
 }
 .address-box-is-selected .address-line-2 {
   color: var(--color-addrline2-selected);
   font-size: 16px;
+
+  overflow: hidden;
+  height: 19px;
 }
 
 /****************** ADDRESS-FORM ******************/

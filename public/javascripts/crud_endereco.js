@@ -196,14 +196,14 @@ function createAddressBoxHtml(addr){
   //monta HTML final
   let addressBoxHTML = `
     <div class="${addressClass}" id="address-box-${addr.id}" onclick="selectAddress(${addr.id}, 'address-box-${addr.id}')">
+    <div class="select-container">
+      <div class='address-type'>
+        <i class='address-type-icon'></i>
+        <div class='address-type-text'></div>
+      </div>
+      <div class="text-select">selecionado para entrega</div>
+    </div>
       <div>
-        <div class="select-container">
-          <div class='address-type'>
-            <i class='address-type-icon'></i>
-            <div class='address-type-text'></div>
-          </div>
-          <div class="text-select">selecionado para entrega</div>
-        </div>
         <div class="address-text">
           <div class="address-line address-line-1">${addressLine1}</div>
           <div class="address-line address-line-2">${addressLine2}</div>
