@@ -66,7 +66,7 @@ function criarHtmlDoItemParaSacola(item) {
     </div>
     <img src="${item.img}" alt="">
     <span class="item-nome">${item.nome}</span>
-    <span class="item-preco">R$ <span class="item-valor">${numberToReal(item.valor * item.quantidade)}</span></span>
+    <span class="item-preco"><!--R$ --><span class="item-valor">${numberToReal(item.valor * item.quantidade)}</span></span>
     <i class="fas fa-trash-alt" onclick="removerItemDaSacola('${item.id}')"></i>
   </li>`;
 

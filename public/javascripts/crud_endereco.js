@@ -104,14 +104,14 @@ function showAddressList(){
 //form para prenchimente de endereço fica visível
 function showAddressForm(addr_id){
   if(addr_id) {
-    elConfirmButton.text('ATUALIZAR ENDEREÇO');
+    elConfirmButton.text('ATUALIZAR');
     elConfirmButton.unbind('click'); //remove todos eventos click
     elConfirmButton.click(()=>( editAddress(addr_id))); //add click event
     let address = addressList.find((item) => item.id == addr_id);
     fillInAddress(address);
   }
   else {
-    elConfirmButton.text('ADICIONAR ENDEREÇO');
+    elConfirmButton.text('CADASTRAR');
     elConfirmButton.unbind('click'); //remove todos elementos click
     elConfirmButton.click(addAddress); //add click event
     fillInAddress();

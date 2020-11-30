@@ -39,8 +39,9 @@ main{
   color: white;
   border: none;
   border-radius: 5px;
-  height: 40px;
+  padding: 8px 0;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .containerForms #btn-fazer-pedido:hover{
   background-color: tomato;
@@ -81,6 +82,7 @@ main{
     order: 1;
     width: 100%;
     height: fit-content;
+    margin-top: 20px;
     /* border: 2px solid red; */
   }
   .containerSacola #crud-sacola{
