@@ -51,7 +51,7 @@ main {
   border-radius: 5px;
   padding: 8px 0;
   cursor: pointer;
-  margin-bottom: 20px;
+  margin: 20px 0px;
 }
 .containerForms #btn-fazer-pedido:hover{
   background-color: tomato;
