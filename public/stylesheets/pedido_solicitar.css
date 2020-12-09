@@ -9,13 +9,23 @@ html, body{
   padding: 0px;
 }
 
-main{
-  height: 100%;
+header {
+  border-bottom: 1px solid rgb(220, 220, 220);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 5px;
+}
+header img {
+  height: 45px;
+}
+
+main {
   display: flex;
   justify-content: space-between;
 }
 
-.containerForms{
+.containerForms {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -56,6 +66,7 @@ main{
 }
 .containerSacola #crud-sacola {
   position: fixed;
+  top: 100px;
   width: 500px;
   height: 75%;
   border-radius: 10px;

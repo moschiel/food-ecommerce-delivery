@@ -3,6 +3,6 @@ var router = express.Router();
 const PedidoController = require("../controllers/PedidoController")
 
 /* GET users listing. */
-router.get('/finalizar', PedidoController.finalizar);
+router.get('/solicitar', PedidoController.solicitar);
 
 module.exports = router;

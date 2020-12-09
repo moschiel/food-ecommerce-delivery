@@ -1,7 +1,7 @@
 
 module.exports = {
-  finalizar(req, res, next) {
-    res.render('pedido');
+  solicitar(req, res, next) {
+    res.render('pedido_solicitar');
   }
 }
 
