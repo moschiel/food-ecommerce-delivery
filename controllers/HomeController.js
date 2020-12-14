@@ -139,6 +139,5 @@ let destaques = [
 module.exports = {
   index: (req,res)=>{
     res.render('index', { title: 'Ecommerce', categorias, destaques });
-  },
-  categorias
+  }
 } 

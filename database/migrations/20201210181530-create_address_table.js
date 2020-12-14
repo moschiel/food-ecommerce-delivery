@@ -8,6 +8,7 @@ module.exports = {
           primaryKey: true,
           autoIncrement: true,
         },
+        select: DataType.INTEGER,
         street: DataType.STRING,
         number: DataType.STRING,
         complement: DataType.STRING,
