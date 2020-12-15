@@ -43,13 +43,13 @@ function fillInAddress(address) {
       if($(element).attr('type') == 'radio' && $(element).attr('value') == address.type){
         $(element).prop('checked', true);
       }
-      else if(address[element.id]){
-        element.value = address[element.id];
+      else if(address[element.id.replace('addr_','')]){
+        element.value = address[element.id.replace('addr_','')];
       }
     });
     
   }
-  else { //se não, preenche com os dados da 'Local API'
+  else { //se não, provalemnte é a localAPI, então preenche com os dados da 'Local API'
     // Get the place details from the autocomplete object.
     const place = autocomplete.getPlace();
   
@@ -57,10 +57,19 @@ function fillInAddress(address) {
     // and then fill-in the corresponding field on the form.
     for (const component of place.address_components) {
       const addressType = component.types[0];
-      if (localComponentsAPI[addressType]) {
-        const val = component[localComponentsAPI[addressType]];
-        document.getElementById(addressType).value = val;
-      }
+
+      if(addressType == "route")
+        $("#addr_street").val(component[localComponentsAPI[addressType]])
+      else if(addressType == "street_number")
+        $("#addr_number").val(component[localComponentsAPI[addressType]])
+      else if(addressType == "sublocality_level_1")
+        $("#addr_district").val(component[localComponentsAPI[addressType]])
+      else if(addressType == "administrative_area_level_2")
+        $("#addr_city").val(component[localComponentsAPI[addressType]])
+      else if(addressType == "administrative_area_level_1")
+        $("#addr_state").val(component[localComponentsAPI[addressType]])
+      else if(addressType == "postal_code")
+        $("#addr_postal_code").val(component[localComponentsAPI[addressType]])
     }
   }
 }
@@ -129,15 +138,15 @@ function readAddressFromForm() {
     id:null,
     select: false,
     type: $('input[name=address_type]:checked').val(), 
-    route: $('#address-form #route').val(),
-    street_number: $('#address-form #street_number').val(),
-    complement: $('#address-form #complement').val(),
-    sublocality_level_1: $('#address-form #sublocality_level_1').val(),
-    administrative_area_level_2: $('#address-form #administrative_area_level_2').val(),
-    administrative_area_level_1: $('#address-form #administrative_area_level_1').val(),
-    postal_code: $('#address-form #postal_code').val(),
+    street: $('#addr_street').val(),
+    number: $('#addr_number').val(),
+    complement: $('#addr_complement').val(),
+    district: $('#addr_district').val(),
+    city: $('#addr_city').val(),
+    state: $('#addr_state').val(),
+    postal_code: $('#addr_postal_code').val(),
   }
-  
+ 
   if(verifyAddress(address)) 
     return address;
   else 
@@ -145,19 +154,20 @@ function readAddressFromForm() {
 }
 
 function verifyAddress(address){
-  if(checkValue(address.route) ||
-    checkValue(address.street_number) ||
-    checkValue(address.sublocality_level_1) ||
-    checkValue(address.administrative_area_level_2) ||
-    checkValue(address.administrative_area_level_1) ||
-    checkValue(postal_code))
-    return false;
-  else
+  if(checkValue(address.street) &&
+    checkValue(address.number) &&
+    checkValue(address.district) &&
+    checkValue(address.city) &&
+    checkValue(address.state) &&
+    checkValue(address.postal_code))
     return true;
+  else
+    return false;
 }
 
 function checkValue(value){
-  return (value == null || value == undefined || value == "");
+  console.log(value)
+  return (value != null && value != undefined && value != "");
 }
 
 function clearFormAddress(){
@@ -187,11 +197,11 @@ function createAddressBoxHtml(addr){
   //monta string de endereço, no seguinte formato:
   //RUA, NUMERO, COMPLEMENTO
   //BAIRRO, CIDADE/UF, CEP
-  let addressLine1 = `${addr.route}, ${addr.street_number}`;
+  let addressLine1 = `${addr.street}, ${addr.number}`;
   if(addr.complement) {
     addressLine1 += `, ${addr.complement}`;
   }
-  let addressLine2 = `${addr.sublocality_level_1}, ${addr.administrative_area_level_2}/${addr.administrative_area_level_1}, ${addr.postal_code}`;
+  let addressLine2 = `${addr.district}, ${addr.city}/${addr.state}, ${addr.postal_code}`;
 
   //monta HTML final
   let addressBoxHTML = `
@@ -221,6 +231,7 @@ function createAddressBoxHtml(addr){
 function addAddress(){
   console.log("addAddress");
   let address = readAddressFromForm();
+  
   if(address == null)
     return;
 
