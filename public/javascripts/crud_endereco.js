@@ -136,7 +136,7 @@ function showAddressForm(addr_id){
 function readAddressFromForm() {
   let address = {
     id:null,
-    select: 0,
+    selected: 0,
     type: $('input[name=address_type]:checked').val(), 
     street: $('#addr_street').val(),
     number: $('#addr_number').val(),
@@ -189,7 +189,7 @@ function createAddressBoxHtml(addr){
   else if(addr.type == 'work'){
     addressClass += " address-box-has-type address-box-type-work";
   }
-  if(addr.select) {
+  if(addr.selected) {
     addressClass += " address-box-is-selected";
   }
 
@@ -233,7 +233,7 @@ function addAddress(){
   if(address == null)
     return;
 
-  address.select = 1; //marca esse endereço como selecionado
+  address.selected = 1; //marca esse endereço como selecionado
   let {id, ...data} = address;
 
   $.ajax({
@@ -267,14 +267,14 @@ function editAddress(addr_id){
   if(address == null)
     return;
 
-  // addressList.forEach(addr => { addr.select = 0; });
+  // addressList.forEach(addr => { addr.selected = 0; });
   // $('.address-box').each((idx, element) => {
   //   $(element).removeClass('address-box-select');
   // });
 
   let addrIndex = addressList.findIndex(item => item.id == addr_id);
   address.id = addr_id;
-  address.select = 1;
+  address.selected = 1;
   addressList[addrIndex] = address;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   
@@ -289,22 +289,34 @@ function selectAddress(addr_id, element_id){
     return;
   console.log('selectAddress')
 
-  addressList.forEach(addr => { addr.select = 0; });
+  addressList.forEach(addr => { addr.selected = 0; });
   $('.address-box').each((idx, element) => {
     $(element).removeClass('address-box-is-selected');
   });
   
   let addrIndex = addressList.findIndex(addr => addr.id == addr_id);
-  addressList[addrIndex].select = 1;
+  // addressList[addrIndex].selected = 1;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   $('#'+element_id).addClass('address-box-is-selected');
 }
 
 function deleteAddress(addr_id, element_id){
-  console.log("deleteAddress")
-  addressList = addressList.filter(addr => addr.id != addr_id);
-  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
-  $('#'+element_id).remove();
+  console.log("deleteAddress");
+
+  $.ajax({
+    type: 'post',
+    url: '/endereco/deletar',
+    data: {id: addr_id},
+    dataType: 'text',
+    success: result => {
+      if(result == "error"){
+        console.log('não foi possivel deletar endereço ID: ' + addr_id);
+      }else{
+        console.log('removendo endereço ID: ' + addr_id);
+        $('#' + element_id).remove();
+      }
+    }
+  });
 }
 
 //inicializa lista de endereços

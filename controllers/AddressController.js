@@ -1,10 +1,14 @@
-const { Address } = require("../models")
+const { Address } = require("../models");
 
 module.exports = {
-  async findAll(req, res, next) {
-    let result = await Address.findAll();
-    let addressList = [];
+  async list(req, res, next) {
+    let result = await Address.findAll({
+      where: {
+        deleted: 0
+      }
+    });
 
+    let addressList = [];
     result.forEach(element => {
       if(element['dataValues']){
         addressList.push(element['dataValues']);
@@ -24,5 +28,19 @@ module.exports = {
       res.send(result.dataValues.id.toString());
     else
       res.send('error');
+  },
+
+  async delete(req, res, next) {
+    let { id } = req.body;
+
+    if(id) {
+      let address = await Address.findByPk(id); //instancia elemento do banco de dados
+      address.deleted = 1;                      //altera o estado do elemento instanciado
+      await address.save();                     //faz commit da alteraçao para o banco de dados
+      res.send('OK');
+    }
+    else {
+      res.send('error');
+    }
   }
 }

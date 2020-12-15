@@ -8,7 +8,7 @@ module.exports = (sequelize, DataType) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    select: DataType.INTEGER,
+    selected: DataType.INTEGER,
     street: DataType.STRING,
     number: DataType.STRING,
     complement: DataType.STRING,
@@ -17,6 +17,10 @@ module.exports = (sequelize, DataType) => {
     state: DataType.STRING,
     postal_code: DataType.STRING,
     type: DataType.STRING,
+    deleted: {
+      type: DataType.INTEGER,
+      defaultValue: 0
+    },
     createdAt: {
       type: DataType.DATE
     },
