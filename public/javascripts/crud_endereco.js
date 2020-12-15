@@ -230,38 +230,33 @@ function createAddressBoxHtml(addr){
 function addAddress(){
   console.log("addAddress");
   let address = readAddressFromForm();
-  
   if(address == null)
     return;
 
-  addressList.forEach(addr => { addr.select = 0; });
-  $('.address-box').each((idx, element) => {
-    $(element).removeClass('address-box-is-selected');
-  });
-
-  lastCreatedAddressId++;
-  localStorage.setItem('lastCreatedAddressId', lastCreatedAddressId);
-
-  address.id = lastCreatedAddressId;
-  address.select = 1;
-  let addressBoxHTML = createAddressBoxHtml(address);
-
-  addressList.push(address);
-  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
-  elAddressList.append(addressBoxHTML);
-
-  showAddressList();
-  //limpa o formulario
-  clearFormAddress();
- 
+  address.select = 1; //marca esse endereço como selecionado
   let {id, ...data} = address;
+
   $.ajax({
     type: 'post',
     url: '/endereco/criar',
     data: data,
     dataType: 'text',
-    success: result => {
-      console.log(result);
+    success: id => {
+      id = parseInt(id);
+      if(isNaN(id) || id < 1){
+        console.log('Erro: não foi possivel cadastrar endereço');
+      }else{
+        console.log("cadastrado com sucesso endereço ID: " + id);
+        //remove seleção de todos os endereços do HTML
+        $('.address-box').each((idx, element) => {
+          $(element).removeClass('address-box-is-selected');
+        });
+        address.id = id;  //carrega id cadastrado no banco de dados
+        let addressBoxHTML = createAddressBoxHtml(address); //cria HTML do endereço
+        elAddressList.append(addressBoxHTML); //insere HTML na pagina
+        showAddressList();  //mostra os endereços do usuario
+        clearFormAddress(); //limpa o formulario
+      }
     }
   });
 }
@@ -336,4 +331,4 @@ function loadAddressList() {
 }
 
 //ao carregar o script, essa função sera executada
-loadAddressList();
+//loadAddressList();
