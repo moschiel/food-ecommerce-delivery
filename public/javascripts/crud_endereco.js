@@ -309,26 +309,26 @@ function deleteAddress(addr_id, element_id){
 
 //inicializa lista de endereços
 function loadAddressList() {
-    //carrega address list
-    let storageAddressList = localStorage.getItem(addressLocalStorageKey);
-    if(storageAddressList != null){
-      addressList = JSON.parse(storageAddressList);
-
-      //cria html da lista de andereços
-      let addressBoxesHTML = "";
-      addressList.forEach(address => {
-        addressBoxesHTML += createAddressBoxHtml(address);
-      });
-
-      //insere html
-      elAddressList.html(addressBoxesHTML);
+  $.ajax({
+    type: 'get',
+    url: '/endereco/listar',
+    success: addressList => {
+      if(addressList == "error") {
+        console.log("não foi possivel carregar lista de endereços");
+      }
+      else {
+        console.log("carregando lista de endereços");
+          //cria html da lista de andereços
+          let addressBoxesHTML = "";
+          addressList.forEach(address => {
+            addressBoxesHTML += createAddressBoxHtml(address);
+          });
+          //insere html
+          elAddressList.html(addressBoxesHTML);
+      }
     }
-
-    //leitura do ultimo address ID criado
-    lastCreatedAddressId = Number(localStorage.getItem('lastCreatedAddressId'));
-    if(lastCreatedAddressId == null)
-      lastCreatedAddressId = 0;
+  });
 }
 
 //ao carregar o script, essa função sera executada
-//loadAddressList();
+loadAddressList();
