@@ -121,7 +121,7 @@ function showAddressForm(addr_id){
   }
   else {
     elConfirmButton.text('CADASTRAR');
-    elConfirmButton.unbind('click'); //remove todos elementos click
+    elConfirmButton.unbind('click'); //remove todos eventos click
     elConfirmButton.click(addAddress); //add click event
     fillInAddress();
   }
@@ -136,7 +136,7 @@ function showAddressForm(addr_id){
 function readAddressFromForm() {
   let address = {
     id:null,
-    select: false,
+    select: 0,
     type: $('input[name=address_type]:checked').val(), 
     street: $('#addr_street').val(),
     number: $('#addr_number').val(),
@@ -166,7 +166,6 @@ function verifyAddress(address){
 }
 
 function checkValue(value){
-  console.log(value)
   return (value != null && value != undefined && value != "");
 }
 
@@ -235,7 +234,7 @@ function addAddress(){
   if(address == null)
     return;
 
-  addressList.forEach(addr => { addr.select = false; });
+  addressList.forEach(addr => { addr.select = 0; });
   $('.address-box').each((idx, element) => {
     $(element).removeClass('address-box-is-selected');
   });
@@ -244,7 +243,7 @@ function addAddress(){
   localStorage.setItem('lastCreatedAddressId', lastCreatedAddressId);
 
   address.id = lastCreatedAddressId;
-  address.select = true;
+  address.select = 1;
   let addressBoxHTML = createAddressBoxHtml(address);
 
   addressList.push(address);
@@ -254,6 +253,17 @@ function addAddress(){
   showAddressList();
   //limpa o formulario
   clearFormAddress();
+ 
+  let {id, ...data} = address;
+  $.ajax({
+    type: 'post',
+    url: '/endereco/criar',
+    data: data,
+    dataType: 'text',
+    success: result => {
+      console.log(result);
+    }
+  });
 }
 
 function editAddress(addr_id){
@@ -262,14 +272,14 @@ function editAddress(addr_id){
   if(address == null)
     return;
 
-  // addressList.forEach(addr => { addr.select = false; });
+  // addressList.forEach(addr => { addr.select = 0; });
   // $('.address-box').each((idx, element) => {
   //   $(element).removeClass('address-box-select');
   // });
 
   let addrIndex = addressList.findIndex(item => item.id == addr_id);
   address.id = addr_id;
-  address.select = true;
+  address.select = 1;
   addressList[addrIndex] = address;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   
@@ -284,13 +294,13 @@ function selectAddress(addr_id, element_id){
     return;
   console.log('selectAddress')
 
-  addressList.forEach(addr => { addr.select = false; });
+  addressList.forEach(addr => { addr.select = 0; });
   $('.address-box').each((idx, element) => {
     $(element).removeClass('address-box-is-selected');
   });
   
   let addrIndex = addressList.findIndex(addr => addr.id == addr_id);
-  addressList[addrIndex].select = true;
+  addressList[addrIndex].select = 1;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   $('#'+element_id).addClass('address-box-is-selected');
 }

@@ -6,10 +6,11 @@ module.exports = {
     return addresses;
   },
   async create(req, res, next) {
-    await Address.create({
-      street: "Rua teste",
-      number: "123"
-    });
-    return;
+    const result = await Address.create(req.body);
+
+    if(result.dataValues.id)
+      res.send(result.dataValues.id.toString());
+    else
+      res.send('error');
   }
 }
