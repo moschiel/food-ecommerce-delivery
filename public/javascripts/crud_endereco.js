@@ -287,7 +287,10 @@ function editAddress(addr_id){
 function selectAddress(addr_id, element_id){
   if(document.getElementById(element_id) == null)
     return;
-  console.log('selectAddress')
+  if($('#'+element_id).hasClass('address-box-is-selected'))
+    return;
+    
+  console.log('selectAddress');
 
   addressList.forEach(addr => { addr.selected = 0; });
   $('.address-box').each((idx, element) => {

@@ -76,6 +76,9 @@
 
   transition: var(--transition-addr-selected);
   height: 70px; /*80*/
+
+  position: relative;
+  z-index: 0;
 }
 .address-box:hover {
   background-color: var(--color-bg-addrbox-selected);
@@ -124,6 +127,9 @@
   min-width: 60px;
   display: flex;
   justify-content: space-between;
+  
+  position: relative;
+  z-index: 10;
 }
 .address-box .address-box-controls i {
   color: var(--color-addrbox-controls);
