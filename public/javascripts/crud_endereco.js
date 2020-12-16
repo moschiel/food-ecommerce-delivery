@@ -233,7 +233,6 @@ function addAddress(){
   if(address == null)
     return;
 
-  address.selected = 1; //marca esse endereço como selecionado
   let {id, ...data} = address;
 
   $.ajax({
@@ -247,10 +246,6 @@ function addAddress(){
         console.log('Erro: não foi possivel cadastrar endereço');
       }else{
         console.log("cadastrado com sucesso endereço ID: " + id);
-        //remove seleção de todos os endereços do HTML
-        $('.address-box').each((idx, element) => {
-          $(element).removeClass('address-box-is-selected');
-        });
         address.id = id;  //carrega id cadastrado no banco de dados
         let addressBoxHTML = createAddressBoxHtml(address); //cria HTML do endereço
         elAddressList.append(addressBoxHTML); //insere HTML na pagina
@@ -267,14 +262,8 @@ function editAddress(addr_id){
   if(address == null)
     return;
 
-  // addressList.forEach(addr => { addr.selected = 0; });
-  // $('.address-box').each((idx, element) => {
-  //   $(element).removeClass('address-box-select');
-  // });
-
   let addrIndex = addressList.findIndex(item => item.id == addr_id);
   address.id = addr_id;
-  address.selected = 1;
   addressList[addrIndex] = address;
   localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
   
@@ -289,18 +278,29 @@ function selectAddress(addr_id, element_id){
     return;
   if($('#'+element_id).hasClass('address-box-is-selected'))
     return;
-    
+
   console.log('selectAddress');
 
-  addressList.forEach(addr => { addr.selected = 0; });
-  $('.address-box').each((idx, element) => {
-    $(element).removeClass('address-box-is-selected');
+  $.ajax({
+    type: 'post',
+    url: '/endereco/selecionar',
+    data: {id: addr_id},
+    dataType: 'text',
+    success: result => {
+      if(result == "error"){
+        console.log('não foi possivel selecionar endereço ID: ' + addr_id);
+      }else{
+        console.log('selecionado endereço ID: ' + addr_id);
+        //retira o estilo css de seleção de todos os endereços
+        $('.address-box').each((idx, element) => {
+          $(element).removeClass('address-box-is-selected');
+        });
+        //adiciona estilo css de seleção
+        $('#'+element_id).addClass('address-box-is-selected');
+      }
+    }
   });
-  
-  let addrIndex = addressList.findIndex(addr => addr.id == addr_id);
-  // addressList[addrIndex].selected = 1;
-  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
-  $('#'+element_id).addClass('address-box-is-selected');
+
 }
 
 function deleteAddress(addr_id, element_id){

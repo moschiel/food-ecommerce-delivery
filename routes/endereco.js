@@ -5,5 +5,6 @@ const AddressController = require("../controllers/AddressController")
 router.get('/listar', AddressController.list);
 router.post('/criar', AddressController.create);
 router.post('/deletar', AddressController.delete);
+router.post('/selecionar', AddressController.select);
 
 module.exports = router;
