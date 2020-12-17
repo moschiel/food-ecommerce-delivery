@@ -33,12 +33,11 @@ function initAutocomplete() {
 }
 
 //preenche o formulario com os dados de endereço
-function fillInAddress(address) {
+function fillInAddress(address, fromAPI) {
   //limpa o formulario
   clearFormAddress();
 
-  //se recebeu endereço como parametro, preenche com os dados recebidos
-  if(address) {
+  if(fromAPI == false) {
     elFormAddrInputs.each((index, element) => {
       if($(element).attr('type') == 'radio' && $(element).attr('value') == address.type){
         $(element).prop('checked', true);
@@ -47,11 +46,9 @@ function fillInAddress(address) {
         element.value = address[element.id.replace('addr_','')];
       }
     });
-    
   }
-  else { //se não, provalemnte é a localAPI, então preenche com os dados da 'Local API'
-    // Get the place details from the autocomplete object.
-    const place = autocomplete.getPlace();
+  else { //fromAPI == true
+    const place = address; //const place = autocomplete.getPlace();
   
     // Get each component of the address from the place details,
     // and then fill-in the corresponding field on the form.
@@ -95,7 +92,6 @@ function geolocate() {
 
 //************ MINHAS FUNCOES *****************
 let lastCreatedAddressId = 0;
-let addressList = [];
 let addressLocalStorageKey = 'addressLocalStorage';
 let elLocationField = $('#locationField');
 let elAddressList = $('#address-list');
@@ -112,18 +108,30 @@ function showAddressList(){
 }
 //form para prenchimente de endereço fica visível
 function showAddressForm(addr_id){
+  //se veio addr_id, é para editar um endereço ja existente
   if(addr_id) {
-    elConfirmButton.text('ATUALIZAR');
-    elConfirmButton.unbind('click'); //remove todos eventos click
-    elConfirmButton.click(()=>( editAddress(addr_id))); //add click event
-    let address = addressList.find((item) => item.id == addr_id);
-    fillInAddress(address);
-  }
+    $.ajax({
+      type: 'get',
+      url: '/endereco/listar?id=' + addr_id,
+      success: address => {
+        if(address == "error") {
+          console.log("não foi possivel carregar endereço ID: " + addr_id);
+        }
+        else {
+          console.log("carregando endereço ID: " + addr_id);
+          elConfirmButton.text('ATUALIZAR');
+          elConfirmButton.unbind('click'); //remove todos eventos click
+          elConfirmButton.click(()=>{ editAddress(addr_id) }); //add click event
+          fillInAddress(address, false);  
+        }
+      }
+    });
+  } //se nao veio addr_id, é para cadastrar um endereço novo
   else {
     elConfirmButton.text('CADASTRAR');
     elConfirmButton.unbind('click'); //remove todos eventos click
     elConfirmButton.click(addAddress); //add click event
-    fillInAddress();
+    fillInAddress(autocomplete.getPlace(), true);
   }
 
   elAddressList.slideUp();
@@ -135,8 +143,6 @@ function showAddressForm(addr_id){
 //retorna null se dados invalidos
 function readAddressFromForm() {
   let address = {
-    id:null,
-    selected: 0,
     type: $('input[name=address_type]:checked').val(), 
     street: $('#addr_street').val(),
     number: $('#addr_number').val(),
@@ -233,12 +239,10 @@ function addAddress(){
   if(address == null)
     return;
 
-  let {id, ...data} = address;
-
   $.ajax({
     type: 'post',
     url: '/endereco/criar',
-    data: data,
+    data: address,
     dataType: 'text',
     success: id => {
       id = parseInt(id);
@@ -246,9 +250,7 @@ function addAddress(){
         console.log('Erro: não foi possivel cadastrar endereço');
       }else{
         console.log("cadastrado com sucesso endereço ID: " + id);
-        address.id = id;  //carrega id cadastrado no banco de dados
-        let addressBoxHTML = createAddressBoxHtml(address); //cria HTML do endereço
-        elAddressList.append(addressBoxHTML); //insere HTML na pagina
+        loadAddressList(); 
         showAddressList();  //mostra os endereços do usuario
         clearFormAddress(); //limpa o formulario
       }
@@ -257,20 +259,29 @@ function addAddress(){
 }
 
 function editAddress(addr_id){
-  console.log("editAddress")
   let address = readAddressFromForm();
   if(address == null)
     return;
 
-  let addrIndex = addressList.findIndex(item => item.id == addr_id);
-  address.id = addr_id;
-  addressList[addrIndex] = address;
-  localStorage.setItem(addressLocalStorageKey, JSON.stringify(addressList));
-  
-  loadAddressList();
-  showAddressList();
-  //limpa o formulario
-  clearFormAddress();
+  console.log("editAddress");
+
+  $.ajax({
+    type: 'post',
+    // contentType: "application/json; charset=utf-8",
+    url: '/endereco/editar',
+    data: {id: addr_id, ...address},
+    dataType: 'text',
+    success: result => {
+      if(result == "error"){
+        console.log('não foi possivel editar endereço ID: ' + addr_id);
+      }else{
+        console.log('editando endereço ID: ' + addr_id);
+        loadAddressList(); 
+        showAddressList();  //mostra os endereços do usuario
+        clearFormAddress(); //limpa o formulario
+      }
+    }
+  });
 }
 
 function selectAddress(addr_id, element_id){
