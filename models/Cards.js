@@ -10,6 +10,7 @@ module.exports = (sequelize, DataType) => {
     },
     selected: DataType.INTEGER,
     type: DataType.STRING,
+    brand: DataType.STRING,
     number: DataType.STRING,
     expirationDate: DataType.STRING,
     cvv: DataType.STRING,

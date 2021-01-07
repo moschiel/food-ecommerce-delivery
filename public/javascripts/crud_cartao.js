@@ -1,6 +1,4 @@
 let lastCreatedCardId = 0;
-let cardsList = [];
-let cardsLocalStorageKey = 'cardsLocalStorage';
 let elCardsList = $('#cards-list');
 let elFormCard = $('#card-form');
 let elFormCardInputs = $("#card-form input");
@@ -28,8 +26,6 @@ function showCardForm(){
 //retorna null se dados invalidos
 function readCardFromForm() {
   let card = {
-    id:null,
-    select: false,
     brand: 'mastercard',
     number: $('#card-form #numCard').val(),
     expirationDate: $('#card-form #expirationDate').val(),
@@ -46,11 +42,11 @@ function readCardFromForm() {
 
 
 function verifyCard(card){
-  if(checkCardValue(card.brand) ||
-    checkCardValue(card.number) ||
-    checkCardValue(card.expirationDate) ||
-    checkCardValue(card.cvv) ||
-    checkCardValue(card.holderName) ||
+  if(checkCardValue(card.brand) &&
+    checkCardValue(card.number) &&
+    checkCardValue(card.expirationDate) &&
+    checkCardValue(card.cvv) &&
+    checkCardValue(card.holderName) &&
     checkCardValue(card.holderCpf))
     return false;
   else
@@ -58,7 +54,7 @@ function verifyCard(card){
 }
 
 function checkCardValue(value){
-  return (value == null || value == undefined || value == "");
+  return (value != null && value != undefined && value != "");
 }
 
 function clearFormCard(){
@@ -111,88 +107,95 @@ function addCard(){
   if(card == null)
     return;
 
-  //retira a selecao de todos os cards, pois o novo sera selecionado
-  cardsList.forEach(card => { card.select = false; });
-  $('.card-box').each((idx, element) => {
-    $(element).removeClass('card-box-is-selected');
+  $.ajax({
+    type: 'post',
+    url: '/cartao/criar',
+    data: card,
+    dataType: 'text',
+    success: id => {
+      id = parseInt(id);
+      if(isNaN(id) || id < 1){
+        console.log('Erro: não foi possivel cadastrar cartao');
+      }else{
+        console.log("cadastrado com sucesso cartao ID: " + id);
+        loadCardsList(); 
+        showCardsList();  //mostra os cartoes do usuario
+        clearFormCard(); //limpa o formulario
+      }
+    }
   });
-
-  lastCreatedCardId++;
-  localStorage.setItem('lastCreatedCardId', lastCreatedCardId);
-
-  card.id = lastCreatedCardId;
-  card.select = true;
-  let cardBoxHTML = createCardBoxHtml(card);
-
-  cardsList.push(card);
-  localStorage.setItem(cardsLocalStorageKey, JSON.stringify(cardsList));
-  elCardsList.append(cardBoxHTML);
-
-  showCardsList();
-  //limpa o formulario
-  clearFormCard();
 }
 
 function selectCard(card_id, element_id){
-  console.log('selectCard');
   if(document.getElementById(element_id) == null)
     return;
-  
-  cardsList.forEach(card => { card.select = false; });
-  $('.card-box').each((idx, element) => {
-    $(element).removeClass('card-box-is-selected');
+  if($('#'+element_id).hasClass('card-box-is-selected'))
+    return;
+
+  console.log('selectCard');
+
+  $.ajax({
+    type: 'post',
+    url: '/cartao/selecionar',
+    data: {id: card_id},
+    dataType: 'text',
+    success: result => {
+      if(result == "error"){
+        console.log('não foi possivel selecionar cartão ID: ' + card_id);
+      }else{
+        console.log('selecionado cartao ID: ' + card_id);
+        //retira o estilo css de seleção de todos os endereços
+        $('.card-box').each((idx, element) => {
+          $(element).removeClass('card-box-is-selected');
+        });
+        //adiciona estilo css de seleção
+        $('#'+element_id).addClass('card-box-is-selected');
+      }
+    }
   });
-  
-  let cardIndex = cardsList.findIndex(card => card.id == card_id);
-  cardsList[cardIndex].select = true;
-  localStorage.setItem(cardsLocalStorageKey, JSON.stringify(cardsList));
-  $('#'+element_id).addClass('card-box-is-selected');
 }
 
 function deleteCard(card_id, element_id){
-  console.log("deleteCard")
-  cardsList = cardsList.filter(card => card.id != card_id);
-  localStorage.setItem(cardsLocalStorageKey, JSON.stringify(cardsList));
-  $('#'+element_id).remove();
-  
-  if(cardsList.length == 0)
-    showCardForm();
+  console.log("deleteCard");
+
+  $.ajax({
+    type: 'post',
+    url: '/cartao/deletar',
+    data: {id: card_id},
+    dataType: 'text',
+    success: result => {
+      if(result == "error"){
+        console.log('não foi possivel deletar cartao ID: ' + card_id);
+      }else{
+        console.log('removendo cartao ID: ' + card_id);
+        $('#' + element_id).remove();
+      }
+    }
+  });
 }
 
 //inicializa lista de  cartões de credito
 function loadCardsList() {
-    //leitura do ultimo card ID criado
-    lastCreatedCardId = Number(localStorage.getItem('lastCreatedCardId'));
-    if(lastCreatedCardId == null)
-      lastCreatedCardId = 0;
-
-    //carrega card list
-    let storageCardsList = localStorage.getItem(cardsLocalStorageKey);
-    if(storageCardsList != null){
-      cardsList = JSON.parse(storageCardsList);
-
-      if(cardsList.length == 0)
-        return false;
-
-      //cria html da lista de cartões
-      let cardBoxesHTML = "";
-      cardsList.forEach(card => {
-        cardBoxesHTML += createCardBoxHtml(card);
-      });
-
-      //insere html
-      elCardsList.html(cardBoxesHTML);
-      return true;
+  $.ajax({
+    type: 'get',
+    url: '/cartao/listar',
+    success: cardsList => {
+      if(cardsList == "error") {
+        console.log("não foi possivel carregar lista de cartoes");
+      }
+      else {
+        console.log("carregando lista de cartoes");
+          //cria html da lista de cartoes
+          let cardBoxesHTML = "";
+          cardsList.forEach(card => {
+            cardBoxesHTML += createAddressBoxHtml(card);
+          });
+          //insere html
+          elCardsList.html(cardBoxesHTML);
+      }
     }
-    else 
-    {
-      return false;
-    }
-}
-
-function initializeCreditCardCRUD() {
-  loadCardsList();
+  });
 }
 
 //ao carregar o script, essa função sera executada
-initializeCreditCardCRUD();
+loadCardsList();
