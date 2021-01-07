@@ -33,7 +33,7 @@ function readCardFromForm() {
     holderName: $('#card-form #holderName').val(),
     holderCpf: $('#card-form #holderCpf').val()
   }
-  
+
   if(verifyCard(card))
     return card;
   else 
@@ -48,9 +48,9 @@ function verifyCard(card){
     checkCardValue(card.cvv) &&
     checkCardValue(card.holderName) &&
     checkCardValue(card.holderCpf))
-    return false;
-  else
     return true;
+  else
+    return false;
 }
 
 function checkCardValue(value){
@@ -68,7 +68,7 @@ function createCardBoxHtml(card){
   //determina classes a serem utilizadas
   let cardClass = "card-box";
 
-  if(card.select) {
+  if(card.selected) {
     cardClass += " card-box-is-selected";
   }
 
@@ -107,6 +107,7 @@ function addCard(){
   if(card == null)
     return;
 
+  console.log("oi");
   $.ajax({
     type: 'post',
     url: '/cartao/criar',
@@ -188,7 +189,7 @@ function loadCardsList() {
           //cria html da lista de cartoes
           let cardBoxesHTML = "";
           cardsList.forEach(card => {
-            cardBoxesHTML += createAddressBoxHtml(card);
+            cardBoxesHTML += createCardBoxHtml(card);
           });
           //insere html
           elCardsList.html(cardBoxesHTML);
