@@ -92,7 +92,6 @@ function geolocate() {
 
 //************ MINHAS FUNCOES *****************
 let lastCreatedAddressId = 0;
-let addressLocalStorageKey = 'addressLocalStorage';
 let elLocationField = $('#locationField');
 let elAddressList = $('#address-list');
 let elFormAddress = $('#address-form');
@@ -160,18 +159,18 @@ function readAddressFromForm() {
 }
 
 function verifyAddress(address){
-  if(checkValue(address.street) &&
-    checkValue(address.number) &&
-    checkValue(address.district) &&
-    checkValue(address.city) &&
-    checkValue(address.state) &&
-    checkValue(address.postal_code))
+  if(checkAddressValue(address.street) &&
+    checkAddressValue(address.number) &&
+    checkAddressValue(address.district) &&
+    checkAddressValue(address.city) &&
+    checkAddressValue(address.state) &&
+    checkAddressValue(address.postal_code))
     return true;
   else
     return false;
 }
 
-function checkValue(value){
+function checkAddressValue(value){
   return (value != null && value != undefined && value != "");
 }
 
@@ -357,4 +356,4 @@ function loadAddressList() {
 }
 
 //ao carregar o script, essa função sera executada
-loadAddressList();
+//loadAddressList();
