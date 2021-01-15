@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stylesheets/shopkeeper.css">
+    
+</head>
+
+<body>
+
+    <header class="row">
+        <div class="container">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-none col-12 mb-4 my-nav no-gutters">
+                <!-- Logo -->
+                <a href="" class="navbar-brand my-logo ">
+                    <img src="../images/logo.png" alt="lanche">
+                </a>
+                <div class="nav-block">
+              
+                    <!-- Menu Hamburger -->
+                    <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- Navegacao -->
+                    <div class="collapse navbar-collapse" id="nav-target">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">SOBRE</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Menu</a>
+                                <div class="dropdown-menu bg-none">
+                                    <a href="" class="nav-link dropdown-item">
+                                        <img src="../images/logo.png" alt="lanche">
+                                        Lanches
+                                    </a>
+                                    <a href="" class="nav-link dropdown-item">Pizzas</a>
+                                    <a href="" class="nav-link dropdown-item">Bebidas</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+        <!-- Abas de controle lojista -->
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-products-tab" data-toggle="tab" href="#nav-products"
+                    role="tab" aria-controls="nav-Products" aria-selected="true">Produtos</a>
+                <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab"
+                    aria-controls="nav-delivery" aria-selected="false">Pedidos</a>
+            </div>
+        </nav>
+        <!-- Aba produtos -->
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">
+
+                <% categorias.forEach(categoria=> { %>
+                    <section class="mb-2 row categorias">
+
+                        <h3>
+                            <%= categoria.nome %>
+                        </h3>
+                        <div class="col-12 categoria">
+
+                            <!-- card-inicio -->
+                            <% categoria.items.forEach(item=> { %>
+                                <% let cardId="card-" +item.id; %>
+                                    <div class="my-card" id="<%= cardId %>">
+                                        <div class="my-card-body">
+                                            <img src="<%='.'+ item.imagem %>" class="my-card-img-top" alt="...">
+                                            <p class="my-card-text">
+                                                <%= item.valor %>
+                                            </p>
+                                            <div class="text-group">
+                                                <p class="my-card-title">
+                                                    <%= item.nome %>
+                                                </p>
+                                                <!-- adicionar funcao de editar ao botao -->
+                                                <a class="my-card-btn-add" onclick="">
+                                                    <i class="far fa-edit"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                                        <!-- card fim -->
+
+                    </section>
+                    <% }) %>
+            </div>
+            <!-- Aba de pedidos  -->
+            <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">Meus pedidos
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container info-container">
+            Burguer House
+        </div>
+
+    </footer>
+    <!-- Footer -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
