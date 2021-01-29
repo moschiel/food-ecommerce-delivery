@@ -356,4 +356,4 @@ function loadAddressList() {
 }
 
 //ao carregar o script, essa função sera executada
-//loadAddressList();
+loadAddressList();
