@@ -1,9 +1,13 @@
 module.exports = (sequelize, DataType) => {
 	const Shopkeeper = sequelize.define(
-        'shopkeeper', 
+        'Shopkeeper', 
         {
-            username: DataType.STRING,
-            password: DataType.STRING,
+          username: {
+            type: DataType.STRING,
+            primaryKey: true,
+          },             
+            password: DataType.STRING(255),
+            email: DataType.STRING,
             createdAt: {
               type: DataType.DATE
             },
