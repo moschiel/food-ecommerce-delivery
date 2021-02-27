@@ -13,7 +13,7 @@ const {Product, Sequelize} = require('../models');
       res.render('lojista', {products});
     },
 
-    // funcao de criacao de produtos *corrigir redirecionamento, esta dando erro na pagina apos cadastar produto
+    // funcao de criacao de produtos
     async create(req, res, next) {      
       let product = { ...req.body }; 
       await Product.create(product);
@@ -27,10 +27,34 @@ const {Product, Sequelize} = require('../models');
   
       res.render('lojista', {products});
     },
+    
+    // funcao atualizar produto
+    async update(req, res, next) {
+      let id = req.params.id;
+      let product = await Product.findByPk(id);
+      
+  
+      let { name, stock, price, category, description, image } = req.body;
+  
+      product.name = name;
+      product.stock = stock;
+      product.price = price;
+      product.category = category;
+      product.description = description;
+      product.image = image;      
+  
+      await product.save();
+      
+      let products = await Product.findAll({
+        where:{
+        deleted: 0
+      }
+    });
+  
+    res.redirect('/lojista/listar');
+    },
 
-    // falta funcao de alterar e atualizar produtos
-
-    // funcao de deletar produtos *corrigir redirecionamento, erro na pagina apos excluir o produto
+    // funcao de deletar produtos 
     async delete(req, res, next) {
       let id = req.params.id;
       let product = await Product.findByPk(id);
@@ -47,6 +71,8 @@ const {Product, Sequelize} = require('../models');
       
       res.redirect('/lojista/listar');
     },
+
+    // Contollers dos pedidos
 
     // listagem de pedidos 
     async ordersList (req,res,next) {
