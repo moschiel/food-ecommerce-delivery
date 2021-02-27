@@ -1,0 +1,67 @@
+body {
+    background-color: #f3f3f3;
+    font-family: 'Bebas Neue', cursive;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+  }
+  
+  header{
+    background-color: rgb(253, 190, 71);
+    box-sizing: border-box;
+
+    width: 100vw;
+    height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  nav a img{
+    width: 50vw;
+    height: 15vh;
+  }
+
+  .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .form-login{
+      width: 30vw;
+  }
+
+  .info-container{
+    color: #dddddd;
+  }
+
+  .btn-primary{
+    background-color: tomato;
+
+    color: black;
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    
+    background-color: rgb(253, 190, 71);
+    
+    text-align: center;
+    font-size: 35px;
+    
+    height: 20vh;
+  }
+
+  @media (max-width:540px) {
+    .my-logo{
+      display: flex;
+      margin-bottom: 15px;
+    }  
+
+    .form-login{
+        min-width: 130px;
+    }
+  }
