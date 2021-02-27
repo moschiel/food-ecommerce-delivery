@@ -37,9 +37,13 @@
                             <li class="nav-item">
                                 <a href="/lojista/pedidos" class="nav-link">Pedidos</a>
                             </li>
-                            <!-- Login -->
+                            <!-- Logout -->
                             <li class="nav-item">
-                                <a href="" class="nav-link">Login</a>
+                                <% if (typeof user !== "undefined") { %>
+                                    <li class="nav-item">
+                                      <a class="nav-link" href="/lojista/deslogar">Sair</a>
+                                    </li>
+                                    <% } %>                                     
                             </li>
                         </ul>
                     </div>

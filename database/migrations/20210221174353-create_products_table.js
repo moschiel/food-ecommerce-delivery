@@ -11,7 +11,7 @@ module.exports = {
       name: DataType.STRING,
       stock: DataType.INTEGER,
       price: DataType.FLOAT,
-      descrition: DataType.STRING,
+      description: DataType.STRING,
       image: DataType.STRING,
       category: DataType.STRING,
       deleted: {

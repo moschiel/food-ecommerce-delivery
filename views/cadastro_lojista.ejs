@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../stylesheets/shopkeeper_login.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-none my-nav no-gutters">
+                <!-- Logo -->
+                <a href="" class="navbar-brand my-logo ">
+                    <img src="../images/logo.png" alt="lanche">
+                </a>
+            </nav>
+        </div>
+
+        <div class="container">
+            <section class="register">
+                <h1>Cadastro de Lojista</h1>
+                <p>Preencha os campos abaixo para efetuar cadastro</p>
+
+                <form action="/lojista/salvar" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="input-username">Username</label>
+                            <input type="text" class="form-control" name="username" id="input-username"
+                                placeholder="Insira seu nome de usuario">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="input-email">E-mail</label>
+                            <input type="email" class="form-control" name="email" id="input-email"
+                                placeholder="Email@exemplo.com">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="input-senha">Senha</label>
+                            <input type="password" class="form-control" name="password" id="input-senha"
+                                placeholder="Insira sua senha">
+                        </div>
+                    </div>
+                    <% if (typeof added !=="undefined" ) { %>
+                        <div class="form-group col-md-12 alert alert-success">
+                            Usuário cadastrado com sucesso
+                            <a class="nav-link" href="/lojista">Ir para pagina de login</a>
+                        </div>
+                        <% } %>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </section>
+        </div>
+    </header>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container info-container">
+            Burguer House
+        </div>
+
+    </footer>
+    <!-- Footer -->
+</body>
+
+</html>
