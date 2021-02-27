@@ -26,7 +26,7 @@
                 <div class="nav-block">
                     <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
                         <span class="navbar-toggler-icon"></span>
-                      </button>
+                    </button>
                     <!-- Navegacao -->
                     <div class="collapse navbar-collapse" id="nav-target">
                         <ul class="navbar-nav ml-auto">
@@ -57,13 +57,14 @@
                 <!-- Aba lista de produtos -->
                 <a class="nav-item nav-link active" id="nav-products-tab" data-toggle="tab" href="#nav-products"
                     role="tab" aria-controls="nav-Products" aria-selected="true">Produtos</a>
-                    <!-- Aba do formulario de adicao de produtos -->
+                <!-- Aba do formulario de adicao de produtos -->
                 <a class="nav-item nav-link" id="nav-addProducts-tab" data-toggle="tab" href="#nav-addProducts"
                     role="tab" aria-controls="nav-addProducts" aria-selected="false">Adicionar produtos</a>
             </div>
         </nav>
-        <!-- Aba de listagem produtos -->
+
         <div class="tab-content" id="nav-tabContent">
+            <!-- Aba de listagem produtos -->
             <div class="tab-pane fade show active" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">
                 <!-- Lista de produtos -->
                 <section class="mb-2 row categorias">
@@ -72,10 +73,10 @@
                         <h3>
                             Lanches
                         </h3>
-    
+
                         <% products.forEach(product=> { %>
                             <% if(product.category=="Lanches" ) { %>
-    
+
                                 <div class="lanches">
                                     <!-- card-inicio -->
                                     <div class="my-card" id="">
@@ -90,17 +91,99 @@
                                                 <p class="my-card-title">
                                                     <%= product.name %>
                                                 </p>
-                                                <!-- adicionar funcao de editar ao botao -->
-                                                <a class="my-card-btn" onclick="">
+                                                <!-- Botão editar produto-->
+                                                <a class="my-card-btn" id="btn-edit" href="#" data-toggle="modal"
+                                                    data-target="#modal-editProduct-<%= product.id %>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
+                                                <!-- Modal de edição de produtos-->
+                                                <div class="modal fade" id="modal-editProduct-<%= product.id %>"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <!-- Mensagem da janela modal -->
+                                                                <h5 class="modal-title">
+                                                                    Deseja editar produto?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Fechar">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <section class="form-register">
+                                                                    <form action="/lojista/alterar/<%= product.id %> "
+                                                                        method="POST">
+
+                                                                        <div class="form-group">
+                                                                            <label for="input-nome">Nome</label>
+                                                                            <input type="text" name="name"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Nome do Produto"
+                                                                                value="<%= product.name  %> ">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-estoque">Unidades</label>
+                                                                            <input type="text" name="stock"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Quantidade em estoque"
+                                                                                value="<%= product.stock  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-preco">Preço</label>
+                                                                            <input type="text" name="price"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Preço do produto"
+                                                                                value="<%= product.price  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-descricao">Descrição do
+                                                                                produto</label>
+                                                                            <textarea class="form-control"
+                                                                                name="description" id="formeditProducts"
+                                                                                rows="3"
+                                                                                value="<%= product.description %>"></textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-imagem">Imagem do
+                                                                                produto</label>
+                                                                            <input type="file" name="image"
+                                                                                class="form-control-file"
+                                                                                id="formeditProducts"
+                                                                                value="<%= product.image  %>">
+                                                                        </div>
+
+                                                                        <!-- footer modal -->
+                                                                        <div class="modal-footer">
+                                                                            <!-- botoes -->
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Cancelar</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Salvar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Fim Modal -->
+
+
+                                                <!-- Botão excluir produto -->
                                                 <a class="my-card-btn" id="btn-delete" href="#" data-toggle="modal"
                                                     data-target="#modal-product-<%= product.id %>">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
                                                 <!-- Modal de exclusao de produtos-->
-                                                <div class="modal fade" id="modal-product-<%= product.id %>" tabindex="-1"
-                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="modal-product-<%= product.id %>"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -138,7 +221,7 @@
                                         <% }) %>
                                 </div>
 
-                    </div>                    
+                    </div>
                     <!-- Categoria Pizzas -->
                     <div class="categoria col-12">
                         <h3>
@@ -162,15 +245,95 @@
                                                 <p class="my-card-title">
                                                     <%= product.name %>
                                                 </p>
-                                                <!-- adicionar funcao de editar ao botao -->
-                                                <a class="my-card-btn" onclick="">
+                                                <!-- Botão de edição -->
+                                                <a class="my-card-btn" id="btn-edit" href="#" data-toggle="modal"
+                                                    data-target="#modal-editProduct-<%= product.id %>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
+                                                <!-- Modal de edição de produtos-->
+                                                <div class="modal fade" id="modal-editProduct-<%= product.id %>"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <!-- Mensagem da janela modal -->
+                                                                <h5 class="modal-title">
+                                                                    Deseja editar produto?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Fechar">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <section class="form-register">
+                                                                    <form action="/lojista/alterar/<%= product.id %> "
+                                                                        method="POST">
+
+                                                                        <div class="form-group">
+                                                                            <label for="input-nome">Nome</label>
+                                                                            <input type="text" name="name"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Nome do Produto"
+                                                                                value="<%= product.name  %> ">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-estoque">Unidades</label>
+                                                                            <input type="text" name="stock"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Quantidade em estoque"
+                                                                                value="<%= product.stock  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-preco">Preço</label>
+                                                                            <input type="text" name="price"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Preço do produto"
+                                                                                value="<%= product.price  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-descricao">Descrição do
+                                                                                produto</label>
+                                                                            <textarea class="form-control"
+                                                                                name="description" id="formeditProducts"
+                                                                                rows="3"
+                                                                                value="<%= product.description %>"></textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-imagem">Imagem do
+                                                                                produto</label>
+                                                                            <input type="file" name="image"
+                                                                                class="form-control-file"
+                                                                                id="formeditProducts"
+                                                                                value="<%= product.image  %>">
+                                                                        </div>
+
+                                                                        <!-- footer modal -->
+                                                                        <div class="modal-footer">
+                                                                            <!-- botoes -->
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Cancelar</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Salvar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Fim Modal -->
+
+                                                <!-- botão de excluir -->
                                                 <a class="my-card-btn" id="btn-delete" href="#" data-toggle="modal"
                                                     data-target="#modal-product-<%= product.id %>">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
-                                                <!-- Modal -->
+                                                <!-- Modal Excluir produto-->
                                                 <div class="modal fade" id="modal-product-<%= product.id %>"
                                                     tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
@@ -180,8 +343,8 @@
                                                                 <h5 class="modal-title">
                                                                     Deseja realmente
                                                                     excluir ?</h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal" aria-label="Fechar">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Fechar">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
@@ -223,8 +386,8 @@
                                     <!-- card-inicio -->
                                     <div class="my-card" id="">
                                         <div class="my-card-body">
-                                            <img src="<%= '../images/' + product.image %>"
-                                                class="my-card-img-top" alt="...">
+                                            <img src="<%= '../images/' + product.image %>" class="my-card-img-top"
+                                                alt="...">
                                             <p class="my-card-text">
                                                 <%= "Un." + product.stock %>
                                                     <%= "R$" + product.price %>
@@ -233,27 +396,106 @@
                                                 <p class="my-card-title">
                                                     <%= product.name %>
                                                 </p>
-                                                <!-- adicionar funcao de editar ao botao -->
-                                                <a class="my-card-btn" onclick="">
+
+                                                <!-- Botão editar produto-->
+                                                <a class="my-card-btn" id="btn-edit" href="#" data-toggle="modal"
+                                                    data-target="#modal-editProduct-<%= product.id %>">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <a class="my-card-btn" id="btn-delete" href="#"
-                                                    data-toggle="modal"
+                                                <!-- Modal de edição de produtos-->
+                                                <div class="modal fade" id="modal-editProduct-<%= product.id %>"
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <!-- Mensagem da janela modal -->
+                                                                <h5 class="modal-title">
+                                                                    Deseja editar produto?</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Fechar">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <section class="form-register">
+                                                                    <form action="/lojista/alterar/<%= product.id %> "
+                                                                        method="POST">
+
+                                                                        <div class="form-group">
+                                                                            <label for="input-nome">Nome</label>
+                                                                            <input type="text" name="name"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Nome do Produto"
+                                                                                value="<%= product.name  %> ">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-estoque">Unidades</label>
+                                                                            <input type="text" name="stock"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Quantidade em estoque"
+                                                                                value="<%= product.stock  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-preco">Preço</label>
+                                                                            <input type="text" name="price"
+                                                                                class="form-control"
+                                                                                id="formeditProducts"
+                                                                                placeholder="Preço do produto"
+                                                                                value="<%= product.price  %>">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-descricao">Descrição do
+                                                                                produto</label>
+                                                                            <textarea class="form-control"
+                                                                                name="description" id="formeditProducts"
+                                                                                rows="3"
+                                                                                value="<%= product.description %>"></textarea>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="input-imagem">Imagem do
+                                                                                produto</label>
+                                                                            <input type="file" name="image"
+                                                                                class="form-control-file"
+                                                                                id="formeditProducts"
+                                                                                value="<%= product.image  %>">
+                                                                        </div>
+
+                                                                        <!-- footer modal -->
+                                                                        <div class="modal-footer">
+                                                                            <!-- botoes -->
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Cancelar</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-danger">Salvar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </section>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Fim Modal -->
+
+                                                <!-- botão de excluir -->
+                                                <a class="my-card-btn" id="btn-delete" href="#" data-toggle="modal"
                                                     data-target="#modal-product-<%= product.id %>">
                                                     <i class="far fa-trash-alt"></i>
                                                 </a>
-                                                <!-- Modal -->
+                                                <!-- Modal de exclusao de produto -->
                                                 <div class="modal fade" id="modal-product-<%= product.id %>"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title">
                                                                     Deseja realmente
                                                                     excluir ?</h5>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal"
+                                                                <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Fechar">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -263,11 +505,9 @@
                                                                 </p>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button"
-                                                                    class="btn btn-secondary"
+                                                                <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Cancelar</button>
-                                                                <a
-                                                                    href="/lojista/excluir/<%= product.id %>">
+                                                                <a href="/lojista/excluir/<%= product.id %>">
                                                                     <button type="button"
                                                                         class="btn btn-danger">Excluir</button>
                                                                 </a>
