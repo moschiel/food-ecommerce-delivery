@@ -64,13 +64,8 @@ section.carousel {
   margin-bottom: 20px;
 }
 
-section.carousel>div{
-  height: 92vh;
-  width: 100vw;
-}
-
-.carousel-inner img{
-  height: 92vh;
+.carousel-inner img, .carousel-inner{
+  height: 40vw;
   width: 100vw;
 }
 
@@ -84,7 +79,22 @@ section.categorias>div{
   overflow-x: auto;
 }
 
+.mais{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
 
+.mais>div{
+  display: inline-block;
+  height: 15px;
+  width: 60px;
+  position: relative;
+  bottom: 30px;
+  right: 60px;
+  font-size: 20px;
+}
 
 /* card */
 .my-card{
@@ -208,7 +218,7 @@ footer {
 
 /* width */
 ::-webkit-scrollbar {
-  height: 4px;
+  height: 10px;
 }
 
 /* Track */
@@ -237,6 +247,12 @@ footer {
 
   section.carousel>div{
     width: 100%;
+  }
+
+  
+  .carousel-inner img, .carousel-inner{
+    height: 55vw;
+    width: 100vw;
   }
 }
 
