@@ -1,7 +1,11 @@
 const { sequelize } = require('../models')
 
+
+
 module.exports = {
   async index (req,res) {
+
+    console.log("Username: ",req.session.user);
 
     let categoriasDeProdutos = await sequelize.query('SELECT DISTINCT category FROM products WHERE deleted = 0',
       { bind: ['active'], type: sequelize.QueryTypes.SELECT }
@@ -28,13 +32,13 @@ module.exports = {
             {id: produto.id, 
             nome: produto.name, 
             valor: produto.price, 
-            imagem: './images/'+ produto.image
+            imagem: '../images/'+ produto.image
           })
         }
       })
     })
 
     
-    res.render('index', { title: 'Ecommerce', categorias, destaques });
+    res.render('index', { title: 'Ecommerce', categorias });
   }
 } 

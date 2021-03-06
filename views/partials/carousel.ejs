@@ -1,6 +1,22 @@
 <div>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
+        <%
+        let destaques = [
+          {
+            id: 1,
+            imagem: "../images/banner1.jpeg"
+          },
+          {
+            id: 2,
+            imagem: "../images/banner1.jpeg"
+          },
+          {
+            id: 3,
+            imagem: "../images/banner1.jpeg"
+          },
+        ]
+        %>
         <% destaques.forEach(destaque => { %>
           <% if (destaque.id ==1) { %>
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

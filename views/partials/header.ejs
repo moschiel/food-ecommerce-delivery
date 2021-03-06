@@ -2,8 +2,8 @@
     <div class="container">
       <nav class="navbar navbar-expand-sm navbar-dark bg-none col-12 mb-4 my-nav no-gutters">
         <!-- Logo -->
-        <a href="" class="navbar-brand my-logo ">
-          <img src="./images/logo.png" alt="lanche">
+        <a href="/" class="navbar-brand my-logo ">
+          <img src= "../images/logo.png"  alt="lanche">
         </a>      
         <div class="nav-block">
           <!-- delivery -->
@@ -35,9 +35,24 @@
                   <a href="" class="nav-link dropdown-item">Bebidas</a>
                 </div>
               </li> -->
-              <li class="nav-item">
-                <a href="" class="nav-link">Login</a>
-              </li>
+              <il class="navbar-nav ml-auto">
+                
+                <% if (typeof user !== "undefined") { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="">Olá, <%= user.name %> </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/deslogar">Sair</a>
+                  </li>
+                <% } else { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/registrar">Cadastre-se</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/autenticar">Login</a>
+                  </li>
+                <% } %>
+                </il>
             </ul>
           </div>
         </div>

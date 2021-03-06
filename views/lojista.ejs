@@ -11,41 +11,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../stylesheets/shopkeeper.css">
+    
+    <link defer rel="stylesheet" href="stylesheets/index.css">
 
 </head>
 
 <body>
 
     <header class="row">
-        <div class="container">
-            <nav class="navbar navbar-expand-sm navbar-dark bg-none col-12 mb-4 my-nav no-gutters">
-                <!-- Logo -->
-                <a href="" class="navbar-brand my-logo ">
-                    <img src="../images/logo.png" alt="lanche">
-                </a>
-                <div class="nav-block">
-                    <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!-- Navegacao -->
-                    <div class="collapse navbar-collapse" id="nav-target">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a href="/lojista/listar" class="nav-link">Home</a>
-                            </li>
-                            <!-- Pedidos *Adicionar rota de pedidos -->
-                            <li class="nav-item">
-                                <a href="/lojista/pedidos" class="nav-link">Pedidos</a>
-                            </li>
-                            <!-- Login -->
-                            <li class="nav-item">
-                                <a href="" class="nav-link">Login</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+        <%- include('./partials/header'); %>
     </header>
 
 
