@@ -2,12 +2,11 @@ const {Shopkeeper, Product, Sequelize} = require('../models');
 const bcrypt = require("bcrypt");
 
 module.exports = {
-
-// controles de acesso lojistas
-userCreate(req, res, next) {  
+  // controles de acesso lojistas
+  userCreate(req, res, next) {  
     res.render('cadastro_lojista');
   },
-
+  
   async save(req, res, next) {
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     let user = { ...req.body };
