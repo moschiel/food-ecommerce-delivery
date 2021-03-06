@@ -1,0 +1,28 @@
+<% categorias.forEach(product => { %>
+    <section class="mb-2 row categorias">
+
+      <h3><%= product.nome %> </h3>
+      <div class="col-12 categoria">
+       
+        <!-- card-inicio -->
+        <% product.items.forEach(item => { %>
+          <% let cardId = "card-"+item.id; %>  
+          <div class="my-card" id="<%= cardId %>">
+            <div class="my-card-body">
+              <img src="<%= item.imagem %>" class="my-card-img-top" alt="...">
+              <p class="my-card-text"><%= item.valor %></p>
+              <div class="text-group">
+                <p class="my-card-title"><%= item.nome %></p>   
+                <a class="my-card-btn-add" onclick="adicionarNaSacola('<%= cardId %>')">
+                  <i class="fas fa-cart-plus"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+        <!-- card fim -->
+        <!-- <div class="row mais">
+            <div>Ver mais</div>
+        </div> -->
+    </section>
+<% }) %>

@@ -6,10 +6,13 @@ var logger = require('morgan');
 const session = require('express-session');
 
 var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
 var pedidoRouter = require('./routes/pedido');
 var addressRouter = require('./routes/endereco');
 var cardsRouter = require('./routes/cartao');
 var shopkeeperRouter = require('./routes/shopkeeper');
+
 
 var app = express();
 
@@ -18,7 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(session({
-  secret: "projeto-food-ecommerce",
+  secret: "projeto-node-fs10",
   resave: true,
   saveUninitialized: true
 }));
@@ -30,6 +33,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/usuario', usersRouter);
+
 app.use('/pedido', pedidoRouter);
 app.use('/endereco', addressRouter);
 app.use('/cartao', cardsRouter);

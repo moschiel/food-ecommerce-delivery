@@ -1,0 +1,60 @@
+
+    <div class="container">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-none col-12 mb-4 my-nav no-gutters">
+        <!-- Logo -->
+        <a href="/" class="navbar-brand my-logo ">
+          <img src= "../images/logo.png"  alt="lanche">
+        </a>      
+        <div class="nav-block">
+          <!-- delivery -->
+          <!-- <div class="delivery">
+            <img src="./images/delivery.png" alt="delivery">
+            <a href="#">Disk entrega 67 99295-5488</a>
+          </div> -->
+          <!-- Menu Hamburger -->
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-target">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          <!-- Navegacao -->
+          <div class="collapse navbar-collapse" id="nav-target">
+            <ul class="navbar-nav ml-auto">
+              <!-- <li class="nav-item">
+                <a href="" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">SOBRE</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">Menu</a>
+                <div class="dropdown-menu bg-none">
+                  <a href="" class="nav-link dropdown-item">
+                    <img src="./images/lanche.png" alt="lanche">
+                    Lanches
+                  </a>
+                  <a href="" class="nav-link dropdown-item">Pizzas</a>
+                  <a href="" class="nav-link dropdown-item">Bebidas</a>
+                </div>
+              </li> -->
+              <il class="navbar-nav ml-auto">
+                
+                <% if (typeof user !== "undefined") { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="">Olá, <%= user.name %> </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/deslogar">Sair</a>
+                  </li>
+                <% } else { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/registrar">Cadastre-se</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/usuario/autenticar">Login</a>
+                  </li>
+                <% } %>
+                </il>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
