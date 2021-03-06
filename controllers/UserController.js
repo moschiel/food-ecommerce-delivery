@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { User, sequelize } = require("../models");
+const HomeController = require("../controllers/HomeController")
 
 module.exports = {
   create(req, res, next) {
@@ -20,38 +21,6 @@ module.exports = {
   },
 
   async authenticate(req, res, next) {
-  
-    let categoriasDeProdutos = await sequelize.query('SELECT DISTINCT category FROM products WHERE deleted = 0',
-      { bind: ['active'], type: sequelize.QueryTypes.SELECT }
-    )
-    
-    let categorias = []
-    categoriasDeProdutos.map(produto=>{
-      categorias.push(
-        {
-          nome: produto.category,
-          items: []
-        }
-      ) 
-    })
-    
-    let produtos = await sequelize.query('SELECT * FROM products WHERE deleted = 0',
-      { bind: ['active'], type: sequelize.QueryTypes.SELECT }
-    )
-
-    produtos.map(produto =>{
-      categorias.map(categoria=>{
-        if ( categoria.nome === produto.category) {
-          categoria.items.push(
-            {id: produto.id, 
-            nome: produto.name, 
-            valor: produto.price, 
-            imagem: '../images/'+ produto.image
-          })
-        }
-      })
-    })
-
     let { email, password } = req.body;
     let user = await User.findOne({ where: { email } });
 
@@ -68,8 +37,10 @@ module.exports = {
     delete user.password;
 
     req.session.user = user;
-
-    res.render('index', { user: req.session.user, categorias });
+    
+    //res.render('index', { user: req.session.user, categorias });
+    //HomeController.index(req, res);
+    res.redirect('/')
   },
 
   logout(req, res, next) {
