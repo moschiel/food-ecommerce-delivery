@@ -2,15 +2,14 @@ const {Product, Sequelize} = require('../models');
   
   module.exports = {
     // funcao de listagem de produtos| com filtro de produtos não excluidos
-   async list (req,res,next) {
-      
+   async list (req,res,next) {      
       let products = await Product.findAll({
         where:{
         deleted: 0
       }
     });
      
-      res.render('lojista', {products});
+      res.render('lojista', {products, user: req.session.user});
     },
 
     // funcao de criacao de produtos
@@ -22,8 +21,7 @@ const {Product, Sequelize} = require('../models');
         where:{
         deleted: 0
       }
-    });
-   
+    });   
   
       res.render('lojista', {products});
     },
@@ -31,8 +29,7 @@ const {Product, Sequelize} = require('../models');
     // funcao atualizar produto
     async update(req, res, next) {
       let id = req.params.id;
-      let product = await Product.findByPk(id);
-      
+      let product = await Product.findByPk(id);      
   
       let { name, stock, price, category, description, image } = req.body;
   
@@ -44,12 +41,6 @@ const {Product, Sequelize} = require('../models');
       product.image = image;      
   
       await product.save();
-      
-      let products = await Product.findAll({
-        where:{
-        deleted: 0
-      }
-    });
   
     res.redirect('/lojista/listar');
     },
@@ -63,21 +54,7 @@ const {Product, Sequelize} = require('../models');
   
       await product.save();    
   
-      let products = await Product.findAll({
-        where:{
-        deleted: 0
-      }
-      });
-      
       res.redirect('/lojista/listar');
     },
 
-    // Contollers dos pedidos
-
-    // listagem de pedidos 
-    async ordersList (req,res,next) {
-      
-    
-    res.render('pedidos_lojista');  
   }
-}  

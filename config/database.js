@@ -1,6 +1,6 @@
 const config = {
-  username: 'admin',
-  password: 'admin',
+  username: 'root',
+  password: '',
   database: 'dh_node_fs10',
   host: 'localhost',
   dialect: 'mysql' 
