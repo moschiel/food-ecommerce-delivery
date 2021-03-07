@@ -35,8 +35,9 @@ module.exports = {
         res.send(addressList);
       }
     }
-    else
+    else {
       res.send('error');
+    }
   },
 
   async create(req, res, next) {
