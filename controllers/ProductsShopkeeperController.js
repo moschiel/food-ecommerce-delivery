@@ -2,11 +2,17 @@ const {Product, Sequelize} = require('../models');
   
   module.exports = {
     // funcao de listagem de produtos| com filtro de produtos não excluidos
-   async list (req,res,next) {      
+   async list (req,res,next) {  
+     if(req.session.user == undefined)
+    {
+      res.redirect('/lojista');
+      return;
+    }    
       let products = await Product.findAll({
         where:{
         deleted: 0
       }
+      
     });
      
       res.render('lojista', {products, user: req.session.user});

@@ -77,7 +77,24 @@
                     Em preparo
                 </h3>
 
-                
+                <div>
+                    <% ordersOpen.forEach(order=> { %>
+                            <div class="open">
+                                <!-- card-inicio -->
+                                <div class="my-card" id="">
+                                    <div class="my-card-body">
+                                           <p class="my-card-text">
+                                            <%= "Nome" + order.name %>
+                                            </p>
+                                            <p>
+                                            <%= "R$" + order.price %>
+                                        </p>
+                                        <p>
+                                            <%= "Endereço" + order. %> 
+                                        </p>                                        
+
+                        <% }) %>
+                </div>
                              
             </div>
             <!-- Aba lista de pedidos enviados  -->
@@ -104,4 +121,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
-</html>
+</html>n
