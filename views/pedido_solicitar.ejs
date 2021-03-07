@@ -25,6 +25,7 @@
 
   <!-- scripts/styles dessa pagina -->
   <link rel="stylesheet" href="../stylesheets/pedido_solicitar.css">
+  <script defer src="../javascripts/crud_pedido.js"></script>
   
   <link defer rel="stylesheet" href="stylesheets/index.css">
 </head>
@@ -52,7 +53,7 @@
         <%- include('./partials/crud_cartao'); %>
       </section>
 
-      <button id='btn-fazer-pedido'>fazer pedido</button>
+      <button id='btn-fazer-pedido' onclick="addOrder()">fazer pedido</button>
     </div>
 
     <section class="containerSacola">

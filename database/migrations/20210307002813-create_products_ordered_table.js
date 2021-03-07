@@ -11,6 +11,8 @@ module.exports = {
       order_id: DataType.INTEGER,   //ESSE ID É DA TABELA DE PEDIDOS
       product_id: DataType.INTEGER, //ESSE ID É DA TABELA DE PRODUTOS
       amount: DataType.INTEGER,
+      name: DataType.STRING,
+      price: DataType.FLOAT,
       createdAt: DataType.DATE,
       updatedAt: DataType.DATE,
       deleted: {
