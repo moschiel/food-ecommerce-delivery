@@ -20,6 +20,20 @@ header img {
   height: 45px;
 }
 
+header .user_info {
+  /* width: 200px; */
+  position: absolute;
+  right: 40px;
+  display: flex;
+  align-items: center;
+}
+
+header #user_name{
+  text-transform: capitalize;
+  /* font-weight: bold; */
+  margin-left: 5px;
+}
+
 main {
   display: flex;
   justify-content: space-between;

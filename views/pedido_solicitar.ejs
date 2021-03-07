@@ -25,13 +25,22 @@
 
   <!-- scripts/styles dessa pagina -->
   <link rel="stylesheet" href="../stylesheets/pedido_solicitar.css">
+  <script defer src="../javascripts/crud_pedido.js"></script>
   
   <link defer rel="stylesheet" href="stylesheets/index.css">
 </head>
 <body>
 
-  <header class="row">
-    <%- include('./partials/header'); %>
+  <header>
+    <a href="/">
+      <img src="../images/logo.png" alt="">
+    </a>
+    <% if (typeof user !== "undefined") { %>
+      <div class="user_info">
+        <i class="fas fa-user"></i>
+        <p id="user_name"> <%= user.name %></p>
+      </div>
+    <% } %>
   </header>
 
   <main>
@@ -44,7 +53,7 @@
         <%- include('./partials/crud_cartao'); %>
       </section>
 
-      <button id='btn-fazer-pedido'>fazer pedido</button>
+      <button id='btn-fazer-pedido' onclick="addOrder()">fazer pedido</button>
     </div>
 
     <section class="containerSacola">
