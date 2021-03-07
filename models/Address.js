@@ -8,6 +8,7 @@ module.exports = (sequelize, DataType) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    user_id: DataType.INTEGER, //ESSE ID É DA TABELA DE USUARIOS
     selected: DataType.INTEGER,
     street: DataType.STRING,
     number: DataType.STRING,
