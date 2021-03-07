@@ -1,165 +1,165 @@
 
 body {
-    background-color: #f3f3f3;
-    font-family: 'Bebas Neue', cursive;
+  background-color: #f3f3f3;
+  font-family: 'Bebas Neue', cursive;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+header{
+  background-color: rgb(253, 190, 71);
+  box-sizing: border-box;
+}
+
+.my-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav li a {
+  font-size: 30px;
+  color: #3d2514;
+  
+}
+nav a img{
+  height: 8vh;
+}
+
+.nav-block{
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-toggler{
+  outline: none !important;
+  border: none !important;
+}
+
+
+.delivery a {
+  color:  #3d2514;
+  font-size: 20px;
+}
+
+section.categorias>div{
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* card */
+.my-card{
+  position: relative;
+}
+
+.my-card-img-top{
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+}
+
+.my-card-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-card-title, .my-card-text, .my-card-btn-add{
+  margin: 0px;
+  display: inline-block;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.my-card-title{
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 18px;
+  align-self: center;
+  justify-self: center;
+  color: black;
+  border-radius: 10px;
+}
+
+.my-card-text{
+  font-size: 18px;
+  position: absolute;
+  right: 15vw;
+  top: 10px;
+  width: 80px;
+}
+
+.my-btn-group{
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.my-card-btn{
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  align-content: center;
+  text-align: center;
+  height: 40px;
+  width: 40px;
+  line-height: 33px;
+  background-color: tomato;
+  color: #3d2514;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.my-card-btn:hover{
+  color: white;
+  background-color: rgb(235, 91, 66);
+}
+#btn-delete{
+  bottom: 10px;
+  right: 5px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  background-color: rgb(253, 190, 71);
+  text-align: center;
+  font-size: 35px;
+  height: 9vh;
+}
+
+.info-container{
+  color: #dddddd;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #dddddd; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3; 
+}
+
+@media (max-width:540px) {
+  .my-logo, .av-block, .delivery{
     display: flex;
-    flex-direction: column;
-    width: 100vw;
-  }
-  
-  header{
-    background-color: rgb(253, 190, 71);
-    box-sizing: border-box;
-  }
-  
-  .my-nav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  nav li a {
-    font-size: 30px;
-    color: #3d2514;
-    
-  }
-  nav a img{
-    height: 8vh;
-  }
-  
-  .nav-block{
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .navbar-toggler{
-    outline: none !important;
-    border: none !important;
-  }
-  
-  
-  .delivery a {
-    color:  #3d2514;
-    font-size: 20px;
-  }
-  
-  section.categorias>div{
     margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* card */
-  .my-card{
-    position: relative;
-  }
-  
-  .my-card-img-top{
-    margin: 5px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
-  }
-  
-  .my-card-body{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .my-card-title, .my-card-text, .my-card-btn-add{
-    margin: 0px;
-    display: inline-block;
-    padding: 5px;
-    font-size: 15px;
-  }
-  
-  .my-card-title{
-    position: absolute;
-    bottom: 10px;
-    left: 20px;
-    font-size: 18px;
-    align-self: center;
-    justify-self: center;
-    color: black;
-    border-radius: 10px;
-  }
-  
-  .my-card-text{
-    font-size: 18px;
-    position: absolute;
-    right: 15vw;
-    top: 10px;
-    width: 80px;
-  }
-  
-  .my-btn-group{
-    display: flex;
-    align-items: center;
-    margin: 0;
-  }
-  .my-card-btn{
-    position: absolute;
-    bottom: 10px;
-    right: 50px;
-    align-content: center;
-    text-align: center;
-    height: 40px;
-    width: 40px;
-    line-height: 33px;
-    background-color: tomato;
-    color: #3d2514;
-    border-radius: 50%;
-    margin-bottom: 5px;
-    cursor: pointer;
-  }
-  
-  .my-card-btn:hover{
-    color: white;
-    background-color: rgb(235, 91, 66);
-  }
-  #btn-delete{
-    bottom: 10px;
-    right: 5px;
-  }
-  
-  footer {
-    display: flex;
-    align-items: center;
-    background-color: rgb(253, 190, 71);
-    text-align: center;
-    font-size: 35px;
-    height: 9vh;
-  }
-  
-  .info-container{
-    color: #dddddd;
-  }
-  
-  /* width */
-  ::-webkit-scrollbar {
-    height: 4px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #dddddd; 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #a3a3a3; 
-  }
-  
-  @media (max-width:540px) {
-    .my-logo, .av-block, .delivery{
-      display: flex;
-      margin-bottom: 15px;
-    }  
-  }
+  }  
+}
