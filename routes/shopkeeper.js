@@ -22,5 +22,7 @@ router.get('/excluir/:id', ProductsController.delete);
 
 // rotas de controle de pedidos do lojista
 router.get('/pedidos', PedidoController.list);
+router.get('/pedidos/alterar/:id', PedidoController.update);
+router.get('/pedidos/cancelar/:id', PedidoController.delete);
 
 module.exports = router;
