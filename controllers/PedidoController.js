@@ -1,35 +1,54 @@
 const { Product, Address, Cards, Order, ProdutcsOrdered, User, sequelize} = require("../models");
 
-//pedido 1   12:00     endereço id=5 
-//pedido 2   08:00     endereço id=10
-//pedido 3   14:00     endereço id=3
-
-//pedido 2
-//pedido 1
-//pedido 3
-
-//endereço id=3
-//endereço id=5
-//endereço id=10
-
 module.exports = {
+  // função que lista os pedidos
   async list (req, res, next){
+    // redireciona usuario sem login
     if(req.session.user == undefined)
     {
       res.redirect('/lojista');
       return;
-    }
-    
+    }    
     
     pedidoEmPreparoJSON = await MontaPedidos('PREPARANDO');
-    //pedidoAcaminhoJSON = await MontaPedidos('A CAMINHO');
-    //pedidoEntregueJSON = await MontaPedidos('ENTREGUE');
+    pedidoAcaminhoJSON = await MontaPedidos('A CAMINHO');
+    pedidoEntregueJSON = await MontaPedidos('ENTREGUE');
 
-    console.log(pedidoEmPreparoJSON)
-    
 
-    //res.render('pedidos_lojista', {pedidoEmPreparoJSON, pedidoEmPreparoJSON,pedidoAcaminhoJSON})
-    
+    res.render('pedidos_lojista', {pedidoEmPreparoJSON, pedidoAcaminhoJSON, pedidoEntregueJSON, user: req.session.user});    
+  },
+
+  // função atualizar estatos do pedido
+  async update(req, res, next) {
+    let id = req.params.id;
+    let order = await Order.findByPk(id);  
+
+    // altera o status do pedido para entregue
+    if (order.status == 'A CAMINHO' ){      
+      order.status= 'ENTREGUE';
+      await order.save();
+
+      res.redirect('/lojista/pedidos');
+    }  
+    // altera o status do pedido para a caminho
+    if (order.status == 'PREPARANDO' ){      
+      order.status= 'A CAMINHO';
+      await order.save();
+
+      res.redirect('/lojista/pedidos');
+    }
+  },
+
+  // funcao de cancelar pedidos 
+  async delete(req, res, next) {
+    let id = req.params.id;
+    let order = await Order.findByPk(id);
+
+    order.deleted = 1;
+
+    await order.save();    
+
+    res.redirect('/lojista/pedidos');
   },
 
   async solicitar(req, res, next) {
