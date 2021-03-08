@@ -3,6 +3,7 @@ const {Product, Sequelize} = require('../models');
   module.exports = {
     // funcao de listagem de produtos| com filtro de produtos não excluidos
    async list (req,res,next) {  
+    //  redireciona usuario sem login
      if(req.session.user == undefined)
     {
       res.redirect('/lojista');
