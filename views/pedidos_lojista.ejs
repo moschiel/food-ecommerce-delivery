@@ -39,12 +39,12 @@
                             </li>
                             <!-- Logout -->
                             <li class="nav-item">
-                                <% if (typeof user !== "undefined") { %>
-                                    <li class="nav-item">
-                                      <a class="nav-link" href="/lojista/deslogar">Sair</a>
-                                    </li>
-                                    <% } %>                                     
+                                <% if (typeof user !=="undefined" ) { %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/lojista/deslogar">Sair</a>
                             </li>
+                            <% } %>
+                                </li>
                         </ul>
                     </div>
                 </div>
@@ -61,49 +61,177 @@
                 <!-- Aba de pedidos em preparo -->
                 <a class="nav-item nav-link active" id="nav-openOrder-tab" data-toggle="tab" href="#nav-openOrder"
                     role="tab" aria-controls="nav-openOrder" aria-selected="true">Pedidos em preparo</a>
-                    <!-- Aba de pedidos prontos -->
-                <a class="nav-item nav-link" id="nav-deliveryOrders-tab" data-toggle="tab" href="#nav-deliveryOrders" role="tab"
-                    aria-controls="nav-deliveryOrders" aria-selected="false">Pedidos enviados</a>
-                    <!-- Aba de pedidos enviados -->
+                <!-- Aba de pedidos prontos -->
+                <a class="nav-item nav-link" id="nav-deliveryOrders-tab" data-toggle="tab" href="#nav-deliveryOrders"
+                    role="tab" aria-controls="nav-deliveryOrders" aria-selected="false">Pedidos enviados</a>
+                <!-- Aba de pedidos enviados -->
                 <a class="nav-item nav-link" id="nav-deliveredOrders-tab" data-toggle="tab" href="#nav-deliveredOrders"
                     role="tab" aria-controls="nav-deliveredOrders" aria-selected="false">Pedidos entregues</a>
             </div>
         </nav>
+
         <!-- Aba de pedidos em preparo -->
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-openOrder" role="tabpanel" aria-labelledby="nav-openOrder-tab">
+            <div class="tab-pane fade show active" id="nav-openOrder" role="tabpanel"
+                aria-labelledby="nav-openOrder-tab">
                 <!-- Lista de pedidos -->
                 <h3>
                     Em preparo
                 </h3>
 
-                <div>
-                    <% ordersOpen.forEach(order=> { %>
-                            <div class="open">
-                                <!-- card-inicio -->
-                                <div class="my-card" id="">
-                                    <div class="my-card-body">
-                                           <p class="my-card-text">
-                                            <%= "Nome" + order.name %>
-                                            </p>
-                                            <p>
-                                            <%= "R$" + order.price %>
-                                        </p>
-                                        <p>
-                                            <%= "Endereço" + order. %> 
-                                        </p>                                        
+                <div class="card-pedidos row col-12 ">
+                    <% pedidoEmPreparoJSON.forEach(pedido=> { %>
+
+                        <div class="card mt-3 mr-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= "Numero do pedido: " + pedido.id %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%= "Nome: " + pedido.name %>
+                                        <%= "Total R$ " + pedido.price %>
+                                </h6>
+                                <% pedido.productsOrdered.forEach(product=> { %>
+                                    <p class="card-text">
+                                        <%= "Qt.: " + product.amount + " " + product.name %>
+                                    </p>
+                                    <% }) %>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Endereço: " + pedido.address %>
+                                        </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Hora: " + pedido.time %>
+                                        </h6>
+
+                                        <!-- Botão cancelar pedido -->
+                                        <button type="button" class="btn btn-danger">
+                                            <a href="#" class="card-link text-white" data-toggle="modal"
+                                                data-target="#modal-pedido-<%= pedido.id %>">Cancelar</a>
+                                        </button>
+                                        <!-- Modal de cacelamento de pedido-->
+                                        <div class="modal fade" id="modal-pedido-<%= pedido.id %>" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <!-- Mensagem da janela modal -->
+                                                        <h5 class="modal-title">
+                                                            Tem certeza que quer cancelar o pedido?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Fechar">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Pedido: <%= pedido.id %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <!-- botoes -->
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Cancelar</button>
+                                                        <a href="/lojista/pedidos/cancelar/<%= pedido.id %>">
+                                                            <button type="button"
+                                                                class="btn btn-danger">Confirmar</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Fim Modal -->
+                                        <!-- botão confirmar pedido pronto -->
+                                        <button type="button" class="btn btn-success ">
+                                            <a href="/lojista/pedidos/alterar/<%= pedido.id %>"
+                                                class="card-link text-white">
+                                                Pedido pronto</a>
+                                        </button>
+
+                            </div>
+                        </div>
 
                         <% }) %>
                 </div>
-                             
+
             </div>
             <!-- Aba lista de pedidos enviados  -->
             <div class="tab-pane fade" id="nav-deliveryOrders" role="tabpanel" aria-labelledby="nav-deliveryOrders-tab">
-                Saiu para entrega
+                <h3>
+                    Saiu para entrega
+                </h3>
+                <div class="card-pedidos row col-12 ">
+                    <% pedidoAcaminhoJSON.forEach(pedido=> { %>
+
+                        <div class="card mt-3 mr-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= "Numero do pedido: " + pedido.id %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%= "Nome: " + pedido.name %>
+                                        <%= "Total R$ " + pedido.price %>
+                                </h6>
+                                <% pedido.productsOrdered.forEach(product=> { %>
+                                    <p class="card-text">
+                                        <%= "Qt.: " + product.amount + " " + product.name %>
+                                    </p>
+                                    <% }) %>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Endereço: " + pedido.address %>
+                                        </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Hora: " + pedido.time %>
+                                        </h6>
+
+                                        <!-- botão confirmar pedido pronto -->
+                                        <button type="button" class="btn btn-success ">
+                                            <a href="/lojista/pedidos/alterar/<%= pedido.id %>"
+                                                class="card-link text-white">
+                                                Entregue
+                                            </a>
+                                        </button>
+
+                            </div>
+                        </div>
+
+                        <% }) %>
+                </div>
             </div>
             <!-- Aba lista de produtos entregues  -->
-            <div class="tab-pane fade" id="nav-deliveredOrders" role="tabpanel" aria-labelledby="nav-deliveredOrders-tab">
-                Entregues
+            <div class="tab-pane fade" id="nav-deliveredOrders" role="tabpanel"
+                aria-labelledby="nav-deliveredOrders-tab">
+                <h3>
+                    Pedidos Entregues
+                </h3>
+                <div class="card-pedidos row col-12 ">
+                    <% pedidoEntregueJSON.forEach(pedido=> { %>
+
+                        <div class="card mt-3 mr-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= "Numero do pedido: " + pedido.id %>
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    <%= "Nome: " + pedido.name %>
+                                        <%= "Total R$ " + pedido.price %>
+                                </h6>
+                                <% pedido.productsOrdered.forEach(product=> { %>
+                                    <p class="card-text">
+                                        <%= "Qt.: " + product.amount + " " + product.name %>
+                                    </p>
+                                    <% }) %>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Endereço: " + pedido.address %>
+                                        </h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">
+                                            <%= "Hora: " + pedido.time %>
+                                        </h6>
+
+                            </div>
+                        </div>
+
+                        <% }) %>
+                </div>
+
             </div>
         </div>
     </div>
@@ -119,6 +247,7 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
-</html>n
+</html>
