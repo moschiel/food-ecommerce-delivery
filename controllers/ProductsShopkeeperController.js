@@ -20,9 +20,20 @@ const {Product, Sequelize} = require('../models');
     },
 
     // funcao de criacao de produtos
-    async create(req, res, next) {      
-      let product = { ...req.body }; 
-      await Product.create(product);
+    async create(req, res, next) { 
+      let { name, stock, price, category, description} = req.body;
+      let {files} = req;//requisição de informações da imagem
+
+      let product = {
+        name,
+        stock,
+        price,
+        category,
+        description,
+        image: files[0].originalname
+      };   
+      
+      await Product.create(product);       
 
       let products = await Product.findAll({
         where:{
@@ -34,18 +45,19 @@ const {Product, Sequelize} = require('../models');
     },
     
     // funcao atualizar produto
-    async update(req, res, next) {
+    async update (req, res, next) {
       let id = req.params.id;
-      let product = await Product.findByPk(id);      
+      let product = await Product.findByPk(id);  
+      let {files} = req; //requisição de informações da imagem
   
-      let { name, stock, price, category, description, image } = req.body;
+      let { name, stock, price, category, description } = req.body;
   
       product.name = name;
       product.stock = stock;
       product.price = price;
       product.category = category;
       product.description = description;
-      product.image = image;      
+      product.image = files[0].originalname;      
   
       await product.save();
   
@@ -63,5 +75,5 @@ const {Product, Sequelize} = require('../models');
   
       res.redirect('/lojista/listar');
     },
-
-  }
+    
+  }  
