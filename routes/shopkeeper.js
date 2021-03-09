@@ -1,5 +1,19 @@
 var express = require('express');
 var router = express.Router();
+const multer = require('multer');
+const path = require('path');
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join('./public/images/'))
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  });
+   
+  var upload = multer({ storage: storage })
+
 const ProductsController = require("../controllers/ProductsShopkeeperController");
 const UserController = require('../controllers/UserShopkeeperController');
 const PedidoController = require('../controllers/PedidoController');
@@ -14,9 +28,9 @@ router.get('/deslogar', UserController.logout);
 
 // rotas do CRUD de produtos Lojistas
 router.get('/listar', ProductsController.list);
-router.post('/registrar', ProductsController.create);
+router.post('/registrar',upload.any(), ProductsController.create);
 
-router.post('/alterar/:id', ProductsController.update);
+router.post('/alterar/:id',upload.any(), ProductsController.update);
 
 router.get('/excluir/:id', ProductsController.delete);
 
