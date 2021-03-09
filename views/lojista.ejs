@@ -118,7 +118,7 @@
                                                             <div class="modal-body">
                                                                 <section class="form-register">
                                                                     <form action="/lojista/alterar/<%= product.id %> "
-                                                                        method="POST">
+                                                                        method="POST" enctype ="multipart/form-data">
 
                                                                         <div class="form-group">
                                                                             <label for="input-nome">Nome</label>
@@ -272,7 +272,7 @@
                                                             <div class="modal-body">
                                                                 <section class="form-register">
                                                                     <form action="/lojista/alterar/<%= product.id %> "
-                                                                        method="POST">
+                                                                        method="POST" enctype ="multipart/form-data">
 
                                                                         <div class="form-group">
                                                                             <label for="input-nome">Nome</label>
@@ -424,7 +424,7 @@
                                                             <div class="modal-body">
                                                                 <section class="form-register">
                                                                     <form action="/lojista/alterar/<%= product.id %> "
-                                                                        method="POST">
+                                                                        method="POST" enctype ="multipart/form-data">
 
                                                                         <div class="form-group">
                                                                             <label for="input-nome">Nome</label>
@@ -534,7 +534,7 @@
             <!-- Aba add produtos  -->
             <div class="tab-pane fade" id="nav-addProducts" role="tabpanel" aria-labelledby="nav-addProducts-tab">
                 <section class="form-register">
-                    <form action="/lojista/registrar" method="POST">
+                    <form action="/lojista/registrar" method="POST" enctype ="multipart/form-data">
 
                         <div class="form-group">
                             <label for="input-nome">Nome</label>
